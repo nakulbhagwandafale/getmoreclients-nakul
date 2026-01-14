@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: #f5f3ff;
+  --color-primary-100: #ede9fe;
+  --color-primary-200: #ddd6fe;
+  --color-primary-300: #c4b5fd;
+  --color-primary-400: #a78bfa;
+  --color-primary-500: #8b5cf6;
+  --color-primary-600: #7c3aed;
+  --color-primary-700: #6d28d9;
+  --color-primary-800: #5b21b6;
+  --color-primary-900: #4c1d95;
+
+  --color-dark-100: #1a0a2e;
+  --color-dark-200: #16082a;
+  --color-dark-300: #120625;
+  --color-dark-400: #0e0420;
+  --color-dark-500: #0a0118;
+  --color-dark-600: #080115;
+  --color-dark-700: #060112;
+  --color-dark-800: #04010e;
+  --color-dark-900: #02000a;
+
+  --font-family-sans: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #0a0118;
+    color: #ffffff;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-800 text-white font-semibold rounded-full 
+           hover:from-purple-700 hover:to-purple-900 transition-all duration-300 
+           shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 cursor-pointer;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-center mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-gray-400 text-center max-w-2xl mx-auto mb-12;
+  }
+
+  .card {
+    @apply bg-gradient-to-br from-purple-900/20 to-purple-950/40 backdrop-blur-sm 
+           border border-purple-500/20 rounded-2xl p-6 
+           hover:border-purple-500/40 transition-all duration-300;
+  }
+
+  .glow-text {
+    background: linear-gradient(135deg, #ffffff 0%, #a78bfa 50%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@layer utilities {
+  .wave-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%237c3aed' fill-opacity='0.1' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+  }
+
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(124, 58, 237, 0.05));
+    border-radius: 1rem;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.5), transparent, rgba(124, 58, 237, 0.3));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+/* Abstract wave background animation */
+.wave-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.wave-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(139, 92, 246, 0.2) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* Purple mesh lines effect */
+.mesh-lines {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(139, 92, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
