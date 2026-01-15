@@ -16,7 +16,7 @@ const CalendarBooking: React.FC = () => {
     ];
 
     return (
-        <section className="relative py-20 bg-dark-500 overflow-hidden">
+        <section className="relative py-20 bg-transparent overflow-hidden">
             {/* Background wave pattern */}
             <div className="absolute inset-0">
                 <svg

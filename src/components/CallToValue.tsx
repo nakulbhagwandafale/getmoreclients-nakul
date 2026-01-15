@@ -2,7 +2,7 @@ import React from 'react';
 
 const CallToValue: React.FC = () => {
     return (
-        <section className="relative py-20 bg-dark-500 overflow-hidden">
+        <section className="relative py-20 bg-transparent overflow-hidden wave-bg">
             {/* Background decorations */}
             <div className="absolute inset-0">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-600/10 rounded-full blur-3xl"></div>

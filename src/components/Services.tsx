@@ -178,7 +178,7 @@ function CardBack({ service }: CardBackProps) {
 
 const Services = () => {
     return (
-        <section id="services" className="relative py-24 bg-gradient-to-b from-dark-500 via-[#0d031a] to-dark-500 overflow-hidden">
+        <section id="services" className="relative py-24 bg-transparent overflow-hidden wave-bg">
 
             {/* Services Grid with Flipping Cards */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

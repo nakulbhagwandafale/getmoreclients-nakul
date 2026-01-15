@@ -43,7 +43,7 @@ const WhyChooseUs: React.FC = () => {
     ];
 
     return (
-        <section className="relative py-20 bg-dark-500 overflow-hidden">
+        <section className="relative py-20 bg-transparent overflow-hidden wave-bg">
             {/* Background gradient */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/5 to-transparent"></div>
 

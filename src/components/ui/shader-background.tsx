@@ -1,120 +1,157 @@
-'use client';
+import React, { useEffect, useRef } from 'react';
 
-import { Canvas, useFrame } from '@react-three/fiber';
-import { useMemo, useRef } from 'react';
-import * as THREE from 'three';
+const ShaderBackground: React.FC = () => {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
 
-const GradientShaderMaterial = {
-    uniforms: {
-        uTime: { value: 0 },
-        uColor1: { value: new THREE.Color('#0a0118') },
-        uColor2: { value: new THREE.Color('#1a0a2e') },
-        uColor3: { value: new THREE.Color('#4c1d95') }, // Purple accent
-    },
-    vertexShader: `
-    varying vec2 vUv;
-    void main() {
-      vUv = uv;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-  `,
-    fragmentShader: `
-    uniform float uTime;
-    uniform vec3 uColor1;
-    uniform vec3 uColor2;
-    uniform vec3 uColor3;
-    varying vec2 vUv;
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
 
-    // Simplex noise function
-    vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
-    float snoise(vec2 v){
-      const vec4 C = vec4(0.211324865405187, 0.366025403784439,
-               -0.577350269189626, 0.024390243902439);
-      vec2 i  = floor(v + dot(v, C.yy) );
-      vec2 x0 = v -   i + dot(i, C.xx);
-      vec2 i1;
-      i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-      vec4 x12 = x0.xyxy + C.xxzz;
-      x12.xy -= i1;
-      i = mod(i, 289.0);
-      vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 ))
-      + i.x + vec3(0.0, i1.x, 1.0 ));
-      vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy), dot(x12.zw,x12.zw)), 0.0);
-      m = m*m ;
-      m = m*m ;
-      vec3 x = 2.0 * fract(p * C.www) - 1.0;
-      vec3 h = abs(x) - 0.5;
-      vec3 ox = floor(x + 0.5);
-      vec3 a0 = x - ox;
-      m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
-      vec3 g;
-      g.x  = a0.x  * x0.x  + h.x  * x0.y;
-      g.yz = a0.yz * x12.xz + h.yz * x12.yw;
-      return 130.0 * dot(m, g);
-    }
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
 
-    void main() {
-      // Slow moving noise for organic flow
-      float noise1 = snoise(vUv * 3.0 + uTime * 0.1);
-      float noise2 = snoise(vUv * 6.0 - uTime * 0.15);
-      
-      // Mix colors based on noise
-      vec3 color = mix(uColor1, uColor2, noise1 * 0.5 + 0.5);
-      
-      // Add subtle accent highlights
-      float highlight = smoothstep(0.4, 0.6, noise2);
-      color = mix(color, uColor3, highlight * 0.15); // Low opacity for subtle effect
-      
-      // Vignette
-      float dist = distance(vUv, vec2(0.5));
-      color *= 1.0 - dist * 0.5;
+        let animationId: number;
+        let time = 0;
 
-      gl_FragColor = vec4(color, 1.0);
-    }
-  `
-};
+        const resize = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        };
 
-const GradientBackground = () => {
-    const mesh = useRef<THREE.Mesh>(null);
+        resize();
+        window.addEventListener('resize', resize);
 
-    // Initialize uniforms reference
-    const uniforms = useMemo(
-        () => ({
-            uTime: { value: 0 },
-            uColor1: { value: new THREE.Color('#030014') }, // Deepest dark
-            uColor2: { value: new THREE.Color('#0f0524') }, // Dark purple
-            uColor3: { value: new THREE.Color('#581c87') }, // Purple accent
-        }),
-        []
-    );
+        const drawWave = (
+            yOffset: number,
+            amplitude: number,
+            frequency: number,
+            speed: number,
+            color: string,
+            lineWidth: number,
+            phase: number = 0
+        ) => {
+            if (!ctx) return;
 
-    useFrame((state) => {
-        if (mesh.current) {
-            (mesh.current.material as THREE.ShaderMaterial).uniforms.uTime.value = state.clock.getElapsedTime();
-        }
-    });
+            ctx.beginPath();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = lineWidth;
+            ctx.lineCap = 'round';
+
+            const centerY = canvas.height / 2 + yOffset;
+
+            for (let x = 0; x <= canvas.width; x += 2) {
+                const y = centerY +
+                    Math.sin((x * frequency) + (time * speed) + phase) * amplitude +
+                    Math.sin((x * frequency * 0.5) + (time * speed * 0.7) + phase) * (amplitude * 0.5) +
+                    Math.sin((x * frequency * 2) + (time * speed * 1.3) + phase) * (amplitude * 0.3);
+
+                if (x === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+
+            ctx.stroke();
+        };
+
+        const animate = () => {
+            if (!ctx) return;
+
+            // Clear with gradient background
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#0a0118');
+            gradient.addColorStop(0.5, '#0d0320');
+            gradient.addColorStop(1, '#0a0118');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Add subtle radial glow
+            const radialGradient = ctx.createRadialGradient(
+                canvas.width / 2, canvas.height / 2, 0,
+                canvas.width / 2, canvas.height / 2, canvas.width * 0.6
+            );
+            radialGradient.addColorStop(0, 'rgba(139, 92, 246, 0.1)');
+            radialGradient.addColorStop(0.5, 'rgba(124, 58, 237, 0.05)');
+            radialGradient.addColorStop(1, 'transparent');
+            ctx.fillStyle = radialGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw multiple wave layers
+            const waveConfigs = [
+                // Main bright waves
+                { yOffset: 0, amplitude: 80, frequency: 0.003, speed: 0.8, color: 'rgba(168, 85, 247, 0.9)', lineWidth: 2.5, phase: 0 },
+                { yOffset: -20, amplitude: 70, frequency: 0.0035, speed: 0.9, color: 'rgba(147, 51, 234, 0.8)', lineWidth: 2, phase: 1 },
+                { yOffset: 30, amplitude: 90, frequency: 0.0025, speed: 0.7, color: 'rgba(192, 132, 252, 0.85)', lineWidth: 2.2, phase: 2 },
+
+                // Secondary waves
+                { yOffset: -50, amplitude: 60, frequency: 0.004, speed: 1.0, color: 'rgba(139, 92, 246, 0.7)', lineWidth: 1.8, phase: 3 },
+                { yOffset: 60, amplitude: 75, frequency: 0.003, speed: 0.85, color: 'rgba(124, 58, 237, 0.75)', lineWidth: 2, phase: 4 },
+                { yOffset: -80, amplitude: 55, frequency: 0.0045, speed: 1.1, color: 'rgba(167, 139, 250, 0.6)', lineWidth: 1.5, phase: 5 },
+
+                // Subtle background waves
+                { yOffset: 100, amplitude: 50, frequency: 0.005, speed: 0.6, color: 'rgba(139, 92, 246, 0.4)', lineWidth: 1.2, phase: 6 },
+                { yOffset: -100, amplitude: 45, frequency: 0.0055, speed: 0.65, color: 'rgba(124, 58, 237, 0.35)', lineWidth: 1, phase: 7 },
+                { yOffset: 130, amplitude: 40, frequency: 0.006, speed: 0.55, color: 'rgba(147, 51, 234, 0.3)', lineWidth: 0.8, phase: 8 },
+                { yOffset: -130, amplitude: 35, frequency: 0.0065, speed: 0.5, color: 'rgba(168, 85, 247, 0.25)', lineWidth: 0.8, phase: 9 },
+
+                // Extra fine detail waves
+                { yOffset: 40, amplitude: 65, frequency: 0.0038, speed: 0.95, color: 'rgba(192, 132, 252, 0.6)', lineWidth: 1.5, phase: 10 },
+                { yOffset: -40, amplitude: 70, frequency: 0.0032, speed: 0.88, color: 'rgba(167, 139, 250, 0.65)', lineWidth: 1.6, phase: 11 },
+            ];
+
+            // Apply blur effect for glow
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = 'rgba(147, 51, 234, 0.5)';
+
+            waveConfigs.forEach(config => {
+                drawWave(
+                    config.yOffset,
+                    config.amplitude,
+                    config.frequency,
+                    config.speed,
+                    config.color,
+                    config.lineWidth,
+                    config.phase
+                );
+            });
+
+            // Reset shadow
+            ctx.shadowBlur = 0;
+
+            // Add sparkle/particle effects
+            const particleCount = 20;
+            for (let i = 0; i < particleCount; i++) {
+                const x = (Math.sin(time * 0.5 + i * 0.5) * 0.5 + 0.5) * canvas.width;
+                const y = canvas.height / 2 + Math.sin(time * 0.3 + i * 0.7) * 120;
+                const opacity = Math.sin(time * 2 + i) * 0.3 + 0.4;
+                const size = Math.sin(time * 1.5 + i * 0.3) * 1.5 + 2;
+
+                ctx.beginPath();
+                ctx.arc(x, y, size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+                ctx.fill();
+            }
+
+            time += 0.016;
+            animationId = requestAnimationFrame(animate);
+        };
+
+        animate();
+
+        return () => {
+            window.removeEventListener('resize', resize);
+            cancelAnimationFrame(animationId);
+        };
+    }, []);
 
     return (
-        <mesh ref={mesh}>
-            <planeGeometry args={[2, 2]} />
-            <shaderMaterial
-                uniforms={uniforms}
-                vertexShader={GradientShaderMaterial.vertexShader}
-                fragmentShader={GradientShaderMaterial.fragmentShader}
-            />
-        </mesh>
+        <canvas
+            ref={canvasRef}
+            className="absolute inset-0 w-full h-full"
+            style={{ zIndex: 0 }}
+        />
     );
 };
 
-export default function ShaderBackground() {
-    return (
-        <div className="absolute inset-0 w-full h-full -z-10">
-            <Canvas
-                camera={{ position: [0, 0, 1] }}
-                dpr={[1, 2]}
-            >
-                <GradientBackground />
-            </Canvas>
-        </div>
-    );
-}
+export default ShaderBackground;

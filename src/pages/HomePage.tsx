@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 
 const HomePage = () => {
     return (
-        <div className="min-h-screen bg-dark-500">
+        <div className="min-h-screen bg-gradient-to-b from-[#0a0118] via-[#1a0b2e] to-[#11052C]">
             <Navbar />
             <main>
                 <Hero />
