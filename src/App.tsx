@@ -1,26 +1,17 @@
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Services from './components/Services'
-import WhyChooseUs from './components/WhyChooseUs'
-import CalendarBooking from './components/CalendarBooking'
-import CallToValue from './components/CallToValue'
-import Footer from './components/Footer'
-import './index.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import ServicesPage from './pages/ServicesPage';
+import './index.css';
 
 function App() {
   return (
-    <div className="min-h-screen bg-dark-500">
-      <Navbar />
-      <main>
-        <Hero />
-        <Services />
-        <WhyChooseUs />
-        <CalendarBooking />
-        <CallToValue />
-      </main>
-      <Footer />
-    </div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/services" element={<ServicesPage />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

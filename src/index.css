@@ -37,6 +37,7 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
 
   body {
@@ -44,6 +45,20 @@
     background-color: #0a0118;
     color: #ffffff;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* GPU Acceleration for smooth animations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  /* Optimize 3D elements for performance */
+  canvas {
+    will-change: auto;
   }
 }
 
