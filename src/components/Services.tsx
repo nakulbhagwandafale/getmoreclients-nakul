@@ -111,35 +111,35 @@ interface CardFrontProps {
 
 function CardFront({ service }: CardFrontProps) {
     return (
-        <div className="flex flex-col h-full w-full p-6">
-            {/* Icon */}
-            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white mb-5 shadow-lg shadow-purple-500/25">
-                {service.icon}
+        <div className="flex flex-col h-full w-full p-8 border border-white/5 bg-white/5 backdrop-blur-xl rounded-3xl hover:border-purple-500/30 transition-all duration-500 group">
+            {/* Header */}
+            <div className="flex justify-between items-start mb-6">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 flex items-center justify-center text-purple-400 group-hover:text-white group-hover:bg-purple-600 transition-all duration-500">
+                    {service.icon}
+                </div>
+                <div className="text-right">
+                    <span className="text-xs font- tracking-wider text-purple-400/60 uppercase">Service</span>
+                </div>
             </div>
 
-            {/* Title & Subtitle */}
-            <h3 className="text-xl font-bold text-white mb-1">
-                {service.title}
-            </h3>
-            <p className="text-purple-400 text-sm font-medium mb-4">
-                {service.subtitle}
-            </p>
+            {/* Content */}
+            <div className="mt-2">
+                <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-purple-200 transition-colors">
+                    {service.title}
+                </h3>
+                <p className="text-purple-300/80 text-sm font-medium mb-4">
+                    {service.subtitle}
+                </p>
+                <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">
+                    {service.description}
+                </p>
+            </div>
 
-            {/* Description */}
-            <p className="text-gray-400 text-sm leading-relaxed flex-grow">
-                {service.description}
-            </p>
-
-            {/* Hover hint */}
-            <div className="mt-4 flex items-center text-purple-400 text-sm font-medium">
-                <span>Hover to learn more</span>
-                <svg
-                    className="w-4 h-4 ml-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            {/* Footer */}
+            <div className="mt-auto pt-6 flex items-center text-sm font-medium text-white/40 group-hover:text-purple-400 transition-colors">
+                <span>Explore Details</span>
+                <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
             </div>
         </div>
@@ -152,49 +152,58 @@ interface CardBackProps {
 
 function CardBack({ service }: CardBackProps) {
     return (
-        <div className="flex flex-col items-center justify-center h-full w-full p-6 text-center">
-            {/* Icon */}
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white mb-4 shadow-lg shadow-purple-500/25">
-                {service.icon}
+        <div className="flex flex-col h-full w-full p-8 border border-purple-500/30 bg-purple-900/40 backdrop-blur-xl rounded-3xl relative overflow-hidden">
+            {/* Decorative Gradient */}
+            <div className="absolute -top-20 -right-20 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl"></div>
+
+            <div className="relative z-10 flex flex-col h-full items-center text-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-300 mb-6">
+                    {service.icon}
+                </div>
+
+                <h3 className="text-2xl font-bold text-white mb-4">
+                    {service.title}
+                </h3>
+
+                <p className="text-gray-300 text-sm leading-relaxed mb-8 max-w-[260px]">
+                    {service.backDescription}
+                </p>
+
+                <button className="px-8 py-3 bg-white text-purple-900 text-sm font-bold rounded-full hover:bg-purple-50 transition-colors shadow-lg shadow-white/5">
+                    {service.buttonText}
+                </button>
             </div>
-
-            {/* Title */}
-            <h3 className="text-lg font-bold text-white mb-3">
-                {service.title}
-            </h3>
-
-            {/* Full Description */}
-            <p className="text-gray-300 text-sm leading-relaxed mb-6">
-                {service.backDescription}
-            </p>
-
-            {/* CTA Button */}
-            <button className="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-purple-800 text-white text-sm font-semibold rounded-full hover:from-purple-700 hover:to-purple-900 transition-all duration-300 shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50">
-                {service.buttonText}
-            </button>
         </div>
     );
 }
 
 const Services = () => {
     return (
-        <section id="services" className="relative py-24 bg-transparent overflow-hidden wave-bg">
-
-            {/* Services Grid with Flipping Cards */}
+        <section id="services" className="relative py-32 bg-transparent overflow-hidden wave-bg">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-wrap justify-center gap-6">
+                {/* Section Header */}
+                <div className="text-center mb-20">
+                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                        Our Expertise
+                    </h2>
+                    <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+                        We combine creativity with data-driven technologies to deliver
+                        exceptional digital experiences that grow your business.
+                    </p>
+                </div>
+
+                <div className="flex flex-wrap justify-center gap-8">
                     {services.map((service) => (
                         <FlippingCard
                             key={service.id}
-                            width={320}
-                            height={340}
+                            width={340}
+                            height={420}
                             frontContent={<CardFront service={service} />}
                             backContent={<CardBack service={service} />}
                         />
                     ))}
                 </div>
             </div>
-
         </section>
     );
 };

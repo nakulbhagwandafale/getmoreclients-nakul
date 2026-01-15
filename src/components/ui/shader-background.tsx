@@ -58,13 +58,18 @@ const ShaderBackground: React.FC = () => {
         const animate = () => {
             if (!ctx) return;
 
-            // Clear with gradient background
+            // Clear canvas (transparent) to let StarField show through
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            /* 
+            // Previous opaque gradient removed to reveal stars
             const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
             gradient.addColorStop(0, '#0a0118');
             gradient.addColorStop(0.5, '#0d0320');
             gradient.addColorStop(1, '#0a0118');
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+            */
 
             // Add subtle radial glow
             const radialGradient = ctx.createRadialGradient(

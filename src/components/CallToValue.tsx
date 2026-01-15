@@ -2,28 +2,28 @@ import React from 'react';
 
 const CallToValue: React.FC = () => {
     return (
-        <section className="relative py-20 bg-transparent overflow-hidden wave-bg">
+        <section className="relative py-32 bg-transparent overflow-hidden wave-bg">
             {/* Background decorations */}
             <div className="absolute inset-0">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-600/10 rounded-full blur-3xl"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[100px]"></div>
             </div>
 
-            <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
                 {/* Heading */}
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-                    Final Call-To-Value
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight">
+                    Ready to Scale Your Business?
                 </h2>
 
-                <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto mb-10">
-                    We were here misto in Casse get Wherd for for its the borther.
-                    Your telemarks Scen in Your CIOCK
+                <p className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto mb-12">
+                    Join hundreds of successful businesses that have transformed their digital presence.
+                    Let's build something extraordinary together.
                 </p>
 
                 {/* CTA Button */}
-                <button className="btn-primary text-base md:text-lg px-8 py-4 inline-flex items-center space-x-2 group">
-                    <span>Book Meeting</span>
+                <button className="btn-primary text-lg md:text-xl px-10 py-5 inline-flex items-center space-x-3 group rounded-full shadow-2xl shadow-purple-900/40 hover:scale-105 transition-transform duration-300">
+                    <span>Start Your Journey</span>
                     <svg
-                        className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+                        className="w-6 h-6 transform group-hover:translate-x-1 transition-transform"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -31,11 +31,6 @@ const CallToValue: React.FC = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                 </button>
-
-                {/* Decorative line */}
-                <div className="mt-16 flex items-center justify-center">
-                    <div className="w-1/3 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
-                </div>
             </div>
         </section>
     );

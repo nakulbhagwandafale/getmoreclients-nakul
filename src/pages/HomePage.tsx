@@ -5,10 +5,12 @@ import WhyChooseUs from '../components/WhyChooseUs';
 import CalendarBooking from '../components/CalendarBooking';
 import CallToValue from '../components/CallToValue';
 import Footer from '../components/Footer';
+import StarField from '../components/ui/StarField';
 
 const HomePage = () => {
     return (
-        <div className="min-h-screen bg-gradient-to-b from-[#0a0118] via-[#1a0b2e] to-[#11052C]">
+        <div className="min-h-screen bg-gradient-to-b from-[#0a0118] via-[#1a0b2e] to-[#11052C] relative">
+            <StarField />
             <Navbar />
             <main>
                 <Hero />

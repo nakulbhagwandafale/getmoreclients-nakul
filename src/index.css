@@ -36,7 +36,7 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth;  <-- Disabled to fix "heavy" scroll feel */
     -webkit-overflow-scrolling: touch;
   }
 
