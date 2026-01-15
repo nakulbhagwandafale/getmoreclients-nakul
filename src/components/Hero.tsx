@@ -1,45 +1,52 @@
-import React from 'react';
-import ShaderBackground from './ShaderBackground';
+import { SplineScene } from './SplineScene';
+import { Spotlight } from './ui/Spotlight';
+
+const ROBOT_SCENE_URL = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode";
 
 const Hero: React.FC = () => {
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-            {/* Animated Shader Background */}
-            <ShaderBackground />
+        <section className="relative min-h-screen bg-black/[0.96] overflow-hidden">
+            {/* Spotlight Effect */}
+            <Spotlight
+                className="-top-40 left-0 md:left-60 md:-top-20"
+                fill="white"
+            />
 
-            {/* Content */}
-            <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-                    <span className="text-white">Professional Digital, IT</span>
-                    <br />
-                    <span className="text-white">& Business Services...</span>
-                    <br />
-                    <span className="glow-text">Delivered with Clarity</span>
-                    <br />
-                    <span className="glow-text">and Reliability</span>
-                </h1>
+            {/* Content Container */}
+            <div className="flex flex-col lg:flex-row h-screen items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-                    We help start-ups and growing businesses scale through
-                    marketing, technology, design, and consulting — without
-                    confusion or unnecessary complexity.
-                </p>
+                {/* Left Side - Text Content */}
+                <div className="flex-1 relative z-10 flex flex-col justify-center py-20 lg:py-0">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
+                        Interactive 3D
+                    </h1>
 
-                <button className="btn-primary text-base md:text-lg px-8 py-4 inline-flex items-center space-x-2 group">
-                    <span>Book Meeting</span>
-                    <svg
-                        className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                </button>
+                    <p className="mt-4 text-neutral-300 max-w-lg text-base md:text-lg leading-relaxed">
+                        Bring your UI to life with beautiful 3D scenes. Create immersive experiences
+                        that capture attention and enhance your design.
+                    </p>
+
+                    <button className="mt-8 btn-primary text-sm md:text-base px-6 py-3 inline-flex items-center space-x-2 group w-fit">
+                        <span>Book Meeting</span>
+                        <svg
+                            className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </button>
+                </div>
+
+                {/* Right Side - 3D Robot */}
+                <div className="flex-1 relative w-full h-[400px] lg:h-full">
+                    <SplineScene
+                        scene={ROBOT_SCENE_URL}
+                        className="w-full h-full"
+                    />
+                </div>
             </div>
-
-            {/* Bottom gradient fade */}
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0118] to-transparent z-10"></div>
         </section>
     );
 };
