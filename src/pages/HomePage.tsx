@@ -7,6 +7,8 @@ import CallToValue from '../components/CallToValue';
 import Footer from '../components/Footer';
 import StarField from '../components/ui/StarField';
 
+import Testimonials from '../components/Testimonials';
+
 const HomePage = () => {
     return (
         <div className="min-h-screen bg-gradient-to-b from-[#0a0118] via-[#1a0b2e] to-[#11052C] relative">
@@ -15,6 +17,7 @@ const HomePage = () => {
             <main>
                 <Hero />
                 <Services />
+                <Testimonials />
                 <WhyChooseUs />
                 <CalendarBooking />
                 <CallToValue />
