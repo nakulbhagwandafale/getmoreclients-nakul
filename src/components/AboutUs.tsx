@@ -74,12 +74,12 @@ export default function AboutUs() {
                         Who We Are
                     </motion.div>
 
-                    <h2 className="text-3xl md:text-5xl font-bold mb-5">
+                    <h2 className="text-4xl md:text-6xl font-bold mb-6">
                         <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-100 to-purple-300">
-                            About Us
+                            Transforming Agencies
                         </span>
                         <br />
-                        <span className="text-white/80">Transforming Agencies Into Growth Machines</span>
+                        <span className="text-white/80">Into Growth Machines</span>
                     </h2>
 
                     <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
@@ -165,7 +165,6 @@ export default function AboutUs() {
                     </motion.div>
 
                     {/* Mission Card */}
-                    {/* Mission Card */}
                     <motion.div
                         custom={1}
                         variants={cardVariants}
@@ -186,7 +185,6 @@ export default function AboutUs() {
                         </GradientBorderCard>
                     </motion.div>
 
-                    {/* Vision Card */}
                     {/* Vision Card */}
                     <motion.div
                         custom={2}
@@ -209,7 +207,6 @@ export default function AboutUs() {
                     </motion.div>
 
                     {/* Values Card */}
-                    {/* Values Card */}
                     <motion.div
                         custom={3}
                         variants={cardVariants}
@@ -231,17 +228,13 @@ export default function AboutUs() {
                                             { title: "Radical Transparency", desc: "No hidden fees, no BS metrics." },
                                             { title: "Relentless Innovation", desc: "We ship fast and iterate faster." },
                                         ].map((value, idx) => (
-                                            <motion.div
+                                            <div
                                                 key={idx}
-                                                initial={{ opacity: 0, y: 20 }}
-                                                whileInView={{ opacity: 1, y: 0 }}
-                                                viewport={{ once: true }}
-                                                transition={{ delay: 0.4 + idx * 0.1, duration: 0.5 }}
                                                 className="text-left"
                                             >
                                                 <h4 className="text-white font-semibold mb-1">{value.title}</h4>
                                                 <p className="text-gray-500 text-sm">{value.desc}</p>
-                                            </motion.div>
+                                            </div>
                                         ))}
                                     </div>
                                 </div>

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-const navLinks = [
+const navigation = [
     { name: 'Home', href: '/', isRoute: true },
-    { name: 'Work', href: '#work' },
+    { name: 'Work', href: '/work', isRoute: true },
     { name: 'Services', href: '/services', isRoute: true },
     { name: 'About Us', href: '/about', isRoute: true },
-    { name: 'Blogs', href: '#blog' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Blog', href: '/blog', isRoute: true },
+    { name: 'Contact', href: '/contact', isRoute: true },
 ];
 
 const Navbar = () => {
@@ -28,7 +28,7 @@ const Navbar = () => {
 
                         {/* Standard Navigation - Center */}
                         <div className="hidden md:flex items-center space-x-8">
-                            {navLinks.map((link) => (
+                            {navigation.map((link) => (
                                 link.isRoute ? (
                                     <Link
                                         key={link.name}
@@ -88,7 +88,7 @@ const Navbar = () => {
                     {isMenuOpen && (
                         <div className="py-4 border-t border-purple-500/10">
                             <div className="flex flex-col space-y-4">
-                                {navLinks.map((link) => (
+                                {navigation.map((link) => (
                                     link.isRoute ? (
                                         <Link
                                             key={link.name}
