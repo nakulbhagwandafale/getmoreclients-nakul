@@ -36,13 +36,12 @@
   }
 
   html {
-    /* scroll-behavior: smooth;  <-- Disabled to fix "heavy" scroll feel */
     -webkit-overflow-scrolling: touch;
   }
 
   body {
     font-family: 'Inter', system-ui, sans-serif;
-    background-color: #0a0118;
+    background: linear-gradient(to bottom, #0a0118, #1a0b2e, #11052C) fixed;
     color: #ffffff;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
@@ -151,3 +150,6 @@
   background-size: 50px 50px;
   pointer-events: none;
 }
+
+
+

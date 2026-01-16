@@ -109,6 +109,8 @@ interface CardFrontProps {
     service: Service;
 }
 
+
+
 function CardFront({ service }: CardFrontProps) {
     return (
         <div className="flex flex-col h-full w-full p-8 border border-white/5 bg-white/5 backdrop-blur-xl rounded-3xl hover:border-purple-500/30 transition-all duration-500 group">

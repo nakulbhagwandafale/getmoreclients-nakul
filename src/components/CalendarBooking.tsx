@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     format,
@@ -17,23 +17,13 @@ import {
 } from 'date-fns';
 import { IconX, IconChevronLeft, IconChevronRight, IconClock, IconCalendar, IconCheck } from '@tabler/icons-react';
 
-const BookingModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+const BookingModal = ({ onClose }: { onClose: () => void }) => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [selectedTime, setSelectedTime] = useState<string | null>(null);
     const [step, setStep] = useState<'date' | 'time' | 'success'>('date');
 
     const today = startOfToday();
-
-    // Reset state when modal opens
-    useEffect(() => {
-        if (isOpen) {
-            setStep('date');
-            setSelectedDate(null);
-            setSelectedTime(null);
-            setCurrentMonth(new Date());
-        }
-    }, [isOpen]);
 
     const renderHeader = () => {
         return (
@@ -132,143 +122,150 @@ const BookingModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
     ];
 
     return (
-        <AnimatePresence>
-            {isOpen && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-                    {/* Backdrop */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        onClick={onClose}
-                        className="absolute inset-0 bg-black/80 backdrop-blur-md"
-                    />
+        <motion.div
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
+            {/* Backdrop */}
+            <div
+                onClick={onClose}
+                className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            />
 
-                    {/* Modal Content */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                        className="relative bg-[#0F0422] border border-white/10 rounded-3xl w-full max-w-5xl h-[85vh] md:h-[700px] overflow-hidden shadow-2xl flex flex-col md:flex-row"
-                    >
-                        {/* Close Button */}
-                        <button
-                            onClick={onClose}
-                            className="absolute top-4 right-4 z-50 p-2 text-gray-400 hover:text-white bg-white/5 rounded-full hover:bg-white/10 transition-colors"
-                        >
-                            <IconX className="w-5 h-5" />
-                        </button>
+            {/* Modal Content */}
+            <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                className="relative bg-[#0F0422] border border-white/10 rounded-3xl w-full max-w-5xl h-[85vh] md:h-[700px] overflow-hidden shadow-2xl flex flex-col md:flex-row z-10"
+            >
+                {/* Close Button */}
+                <button
+                    onClick={onClose}
+                    className="absolute top-4 right-4 z-50 p-2 text-gray-400 hover:text-white bg-white/5 rounded-full hover:bg-white/10 transition-colors"
+                >
+                    <IconX className="w-5 h-5" />
+                </button>
 
-                        {/* Left Panel: Info & Selection Summary */}
-                        <div className="w-full md:w-1/3 bg-gradient-to-br from-purple-900/40 to-black p-8 border-b md:border-b-0 md:border-r border-white/10 flex flex-col justify-between">
-                            <div>
-                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/30 text-purple-300 text-xs font-semibold uppercase tracking-wider mb-6">
-                                    <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
-                                    Live Scheduling
-                                </div>
-                                <h2 className="text-3xl font-bold text-white mb-4">Book Your Strategy Session</h2>
-                                <p className="text-gray-400 leading-relaxed mb-8">
-                                    Select a date and time that works best for you. We'll lock it in and send you a calendar invite instantly.
-                                </p>
+                {/* Left Panel: Info & Selection Summary */}
+                <div className="w-full md:w-1/3 bg-gradient-to-br from-purple-900/40 to-black p-8 border-b md:border-b-0 md:border-r border-white/10 flex flex-col justify-between">
+                    <div>
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/30 text-purple-300 text-xs font-semibold uppercase tracking-wider mb-6">
+                            <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+                            Live Scheduling
+                        </div>
+                        <h2 className="text-3xl font-bold text-white mb-4">Book Your Strategy Session</h2>
+                        <p className="text-gray-400 leading-relaxed mb-8">
+                            Select a date and time that works best for you. We'll lock it in and send you a calendar invite instantly.
+                        </p>
+                    </div>
+
+                    <div className="space-y-4">
+                        <div className={`p-4 rounded-xl border transition-all duration-300 ${selectedDate ? 'bg-purple-600/20 border-purple-500/50' : 'bg-white/5 border-white/10'}`}>
+                            <div className="flex items-center gap-3 mb-1">
+                                <IconCalendar className={`w-5 h-5 ${selectedDate ? 'text-purple-300' : 'text-gray-500'}`} />
+                                <span className="text-sm text-gray-400 uppercase tracking-wider font-semibold">Date</span>
                             </div>
-
-                            <div className="space-y-4">
-                                <div className={`p-4 rounded-xl border transition-all duration-300 ${selectedDate ? 'bg-purple-600/20 border-purple-500/50' : 'bg-white/5 border-white/10'}`}>
-                                    <div className="flex items-center gap-3 mb-1">
-                                        <IconCalendar className={`w-5 h-5 ${selectedDate ? 'text-purple-300' : 'text-gray-500'}`} />
-                                        <span className="text-sm text-gray-400 uppercase tracking-wider font-semibold">Date</span>
-                                    </div>
-                                    <div className={`text-lg font-medium ${selectedDate ? 'text-white' : 'text-gray-600'}`}>
-                                        {selectedDate ? format(selectedDate, 'EEEE, MMMM d, yyyy') : 'Select a date'}
-                                    </div>
-                                </div>
-
-                                <div className={`p-4 rounded-xl border transition-all duration-300 ${selectedTime ? 'bg-purple-600/20 border-purple-500/50' : 'bg-white/5 border-white/10'}`}>
-                                    <div className="flex items-center gap-3 mb-1">
-                                        <IconClock className={`w-5 h-5 ${selectedTime ? 'text-purple-300' : 'text-gray-500'}`} />
-                                        <span className="text-sm text-gray-400 uppercase tracking-wider font-semibold">Time</span>
-                                    </div>
-                                    <div className={`text-lg font-medium ${selectedTime ? 'text-white' : 'text-gray-600'}`}>
-                                        {selectedTime || 'Select a time'}
-                                    </div>
-                                </div>
+                            <div className={`text-lg font-medium ${selectedDate ? 'text-white' : 'text-gray-600'}`}>
+                                {selectedDate ? format(selectedDate, 'EEEE, MMMM d, yyyy') : 'Select a date'}
                             </div>
                         </div>
 
-                        {/* Right Panel: Picker Steps */}
-                        <div className="flex-1 p-6 md:p-10 overflow-y-auto custom-scrollbar relative">
-                            {/* Background decorations */}
-                            <div className="absolute top-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-[100px] pointer-events-none" />
-
-                            {step === 'date' && (
-                                <motion.div
-                                    initial={{ opacity: 0, x: 20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -20 }}
-                                >
-                                    {renderHeader()}
-                                    {renderDays()}
-                                    {renderCells()}
-                                </motion.div>
-                            )}
-
-                            {step === 'time' && (
-                                <motion.div
-                                    initial={{ opacity: 0, x: 20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -20 }}
-                                    className="h-full flex flex-col"
-                                >
-                                    <div className="flex items-center gap-4 mb-8">
-                                        <button onClick={() => setStep('date')} className="text-gray-400 hover:text-white transition-colors flex items-center gap-1">
-                                            <IconChevronLeft className="w-5 h-5" /> Back
-                                        </button>
-                                        <h3 className="text-2xl font-bold text-white">Select Time</h3>
-                                    </div>
-
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                                        {timeSlots.map((time) => (
-                                            <button
-                                                key={time}
-                                                onClick={() => {
-                                                    setSelectedTime(time);
-                                                    setStep('success');
-                                                }}
-                                                className="py-4 px-4 rounded-xl text-center bg-white/5 border border-white/10 text-gray-300 hover:bg-purple-600 hover:border-purple-500 hover:text-white hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-200"
-                                            >
-                                                {time}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </motion.div>
-                            )}
-
-                            {step === 'success' && (
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    className="h-full flex flex-col items-center justify-center text-center p-8"
-                                >
-                                    <div className="w-24 h-24 bg-green-500/20 rounded-full flex items-center justify-center mb-6">
-                                        <IconCheck className="w-12 h-12 text-green-400" />
-                                    </div>
-                                    <h3 className="text-3xl font-bold text-white mb-4">Booking Confirmed!</h3>
-                                    <p className="text-gray-400 max-w-md mx-auto mb-8">
-                                        You are scheduled for <strong className="text-white">{selectedTime}</strong> on <strong className="text-white">{selectedDate ? format(selectedDate, 'MMMM d, yyyy') : ''}</strong>. A calendar invitation has been sent to your email.
-                                    </p>
-                                    <button
-                                        onClick={onClose}
-                                        className="px-8 py-3 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-colors"
-                                    >
-                                        Done
-                                    </button>
-                                </motion.div>
-                            )}
+                        <div className={`p-4 rounded-xl border transition-all duration-300 ${selectedTime ? 'bg-purple-600/20 border-purple-500/50' : 'bg-white/5 border-white/10'}`}>
+                            <div className="flex items-center gap-3 mb-1">
+                                <IconClock className={`w-5 h-5 ${selectedTime ? 'text-purple-300' : 'text-gray-500'}`} />
+                                <span className="text-sm text-gray-400 uppercase tracking-wider font-semibold">Time</span>
+                            </div>
+                            <div className={`text-lg font-medium ${selectedTime ? 'text-white' : 'text-gray-600'}`}>
+                                {selectedTime || 'Select a time'}
+                            </div>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
-            )}
-        </AnimatePresence>
+
+                {/* Right Panel: Picker Steps */}
+                <div className="flex-1 p-6 md:p-10 overflow-y-auto custom-scrollbar relative">
+                    {/* Background decorations */}
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-[100px] pointer-events-none" />
+
+                    <AnimatePresence mode="wait">
+                        {step === 'date' && (
+                            <motion.div
+                                key="step-date"
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -20 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                {renderHeader()}
+                                {renderDays()}
+                                {renderCells()}
+                            </motion.div>
+                        )}
+
+                        {step === 'time' && (
+                            <motion.div
+                                key="step-time"
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -20 }}
+                                transition={{ duration: 0.2 }}
+                                className="h-full flex flex-col"
+                            >
+                                <div className="flex items-center gap-4 mb-8">
+                                    <button onClick={() => setStep('date')} className="text-gray-400 hover:text-white transition-colors flex items-center gap-1">
+                                        <IconChevronLeft className="w-5 h-5" /> Back
+                                    </button>
+                                    <h3 className="text-2xl font-bold text-white">Select Time</h3>
+                                </div>
+
+                                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                                    {timeSlots.map((time) => (
+                                        <button
+                                            key={time}
+                                            onClick={() => {
+                                                setSelectedTime(time);
+                                                setStep('success');
+                                            }}
+                                            className="py-4 px-4 rounded-xl text-center bg-white/5 border border-white/10 text-gray-300 hover:bg-purple-600 hover:border-purple-500 hover:text-white hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-200"
+                                        >
+                                            {time}
+                                        </button>
+                                    ))}
+                                </div>
+                            </motion.div>
+                        )}
+
+                        {step === 'success' && (
+                            <motion.div
+                                key="step-success"
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.9 }}
+                                transition={{ duration: 0.2 }}
+                                className="h-full flex flex-col items-center justify-center text-center p-8"
+                            >
+                                <div className="w-24 h-24 bg-green-500/20 rounded-full flex items-center justify-center mb-6">
+                                    <IconCheck className="w-12 h-12 text-green-400" />
+                                </div>
+                                <h3 className="text-3xl font-bold text-white mb-4">Booking Confirmed!</h3>
+                                <p className="text-gray-400 max-w-md mx-auto mb-8">
+                                    You are scheduled for <strong className="text-white">{selectedTime}</strong> on <strong className="text-white">{selectedDate ? format(selectedDate, 'MMMM d, yyyy') : ''}</strong>. A calendar invitation has been sent to your email.
+                                </p>
+                                <button
+                                    onClick={onClose}
+                                    className="px-8 py-3 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-colors"
+                                >
+                                    Done
+                                </button>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
+            </motion.div>
+        </motion.div>
     );
 };
 
@@ -376,7 +373,9 @@ const CalendarBooking: React.FC = () => {
                 </div>
             </section>
 
-            <BookingModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <AnimatePresence>
+                {isModalOpen && <BookingModal onClose={() => setIsModalOpen(false)} />}
+            </AnimatePresence>
         </>
     );
 };

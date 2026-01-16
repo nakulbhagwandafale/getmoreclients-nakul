@@ -1,213 +1,282 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Linkedin, Twitter, Github } from 'lucide-react';
+import { motion, useScroll, useTransform, type Variants, type TargetAndTransition } from 'framer-motion';
+import { useRef } from 'react';
+import { Sparkles, Target, Rocket, Users, ArrowRight } from 'lucide-react';
 
-// --- Mock Data ---
-const teamMembers = [
-    {
-        id: 1,
-        name: "Elena Rodriguez",
-        role: "Chief Executive Officer",
-        bio: "Visionary leader with 15+ years in digital transformation. Elena steered her previous startup to a $50M exit before founding GetMoreClients.",
-        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1000&auto=format&fit=crop",
-        socials: { linkedin: "#", twitter: "#" }
-    },
-    {
-        id: 2,
-        name: "David Chen",
-        role: "Chief Technology Officer",
-        bio: "Former Principal Engineer at Google. David architects our proprietary AI models and ensures our infrastructure scales effortlessly.",
-        image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=1000&auto=format&fit=crop",
-        socials: { linkedin: "#", github: "#" }
-    },
-    {
-        id: 3,
-        name: "Sarah Johnson",
-        role: "Head of Product",
-        bio: "Sarah bridges the gap between complex AI capabilities and intuitive user experiences. She believes technology should feel like magic.",
-        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1000&auto=format&fit=crop",
-        socials: { linkedin: "#", twitter: "#" }
-    },
-    {
-        id: 4,
-        name: "Michael Ross",
-        role: "Lead AI Engineer",
-        bio: "PhD in Machine Learning from Stanford. Michael pushes the boundaries of what our predictive algorithms can achieve.",
-        image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1000&auto=format&fit=crop",
-        socials: { linkedin: "#", github: "#" }
-    },
-    {
-        id: 5,
-        name: "Emily Parker",
-        role: "Creative Director",
-        bio: "Award-winning designer with a portfolio spanning major tech brands. Emily ensures every pixel we ship is perfect.",
-        image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1000&auto=format&fit=crop",
-        socials: { linkedin: "#", twitter: "#" }
-    },
-    {
-        id: 6,
-        name: "James Wilson",
-        role: "VP of Sales",
-        bio: "James understands the agency landscape inside out. He focuses on building lasting partnerships rather than just closing deals.",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop",
-        socials: { linkedin: "#" }
-    },
-    {
-        id: 7,
-        name: "Linda Wu",
-        role: "Operations Manager",
-        bio: "The glue that holds the team together. Linda optimizes our internal workflows so we can move fast without breaking things.",
-        image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1000&auto=format&fit=crop",
-        socials: { linkedin: "#" }
-    },
-    {
-        id: 8,
-        name: "Robert Fox",
-        role: "Frontend Architect",
-        bio: "Specialist in high-performance web applications. Robert ensures our client dashboards are snappy and responsive.",
-        image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1000&auto=format&fit=crop",
-        socials: { linkedin: "#", github: "#" }
-    },
-    {
-        id: 9,
-        name: "Jessica Lee",
-        role: "Marketing Strategist",
-        bio: "Data-driven marketer who knows how to tell a story. Jessica crafts the campaigns that put GetMoreClients on the map.",
-        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop",
-        socials: { linkedin: "#", twitter: "#" }
-    },
-    {
-        id: 10,
-        name: "William Brown",
-        role: "Customer Success Lead",
-        bio: "Dedicated to our clients' growth. William leads the team that ensures every agency using our platform succeeds.",
-        image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=1000&auto=format&fit=crop",
-        socials: { linkedin: "#" }
-    },
+const stats = [
+    { value: "500+", label: "Agencies Served" },
+    { value: "2.5M+", label: "Leads Generated" },
+    { value: "98%", label: "Client Satisfaction" },
+    { value: "24/7", label: "Support Available" },
 ];
 
+const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: (i: number) => ({
+        opacity: 1,
+        y: 0,
+        transition: {
+            delay: i * 0.1,
+            duration: 0.6,
+            ease: "easeOut",
+        },
+    }),
+};
+
+const floatAnimation: TargetAndTransition = {
+    y: [-8, 8, -8],
+    transition: {
+        duration: 6,
+        repeat: Infinity,
+        ease: "easeInOut",
+    },
+};
+
 export default function AboutUs() {
-    const [selectedId, setSelectedId] = useState(1);
-    const selectedMember = teamMembers.find(m => m.id === selectedId) || teamMembers[0];
+    const containerRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"],
+    });
+
+    const imageY = useTransform(scrollYProgress, [0, 1], [100, -100]);
+    const opacityProgress = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
 
     return (
-        <section className="relative py-24 bg-transparent overflow-hidden">
-            {/* Ambient Background Glow */}
-            <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-purple-600/10 blur-[120px] rounded-full pointer-events-none" />
+        <section
+            ref={containerRef}
+            id="about"
+            className="relative py-32 overflow-hidden"
+        >
+            {/* Ambient Background Effects */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-1/4 left-0 w-[600px] h-[600px] bg-purple-600/15 rounded-full blur-[150px]" />
+                <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px]" />
+            </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col gap-16">
-
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 {/* Section Header */}
-                <div className="text-center space-y-4">
-                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-purple-400 drop-shadow-[0_0_15px_rgba(168,85,247,0.3)]">
-                        About Us
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.7, ease: "easeOut" }}
+                    className="text-center mb-20"
+                >
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2, duration: 0.5 }}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-sm font-medium mb-6"
+                    >
+                        <Sparkles className="w-4 h-4" />
+                        Who We Are
+                    </motion.div>
+
+                    <h2 className="text-4xl md:text-6xl font-bold mb-6">
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-100 to-purple-300">
+                            Transforming Agencies
+                        </span>
+                        <br />
+                        <span className="text-white/80">Into Growth Machines</span>
                     </h2>
-                    <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-                        Meet the diverse minds shaping the future of agency growth.
+
+                    <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                        We're not just another SaaS. We're your strategic partner in building
+                        predictable, scalable client acquisition systems that work while you sleep.
                     </p>
-                </div>
+                </motion.div>
 
-                {/* --- UPPER PART: Selected Member Details --- */}
-                <div className="min-h-[300px] flex items-center justify-center">
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={selectedMember.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.3 }}
-                            className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 md:p-12 w-full max-w-4xl flex flex-col md:flex-row items-center gap-8 md:gap-12"
-                        >
-                            {/* Large Image of Selected Member */}
-                            <div className="relative w-40 h-40 md:w-56 md:h-56 shrink-0 rounded-full overflow-hidden border-4 border-purple-500/30 shadow-[0_0_30px_rgba(168,85,247,0.3)]">
-                                <img
-                                    src={selectedMember.image}
-                                    alt={selectedMember.name}
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
+                {/* Bento Grid Layout */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+                    {/* Main Feature Card - Spans 2 columns */}
+                    <motion.div
+                        custom={0}
+                        variants={cardVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.2 }}
+                        className="md:col-span-2 relative group"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-indigo-600/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="relative h-full bg-gradient-to-br from-[#1a0a2e] to-[#0f0720] rounded-3xl border border-white/10 p-8 md:p-10 overflow-hidden group-hover:border-purple-500/30 transition-colors duration-300">
+                            {/* Decorative Grid Pattern */}
+                            <div className="absolute inset-0 opacity-5" style={{
+                                backgroundImage: `linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)`,
+                                backgroundSize: '40px 40px'
+                            }} />
 
-                            {/* Text Content */}
-                            <div className="flex-1 text-center md:text-left space-y-4">
-                                <div>
-                                    <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">{selectedMember.name}</h3>
-                                    <p className="text-lg text-purple-400 font-medium tracking-wide border-b border-purple-500/30 inline-block pb-1">
-                                        {selectedMember.role}
-                                    </p>
-                                </div>
-                                <p className="text-gray-300 text-lg leading-relaxed max-w-2xl">
-                                    {selectedMember.bio}
-                                </p>
-
-                                {/* Social Links */}
-                                <div className="flex items-center justify-center md:justify-start gap-4 pt-4">
-                                    {/* Mock Social Icons */}
-                                    <button className="p-2 rounded-full bg-white/5 hover:bg-white/20 transition-colors text-white">
-                                        <Linkedin className="w-5 h-5" />
-                                    </button>
-                                    <button className="p-2 rounded-full bg-white/5 hover:bg-white/20 transition-colors text-white">
-                                        <Twitter className="w-5 h-5" />
-                                    </button>
-                                    <button className="p-2 rounded-full bg-white/5 hover:bg-white/20 transition-colors text-white">
-                                        <Github className="w-5 h-5" />
-                                    </button>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
-                </div>
-
-                {/* --- LOWER PART: Infinite Marquee --- */}
-                <div className="relative w-full overflow-hidden mask-linear-fade">
-                    {/* 
-                      Gradient Masks on sides to fade the marquee edges.
-                      (Requires custom CSS or inline styles if tailwind plugin not configured)
-                    */}
-                    <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#0a0118] to-transparent z-10 pointer-events-none" />
-                    <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#0a0118] to-transparent z-10 pointer-events-none" />
-
-                    <div className="flex w-full">
-                        {/* We duplicate the array to create a seamless loop */}
-                        <motion.div
-                            className="flex gap-6 pr-6"
-                            animate={{ x: "-50%" }}
-                            transition={{
-                                duration: 30, // Slow speed
-                                ease: "linear",
-                                repeat: Infinity
-                            }}
-                            whileHover={{ animationPlayState: 'paused' }} // Note: Framer Motion uses visual state, simple CSS hover is easier for pause. 
-                        // Actually, with Framer Motion 'animate', sticking to native 'animation-play-state' logic via CSS class is often more robust, 
-                        // but let's try a hover override or just accept continuous flow.
-                        // Better UX: Allow interaction. 
-                        >
-                            {[...teamMembers, ...teamMembers].map((member, idx) => (
+                            <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
+                                {/* Floating Image Stack */}
                                 <motion.div
-                                    key={`${member.id}-${idx}`}
-                                    className={`
-                                        relative w-28 h-28 md:w-32 md:h-32 shrink-0 rounded-full overflow-hidden cursor-pointer border-2 transition-all duration-300
-                                        ${selectedId === member.id ? 'border-purple-500 scale-110 shadow-[0_0_20px_rgba(168,85,247,0.5)]' : 'border-white/10 grayscale hover:grayscale-0 hover:scale-105 hover:border-white/50'}
-                                    `}
-                                    onMouseEnter={() => setSelectedId(member.id)}
-                                    onClick={() => setSelectedId(member.id)}
-                                // Make sure mouse enter triggers dynamic update
+                                    className="relative w-64 h-64 shrink-0"
+                                    style={{ y: imageY }}
                                 >
-                                    <img
-                                        src={member.image}
-                                        alt={member.name}
-                                        className="w-full h-full object-cover"
+                                    <motion.div
+                                        animate={floatAnimation}
+                                        className="absolute top-0 left-0 w-36 h-36 rounded-2xl overflow-hidden shadow-2xl shadow-purple-500/20 border border-white/10"
+                                    >
+                                        <img
+                                            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&auto=format&fit=crop&q=80"
+                                            alt="Team collaboration"
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </motion.div>
+                                    <motion.div
+                                        animate={{ ...floatAnimation, transition: { ...floatAnimation.transition, delay: 1 } }}
+                                        className="absolute bottom-0 right-0 w-40 h-40 rounded-2xl overflow-hidden shadow-2xl shadow-indigo-500/20 border border-white/10"
+                                    >
+                                        <img
+                                            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&auto=format&fit=crop&q=80"
+                                            alt="Office meeting"
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </motion.div>
+                                    {/* Decorative floating element */}
+                                    <motion.div
+                                        animate={{ rotate: 360 }}
+                                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full border border-purple-500/30 border-dashed"
                                     />
                                 </motion.div>
-                            ))}
-                        </motion.div>
-                    </div>
+
+                                {/* Text Content */}
+                                <div className="flex-1 text-center md:text-left">
+                                    <h3 className="text-3xl font-bold text-white mb-4">
+                                        Built by Agency Owners, <br />
+                                        <span className="text-purple-400">For Agency Owners</span>
+                                    </h3>
+                                    <p className="text-gray-400 leading-relaxed mb-6">
+                                        After scaling our own agency from $0 to $5M ARR, we built the exact
+                                        system we wished existed—a growth engine that combines AI-powered
+                                        lead scoring, automated outreach, and battle-tested playbooks.
+                                    </p>
+                                    <motion.a
+                                        href="#services"
+                                        whileHover={{ x: 5 }}
+                                        className="inline-flex items-center gap-2 text-purple-400 font-medium group/link"
+                                    >
+                                        Learn how we do it
+                                        <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                                    </motion.a>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    {/* Mission Card */}
+                    <motion.div
+                        custom={1}
+                        variants={cardVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.2 }}
+                        className="group"
+                    >
+                        <div className="h-full bg-gradient-to-br from-[#1a0a2e] to-[#0f0720] rounded-3xl border border-white/10 p-8 group-hover:border-purple-500/30 transition-all duration-300 flex flex-col">
+                            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-indigo-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <Target className="w-7 h-7 text-purple-400" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-white mb-3">Our Mission</h3>
+                            <p className="text-gray-400 leading-relaxed flex-1">
+                                To democratize agency growth—making enterprise-grade marketing
+                                systems accessible to ambitious teams of all sizes.
+                            </p>
+                        </div>
+                    </motion.div>
+
+                    {/* Vision Card */}
+                    <motion.div
+                        custom={2}
+                        variants={cardVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.2 }}
+                        className="group"
+                    >
+                        <div className="h-full bg-gradient-to-br from-[#1a0a2e] to-[#0f0720] rounded-3xl border border-white/10 p-8 group-hover:border-indigo-500/30 transition-all duration-300 flex flex-col">
+                            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                <Rocket className="w-7 h-7 text-indigo-400" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-white mb-3">Our Vision</h3>
+                            <p className="text-gray-400 leading-relaxed flex-1">
+                                A world where every agency has the power to compete with the giants—
+                                armed with data, automation, and proven strategies.
+                            </p>
+                        </div>
+                    </motion.div>
+
+                    {/* Values Card */}
+                    <motion.div
+                        custom={3}
+                        variants={cardVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.2 }}
+                        className="md:col-span-2 group"
+                    >
+                        <div className="h-full bg-gradient-to-br from-[#1a0a2e] to-[#0f0720] rounded-3xl border border-white/10 p-8 group-hover:border-pink-500/30 transition-all duration-300">
+                            <div className="flex flex-col md:flex-row items-start gap-8">
+                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500/20 to-purple-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                                    <Users className="w-7 h-7 text-pink-400" />
+                                </div>
+                                <div>
+                                    <h3 className="text-2xl font-bold text-white mb-3">Our Values</h3>
+                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-4">
+                                        {[
+                                            { title: "Client-First", desc: "Your success is our success. Period." },
+                                            { title: "Radical Transparency", desc: "No hidden fees, no BS metrics." },
+                                            { title: "Relentless Innovation", desc: "We ship fast and iterate faster." },
+                                        ].map((value, idx) => (
+                                            <motion.div
+                                                key={idx}
+                                                initial={{ opacity: 0, y: 20 }}
+                                                whileInView={{ opacity: 1, y: 0 }}
+                                                viewport={{ once: true }}
+                                                transition={{ delay: 0.4 + idx * 0.1, duration: 0.5 }}
+                                                className="text-left"
+                                            >
+                                                <h4 className="text-white font-semibold mb-1">{value.title}</h4>
+                                                <p className="text-gray-500 text-sm">{value.desc}</p>
+                                            </motion.div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
 
+                {/* Stats Row */}
+                <motion.div
+                    style={{ opacity: opacityProgress }}
+                    className="grid grid-cols-2 md:grid-cols-4 gap-6"
+                >
+                    {stats.map((stat, idx) => (
+                        <motion.div
+                            key={idx}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true, amount: 0.5 }}
+                            transition={{ delay: idx * 0.1, duration: 0.5 }}
+                            whileHover={{ scale: 1.05, y: -5 }}
+                            className="relative group text-center py-8 px-4 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-purple-500/30 transition-all duration-300"
+                        >
+                            {/* Hover Glow */}
+                            <div className="absolute inset-0 bg-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
 
+                            <div className="relative z-10">
+                                <div className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400 mb-2">
+                                    {stat.value}
+                                </div>
+                                <div className="text-gray-400 text-sm font-medium tracking-wide uppercase">
+                                    {stat.label}
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </motion.div>
             </div>
         </section>
     );
 }
-
-// Ensure the marquee has wide enough content for x: -50% to work correctly with duplicated array.
-// With 20 items (10x2), it should be plenty wide.

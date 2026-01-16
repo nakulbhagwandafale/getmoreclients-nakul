@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-
-let interval: any;
 
 export type CardStackItem = {
     id: number;
@@ -25,10 +23,30 @@ export const CardStack = ({
 }) => {
     const [cards, setCards] = useState<CardStackItem[]>(items);
     const [isHovering, setIsHovering] = useState(false);
+    const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
     useEffect(() => {
         setCards(items);
     }, [items]);
+
+    const stopFlipping = useCallback(() => {
+        if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+        }
+    }, []);
+
+    const startFlipping = useCallback(() => {
+        stopFlipping(); // Ensure no duplicate intervals
+        intervalRef.current = setInterval(() => {
+            setCards((prevCards: CardStackItem[]) => {
+                const newArray = [...prevCards];
+                const first = newArray.shift();
+                if (first) newArray.push(first);
+                return newArray;
+            });
+        }, intervalMs);
+    }, [intervalMs, stopFlipping]);
 
     useEffect(() => {
         if (autoAdvance && !isHovering) {
@@ -38,22 +56,7 @@ export const CardStack = ({
         }
 
         return () => stopFlipping();
-    }, [autoAdvance, intervalMs, isHovering]);
-
-    const startFlipping = () => {
-        interval = setInterval(() => {
-            setCards((prevCards: CardStackItem[]) => {
-                const newArray = [...prevCards];
-                const first = newArray.shift();
-                if (first) newArray.push(first);
-                return newArray;
-            });
-        }, intervalMs);
-    };
-
-    const stopFlipping = () => {
-        clearInterval(interval);
-    };
+    }, [autoAdvance, intervalMs, isHovering, startFlipping, stopFlipping]);
 
     const handleCardClick = (clickedIndex: number) => {
         if (clickedIndex === 0) return; // Already center
@@ -61,9 +64,6 @@ export const CardStack = ({
         setCards((prevCards) => {
             const newCards = [...prevCards];
             const len = newCards.length;
-
-            // If clicking right side (index 1, 2), shift items from start to end (rotate left)
-            // If clicking left side (index len-1, len-2), pop items from end to start (rotate right)
 
             if (clickedIndex === 1) {
                 // Move 1 item
@@ -102,13 +102,6 @@ export const CardStack = ({
             onMouseLeave={() => pauseOnHover && setIsHovering(false)}
         >
             {cards.map((card, index) => {
-                // 5 Positions Logic
-                // 0 = Center
-                // 1 = Right 1
-                // 2 = Right 2
-                // Len-1 = Left 1
-                // Len-2 = Left 2
-
                 let x = 0;
                 let scale = 1;
                 let rotate = 0;
