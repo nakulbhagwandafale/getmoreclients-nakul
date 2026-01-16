@@ -5,7 +5,7 @@ import WhyChooseUs from '../components/WhyChooseUs';
 import AboutUs from '../components/AboutUs';
 import CalendarBooking from '../components/CalendarBooking';
 import CallToValue from '../components/CallToValue';
-import Footer from '../components/Footer';
+import Footer from '../components/FooterSection';
 import StarField from '../components/ui/StarField';
 
 import Testimonials from '../components/Testimonials';
