@@ -1,19 +1,16 @@
 import { Twitter, Linkedin, Instagram, Flame } from 'lucide-react';
 import Globe from './ui/Globe';
+import StarField from './ui/StarField';
 
 const Footer = () => {
     return (
-        <footer className="relative h-screen w-full overflow-hidden flex flex-col justify-between bg-[#0a0118]">
-            {/* Background Atmosphere */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0a0118] via-[#11052C] to-[#0a0118] z-0" />
+        <footer className="relative h-screen w-full overflow-hidden flex flex-col justify-between bg-transparent">
+            {/* Background Atmosphere - semi transparent to show stars */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0a0118]/80 via-[#11052C]/80 to-[#0a0118]/90 z-0" />
 
-            {/* Stars/Particles */}
-            <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
-                <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-white rounded-full shadow-[0_0_10px_white] animate-pulse" />
-                <div className="absolute top-1/3 right-1/4 w-2 h-2 bg-blue-400 rounded-full shadow-[0_0_15px_#60a5fa] animate-pulse delay-75" />
-                <div className="absolute bottom-1/2 left-1/2 w-1.5 h-1.5 bg-purple-400 rounded-full shadow-[0_0_15px_#c084fc] animate-pulse delay-150" />
-                <div className="absolute top-20 right-20 w-1 h-1 bg-white rounded-full animate-pulse delay-300" />
-                <div className="absolute bottom-40 left-10 w-2 h-2 bg-indigo-400 rounded-full shadow-[0_0_12px_#818cf8] animate-pulse delay-500" />
+            {/* Animated StarField specific to Footer */}
+            <div className="absolute inset-0 z-0 opacity-60 pointer-events-none mix-blend-screen">
+                <StarField className="absolute inset-0" />
             </div>
 
             {/* Globe Section (Upper Area - Takes remaining space) */}

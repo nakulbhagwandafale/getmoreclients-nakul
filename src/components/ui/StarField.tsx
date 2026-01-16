@@ -8,7 +8,7 @@ interface Star {
     speed: number;
 }
 
-const StarField: React.FC = () => {
+const StarField: React.FC<{ className?: string }> = ({ className = "fixed inset-0" }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
@@ -22,6 +22,10 @@ const StarField: React.FC = () => {
         let stars: Star[] = [];
 
         const resizeCanvas = () => {
+            // If absolute, use parent dimensions? Or just window?
+            // For full-screen sections like footer, window is fine.
+            // But better to use clientWidth/clientHeight for robustness if we can.
+            // Stick to window for now as footer is h-screen.
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             initStars();
@@ -76,7 +80,7 @@ const StarField: React.FC = () => {
     return (
         <canvas
             ref={canvasRef}
-            className="fixed inset-0 z-0 pointer-events-none"
+            className={`${className} z-0 pointer-events-none`}
             style={{ mixBlendMode: 'screen' }}
         />
     );
