@@ -4,8 +4,8 @@ import Services from '../components/Services';
 import WhyChooseUs from '../components/WhyChooseUs';
 import AboutUs from '../components/AboutUs';
 import CalendarBooking from '../components/CalendarBooking';
-import CallToValue from '../components/CallToValue';
 import Footer from '../components/FooterSection';
+import HowItWorks from '../components/HowItWorks';
 
 
 import Testimonials from '../components/Testimonials';
@@ -17,11 +17,11 @@ const HomePage = () => {
             <main>
                 <Hero />
                 <Services />
+                <HowItWorks />
                 <Testimonials />
                 <WhyChooseUs />
                 <AboutUs />
                 <CalendarBooking />
-                <CallToValue />
             </main>
             <Footer />
         </div>

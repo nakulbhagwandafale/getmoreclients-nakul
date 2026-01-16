@@ -1,5 +1,6 @@
 import { SplineScene } from './SplineScene';
 import { Spotlight } from './ui/Spotlight';
+import ShaderBackground from './ui/shader-background';
 
 
 const ROBOT_SCENE_URL = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode";
@@ -8,10 +9,12 @@ const Hero: React.FC = () => {
     return (
         <section className="relative min-h-screen overflow-hidden">
             {/* Background */}
-            {/* Background - using global StarField */}
+            <div className="absolute inset-0 z-0">
+                <ShaderBackground />
+            </div>
 
             {/* Spotlight Effect - Overlaid on top of background but behind content */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
+            <div className="absolute inset-0 z-0 pointer-events-none mix-blend-overlay">
                 <Spotlight
                     className="-top-40 left-0 md:left-60 md:-top-20"
                     fill="white"
