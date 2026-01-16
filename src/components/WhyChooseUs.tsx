@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from "framer-motion";
 import { Target, Zap, Shield, Users, ArrowRight } from "lucide-react";
+import { GradientBorderCard } from "./ui/gradient-border-card";
 
 // Feature Data
 const features = [
@@ -73,16 +74,16 @@ const WhyChooseUs: React.FC = () => {
                                 <div
                                     key={feature.id}
                                     onMouseEnter={() => setActiveFeature(index)}
-                                    className={`relative pl-8 pr-6 py-6 rounded-2xl cursor-pointer transition-all duration-300 group overflow-hidden ${activeFeature === index
-                                            ? "bg-white/5 border border-white/10 shadow-2xl shadow-purple-900/10"
-                                            : "hover:bg-white/5 border border-transparent hover:border-white/5"
-                                        }`}
+                                    className="relative cursor-pointer group"
                                 >
-                                    {/* Active Indicator Bar */}
-                                    <div className={`absolute left-0 top-0 bottom-0 w-1 transition-all duration-300 ${activeFeature === index ? "bg-gradient-to-b from-purple-500 to-blue-500" : "bg-white/5"
-                                        }`} />
+                                    <GradientBorderCard
+                                        containerClassName={`transition-all duration-300 ${activeFeature === index ? 'opacity-100 scale-[1.02]' : 'opacity-70 hover:opacity-100'}`}
+                                        className={`pl-8 pr-6 py-6 flex items-start gap-5 transition-colors duration-300 ${activeFeature === index ? "bg-[#1a0a2e]" : "bg-[#0a0118]"}`}
+                                    >
+                                        {/* Active Indicator Bar */}
+                                        <div className={`absolute left-0 top-0 bottom-0 w-1 transition-all duration-300 ${activeFeature === index ? "bg-gradient-to-b from-purple-500 to-blue-500" : "bg-white/5"
+                                            }`} />
 
-                                    <div className="flex items-start gap-5">
                                         <div className={`p-3 rounded-xl transition-all duration-300 ${activeFeature === index ? "bg-purple-500/20 text-purple-300" : "bg-white/5 text-gray-400"
                                             }`}>
                                             <Icon className="w-6 h-6" />
@@ -103,7 +104,7 @@ const WhyChooseUs: React.FC = () => {
                                             }`}>
                                             <ArrowRight className="w-5 h-5" />
                                         </div>
-                                    </div>
+                                    </GradientBorderCard>
                                 </div>
                             );
                         })}

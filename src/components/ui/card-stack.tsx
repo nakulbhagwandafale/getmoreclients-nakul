@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
+import { GradientBorderCard } from "./gradient-border-card";
 
 export type CardStackItem = {
     id: number;
@@ -164,7 +165,7 @@ export const CardStack = ({
                     <motion.div
                         key={card.id}
                         onClick={() => handleCardClick(index)}
-                        className="absolute h-[24rem] w-72 md:h-[28rem] md:w-80 rounded-3xl p-6 shadow-2xl border border-white/10 dark:border-white/10 overflow-hidden flex flex-col justify-end cursor-pointer transition-all duration-300 hover:brightness-110"
+                        className="absolute h-[24rem] w-72 md:h-[28rem] md:w-80 rounded-[2rem] cursor-pointer transition-all duration-300 hover:brightness-110"
                         style={{
                             transformOrigin: "center bottom",
                         }}
@@ -180,29 +181,31 @@ export const CardStack = ({
                             ease: "easeOut"
                         }}
                     >
-                        {/* Full Background Image */}
-                        <div
-                            className="absolute inset-0 bg-cover bg-center z-0"
-                            style={{ backgroundImage: `url(${card.imageSrc})` }}
-                        />
+                        <GradientBorderCard className="relative h-full w-full overflow-hidden rounded-[23px] bg-transparent border-none">
+                            {/* Full Background Image */}
+                            <div
+                                className="absolute inset-0 bg-cover bg-center z-0"
+                                style={{ backgroundImage: `url(${card.imageSrc})` }}
+                            />
 
-                        {/* Gradient Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent z-10" />
+                            {/* Gradient Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent z-10" />
 
-                        {/* Content */}
-                        <div className="relative z-20 pb-2">
-                            <h3 className="font-bold text-white text-xl md:text-2xl mb-2 drop-shadow-lg">
-                                {card.title}
-                            </h3>
-                            <p className="text-gray-200 text-sm leading-snug line-clamp-3 drop-shadow-md mb-3">
-                                {card.description}
-                            </p>
-                            {card.designation && (
-                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-500/20 text-purple-200 border border-purple-500/30">
-                                    {card.designation}
-                                </span>
-                            )}
-                        </div>
+                            {/* Content */}
+                            <div className="absolute bottom-0 left-0 w-full p-6 z-20 pb-8">
+                                <h3 className="font-bold text-white text-xl md:text-2xl mb-2 drop-shadow-lg">
+                                    {card.title}
+                                </h3>
+                                <p className="text-gray-200 text-sm leading-snug line-clamp-3 drop-shadow-md mb-3">
+                                    {card.description}
+                                </p>
+                                {card.designation && (
+                                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-500/20 text-purple-200 border border-purple-500/30">
+                                        {card.designation}
+                                    </span>
+                                )}
+                            </div>
+                        </GradientBorderCard>
                     </motion.div>
                 );
             })}

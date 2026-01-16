@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     format,
@@ -16,6 +17,7 @@ import {
     startOfToday
 } from 'date-fns';
 import { IconX, IconChevronLeft, IconChevronRight, IconClock, IconCalendar, IconCheck } from '@tabler/icons-react';
+import { GradientBorderCard } from './ui/gradient-border-card';
 
 const BookingModal = ({ onClose }: { onClose: () => void }) => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -121,7 +123,7 @@ const BookingModal = ({ onClose }: { onClose: () => void }) => {
         "04:00 PM", "04:30 PM", "05:00 PM"
     ];
 
-    return (
+    return createPortal(
         <motion.div
             className="fixed inset-0 z-[100] flex items-center justify-center p-4"
             initial={{ opacity: 0 }}
@@ -265,7 +267,8 @@ const BookingModal = ({ onClose }: { onClose: () => void }) => {
                     </AnimatePresence>
                 </div>
             </motion.div>
-        </motion.div>
+        </motion.div>,
+        document.body
     );
 };
 
@@ -320,7 +323,7 @@ const CalendarBooking: React.FC = () => {
                             {/* Glow effect */}
                             <div className="absolute inset-0 bg-purple-600/20 blur-3xl rounded-full transform scale-90 group-hover:bg-purple-600/30 transition-all duration-500"></div>
 
-                            <div className="relative bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-8 shadow-2xl group-hover:border-purple-500/30 group-hover:scale-[1.02] transition-all duration-300">
+                            <GradientBorderCard className="p-8">
                                 {/* Calendar Header */}
                                 <div className="flex items-center justify-between mb-8 pointer-events-none">
                                     <button className="w-10 h-10 rounded-full flex items-center justify-center text-gray-400">
@@ -362,12 +365,12 @@ const CalendarBooking: React.FC = () => {
                                 </div>
 
                                 {/* Overlay Hint */}
-                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40 rounded-3xl backdrop-blur-[2px]">
+                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40 rounded-[23px] backdrop-blur-[2px]">
                                     <span className="px-6 py-3 bg-purple-600 text-white font-bold rounded-full shadow-lg transform -translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                                         Click to Schedule
                                     </span>
                                 </div>
-                            </div>
+                            </GradientBorderCard>
                         </div>
                     </div>
                 </div>

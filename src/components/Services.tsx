@@ -8,8 +8,10 @@ import {
     ShoppingCart,
     Play,
     Palette,
+    ArrowRight,
 } from 'lucide-react';
 import { FlippingCard } from './ui/flipping-card';
+import { GradientBorderCard } from './ui/gradient-border-card';
 
 interface Service {
     id: string;
@@ -28,7 +30,7 @@ const services: Service[] = [
         subtitle: 'AI-Powered Strategy',
         description: 'Successful social media marketing starts with a well-defined strategy enhanced by AI-driven insights.',
         backDescription: 'We enhance social media planning with AI insights, trend analysis, and performance prediction to deliver the right content to the right audience at the right time.',
-        icon: <Share2 className="w-8 h-8" />,
+        icon: <Share2 className="w-6 h-6" />,
         buttonText: 'Learn More',
     },
     {
@@ -37,7 +39,7 @@ const services: Service[] = [
         subtitle: 'AI-Enhanced Optimization',
         description: 'Improve the quality and quantity of organic traffic to your website with AI-powered optimization.',
         backDescription: 'We strengthen SEO using AI-powered keyword research, content optimization, and ranking analysis to accelerate visibility on search engines and sustain long-term organic growth.',
-        icon: <Search className="w-8 h-8" />,
+        icon: <Search className="w-6 h-6" />,
         buttonText: 'Boost Rankings',
     },
     {
@@ -46,7 +48,7 @@ const services: Service[] = [
         subtitle: 'Smart Advertising',
         description: 'Pay-per-click marketing with AI-based bidding strategies for maximum ROI and conversions.',
         backDescription: 'We use AI-based bidding strategies, audience targeting, and ad performance optimization to reduce cost per click and maximize conversions with better ROI.',
-        icon: <MousePointerClick className="w-8 h-8" />,
+        icon: <MousePointerClick className="w-6 h-6" />,
         buttonText: 'Start Campaign',
     },
     {
@@ -55,7 +57,7 @@ const services: Service[] = [
         subtitle: 'AI-Driven Planning',
         description: 'Strategic content planning across platforms using AI insights for trending topics and formats.',
         backDescription: 'By using AI insights, we identify trending topics, optimal content formats, and platform-specific preferences to ensure your content reaches the right audience faster and builds trust.',
-        icon: <FileText className="w-8 h-8" />,
+        icon: <FileText className="w-6 h-6" />,
         buttonText: 'Create Content',
     },
     {
@@ -64,7 +66,7 @@ const services: Service[] = [
         subtitle: 'AI-Assisted UX',
         description: 'Combine creativity with AI-assisted user behavior analysis for impressive, converting websites.',
         backDescription: 'We combine creativity with AI-assisted user behavior analysis, performance testing, and design optimization to build visually impressive, easy-to-navigate websites that convert faster.',
-        icon: <Smartphone className="w-8 h-8" />,
+        icon: <Smartphone className="w-6 h-6" />,
         buttonText: 'View Portfolio',
     },
     {
@@ -73,16 +75,16 @@ const services: Service[] = [
         subtitle: 'Visual Storytelling',
         description: 'Transform complex information into visually engaging content optimized by AI.',
         backDescription: 'We enhance infographic design using AI-supported data structuring and visual optimization to communicate your brand message clearly and increase shareability.',
-        icon: <BarChart3 className="w-8 h-8" />,
+        icon: <BarChart3 className="w-6 h-6" />,
         buttonText: 'See Examples',
     },
     {
         id: 'ecommerce-assets',
-        title: 'E-Commerce Assets',
+        title: 'E-Commerce',
         subtitle: 'AI-Optimized Assets',
         description: 'Persuasive digital assets that drive conversions with AI-based consumer behavior analysis.',
         backDescription: 'We use AI-based consumer behavior analysis and platform-specific optimization to create high-impact assets that improve purchase confidence and drive higher sales.',
-        icon: <ShoppingCart className="w-8 h-8" />,
+        icon: <ShoppingCart className="w-6 h-6" />,
         buttonText: 'Increase Sales',
     },
     {
@@ -91,7 +93,7 @@ const services: Service[] = [
         subtitle: 'AI-Enhanced Motion',
         description: 'Interactive and engaging animations with AI-assisted scripting and visual flow optimization.',
         backDescription: 'Our animation process is enhanced with AI-assisted scripting, visual flow optimization, and audience engagement analysis to convey complex ideas clearly and creatively.',
-        icon: <Play className="w-8 h-8" />,
+        icon: <Play className="w-6 h-6" />,
         buttonText: 'Watch Demo',
     },
     {
@@ -100,36 +102,34 @@ const services: Service[] = [
         subtitle: 'AI-Driven Identity',
         description: 'Cohesive, memorable brand assets using AI-powered design consistency tools.',
         backDescription: 'We use AI-powered design consistency tools and brand intelligence to create cohesive, memorable brand assets that resonate with your audience.',
-        icon: <Palette className="w-8 h-8" />,
+        icon: <Palette className="w-6 h-6" />,
         buttonText: 'Build Brand',
     },
 ];
 
-interface CardFrontProps {
+interface CardProps {
     service: Service;
 }
 
-
-
-function CardFront({ service }: CardFrontProps) {
+function CardFront({ service }: CardProps) {
     return (
-        <div className="flex flex-col h-full w-full p-8 border border-white/5 bg-white/5 backdrop-blur-xl rounded-3xl hover:border-purple-500/30 transition-all duration-500 group">
+        <GradientBorderCard className="p-8 flex flex-col h-full bg-[#0a0118]/90">
             {/* Header */}
             <div className="flex justify-between items-start mb-6">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 flex items-center justify-center text-purple-400 group-hover:text-white group-hover:bg-purple-600 transition-all duration-500">
                     {service.icon}
                 </div>
-                <div className="text-right">
-                    <span className="text-xs font- tracking-wider text-purple-400/60 uppercase">Service</span>
+                <div className="text-right opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ArrowRight className="w-5 h-5 text-purple-400" />
                 </div>
             </div>
 
             {/* Content */}
-            <div className="mt-2">
+            <div className="flex-1">
                 <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-purple-200 transition-colors">
                     {service.title}
                 </h3>
-                <p className="text-purple-300/80 text-sm font-medium mb-4">
+                <p className="text-purple-400/80 text-sm font-medium mb-4 uppercase tracking-wider">
                     {service.subtitle}
                 </p>
                 <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">
@@ -137,51 +137,39 @@ function CardFront({ service }: CardFrontProps) {
                 </p>
             </div>
 
-            {/* Footer */}
-            <div className="mt-auto pt-6 flex items-center text-sm font-medium text-white/40 group-hover:text-purple-400 transition-colors">
-                <span>Explore Details</span>
-                <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+            {/* Hint */}
+            <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
+                <span className="text-xs font-medium text-gray-500">Hover to flip</span>
             </div>
-        </div>
+        </GradientBorderCard>
     );
 }
 
-interface CardBackProps {
-    service: Service;
-}
-
-function CardBack({ service }: CardBackProps) {
+function CardBack({ service }: CardProps) {
     return (
-        <div className="flex flex-col h-full w-full p-8 border border-purple-500/30 bg-purple-900/40 backdrop-blur-xl rounded-3xl relative overflow-hidden">
-            {/* Decorative Gradient */}
-            <div className="absolute -top-20 -right-20 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl"></div>
-
-            <div className="relative z-10 flex flex-col h-full items-center text-center justify-center">
-                <div className="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-300 mb-6">
-                    {service.icon}
-                </div>
-
-                <h3 className="text-2xl font-bold text-white mb-4">
-                    {service.title}
-                </h3>
-
-                <p className="text-gray-300 text-sm leading-relaxed mb-8 max-w-[260px]">
-                    {service.backDescription}
-                </p>
-
-                <button className="px-8 py-3 bg-white text-purple-900 text-sm font-bold rounded-full hover:bg-purple-50 transition-colors shadow-lg shadow-white/5">
-                    {service.buttonText}
-                </button>
+        <GradientBorderCard className="p-8 flex flex-col h-full items-center justify-center text-center bg-[#1a0a2e]/95">
+            <div className="w-16 h-16 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-300 mb-6">
+                {service.icon}
             </div>
-        </div>
+
+            <h3 className="text-2xl font-bold text-white mb-4">
+                {service.title}
+            </h3>
+
+            <p className="text-gray-300 text-sm leading-relaxed mb-8">
+                {service.backDescription}
+            </p>
+
+            <button className="px-8 py-3 bg-white text-purple-900 text-sm font-bold rounded-full hover:bg-purple-50 transition-colors shadow-lg shadow-white/5">
+                {service.buttonText}
+            </button>
+        </GradientBorderCard>
     );
 }
 
 const Services = () => {
     return (
-        <section id="services" className="relative py-32 bg-transparent overflow-hidden wave-bg">
+        <section id="services" className="relative py-32 bg-transparent overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-20">
@@ -198,10 +186,11 @@ const Services = () => {
                     {services.map((service) => (
                         <FlippingCard
                             key={service.id}
-                            width={340}
-                            height={420}
+                            width={350}
+                            height={450}
                             frontContent={<CardFront service={service} />}
                             backContent={<CardBack service={service} />}
+                            className="group"
                         />
                     ))}
                 </div>

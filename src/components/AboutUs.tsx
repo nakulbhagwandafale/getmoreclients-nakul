@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform, type Variants, type TargetAndTransition } from 'framer-motion';
 import { useRef } from 'react';
 import { Sparkles, Target, Rocket, Users, ArrowRight } from 'lucide-react';
+import { GradientBorderCard } from './ui/gradient-border-card';
 
 const stats = [
     { value: "500+", label: "Agencies Served" },
@@ -73,12 +74,12 @@ export default function AboutUs() {
                         Who We Are
                     </motion.div>
 
-                    <h2 className="text-4xl md:text-6xl font-bold mb-6">
+                    <h2 className="text-3xl md:text-5xl font-bold mb-5">
                         <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-100 to-purple-300">
-                            Transforming Agencies
+                            About Us
                         </span>
                         <br />
-                        <span className="text-white/80">Into Growth Machines</span>
+                        <span className="text-white/80">Transforming Agencies Into Growth Machines</span>
                     </h2>
 
                     <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
@@ -96,12 +97,11 @@ export default function AboutUs() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.2 }}
-                        className="md:col-span-2 relative group"
+                        className="md:col-span-2 relative h-full"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-indigo-600/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <div className="relative h-full bg-gradient-to-br from-[#1a0a2e] to-[#0f0720] rounded-3xl border border-white/10 p-8 md:p-10 overflow-hidden group-hover:border-purple-500/30 transition-colors duration-300">
+                        <GradientBorderCard className="p-8 md:p-10 flex flex-col justify-center h-full bg-[#0f0720]/90">
                             {/* Decorative Grid Pattern */}
-                            <div className="absolute inset-0 opacity-5" style={{
+                            <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
                                 backgroundImage: `linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)`,
                                 backgroundSize: '40px 40px'
                             }} />
@@ -161,9 +161,10 @@ export default function AboutUs() {
                                     </motion.a>
                                 </div>
                             </div>
-                        </div>
+                        </GradientBorderCard>
                     </motion.div>
 
+                    {/* Mission Card */}
                     {/* Mission Card */}
                     <motion.div
                         custom={1}
@@ -171,9 +172,9 @@ export default function AboutUs() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.2 }}
-                        className="group"
+                        className="h-full"
                     >
-                        <div className="h-full bg-gradient-to-br from-[#1a0a2e] to-[#0f0720] rounded-3xl border border-white/10 p-8 group-hover:border-purple-500/30 transition-all duration-300 flex flex-col">
+                        <GradientBorderCard className="p-8 h-full flex flex-col bg-[#0f0720]/90">
                             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-indigo-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                                 <Target className="w-7 h-7 text-purple-400" />
                             </div>
@@ -182,9 +183,10 @@ export default function AboutUs() {
                                 To democratize agency growth—making enterprise-grade marketing
                                 systems accessible to ambitious teams of all sizes.
                             </p>
-                        </div>
+                        </GradientBorderCard>
                     </motion.div>
 
+                    {/* Vision Card */}
                     {/* Vision Card */}
                     <motion.div
                         custom={2}
@@ -192,9 +194,9 @@ export default function AboutUs() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.2 }}
-                        className="group"
+                        className="h-full"
                     >
-                        <div className="h-full bg-gradient-to-br from-[#1a0a2e] to-[#0f0720] rounded-3xl border border-white/10 p-8 group-hover:border-indigo-500/30 transition-all duration-300 flex flex-col">
+                        <GradientBorderCard className="p-8 h-full flex flex-col bg-[#0f0720]/90">
                             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                                 <Rocket className="w-7 h-7 text-indigo-400" />
                             </div>
@@ -203,9 +205,10 @@ export default function AboutUs() {
                                 A world where every agency has the power to compete with the giants—
                                 armed with data, automation, and proven strategies.
                             </p>
-                        </div>
+                        </GradientBorderCard>
                     </motion.div>
 
+                    {/* Values Card */}
                     {/* Values Card */}
                     <motion.div
                         custom={3}
@@ -213,9 +216,9 @@ export default function AboutUs() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.2 }}
-                        className="md:col-span-2 group"
+                        className="md:col-span-2 h-full"
                     >
-                        <div className="h-full bg-gradient-to-br from-[#1a0a2e] to-[#0f0720] rounded-3xl border border-white/10 p-8 group-hover:border-pink-500/30 transition-all duration-300">
+                        <GradientBorderCard className="p-8 h-full bg-[#0f0720]/90">
                             <div className="flex flex-col md:flex-row items-start gap-8">
                                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500/20 to-purple-500/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
                                     <Users className="w-7 h-7 text-pink-400" />
@@ -243,7 +246,7 @@ export default function AboutUs() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </GradientBorderCard>
                     </motion.div>
                 </div>
 

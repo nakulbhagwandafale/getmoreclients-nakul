@@ -2,7 +2,8 @@ import { useRef, type ReactNode } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Twitter, Linkedin, Instagram, ArrowRight, Flame, Github } from 'lucide-react';
 import Globe from './ui/Globe';
-import StarField from './ui/StarField';
+
+import FlickeringGrid from './ui/flickering-footer';
 
 export default function Footer() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -15,10 +16,10 @@ export default function Footer() {
     const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
 
     return (
-        <footer ref={containerRef} className="relative min-h-screen w-full bg-[#0a0118] overflow-hidden flex flex-col pt-20">
+        <footer ref={containerRef} className="relative min-h-screen w-full bg-transparent overflow-hidden flex flex-col pt-20">
             {/* Background Ambience */}
             <div className="absolute inset-0 z-0">
-                <StarField className="opacity-40" />
+                {/* Global StarField is visible through transparent bg */}
                 <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none translate-x-1/4 -translate-y-1/3" />
                 <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[100px] pointer-events-none -translate-x-1/3 translate-y-1/3" />
             </div>
@@ -141,6 +142,17 @@ export default function Footer() {
                     </div>
 
                     <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8" />
+
+                    {/* Constellation Text Section */}
+                    {/* Height needs to be sufficient for text */}
+                    <div className="relative w-full h-[200px] md:h-[250px] flex justify-center items-center overflow-hidden">
+                        <FlickeringGrid
+                            text="Get More Client"
+                            className="w-full h-full"
+                        />
+                        {/* Extra ambient glow behind the text */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-xl h-24 bg-purple-500/10 blur-[60px] rounded-full pointer-events-none" />
+                    </div>
 
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
                         <p>© {new Date().getFullYear()} GetMoreClients Inc. All rights reserved.</p>

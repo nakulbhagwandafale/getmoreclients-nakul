@@ -7,6 +7,7 @@ import ServicesPage from './pages/ServicesPage';
 import AboutPage from './pages/AboutPage';
 import PageTransition from './components/PageTransition';
 import './index.css';
+import StarField from './components/ui/StarField';
 
 
 
@@ -29,6 +30,7 @@ function App() {
   return (
     <Router>
 
+      <StarField />
       <AnimatedRoutes />
     </Router>
   );

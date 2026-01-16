@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Target, Users, Zap, Heart, Linkedin, Twitter, Github } from 'lucide-react';
 import Navbar from '../components/Navbar';
+import { GradientBorderCard } from '../components/ui/gradient-border-card';
 import Footer from '../components/FooterSection';
 import StarField from '../components/ui/StarField';
 
@@ -126,14 +127,16 @@ const AboutPage = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6 }}
-                            className="bg-white/5 backdrop-blur-lg border border-white/10 p-8 rounded-3xl"
+                            className="h-full"
                         >
-                            <h2 className="text-3xl font-bold text-white mb-4 flex items-center gap-3">
-                                <Users className="text-blue-400" /> Our Story
-                            </h2>
-                            <p className="text-gray-300 leading-relaxed">
-                                Founded in 2024, GetMoreClients emerged from a simple observation: agencies were great at serving clients but struggled to scale themselves. We set out to build the "OS for Agency Growth"—combining predictive AI, automated workflows, and battle-tested strategies to make growth inevitable, not accidental.
-                            </p>
+                            <GradientBorderCard className="p-8 h-full bg-[#0a0118]/80">
+                                <h2 className="text-3xl font-bold text-white mb-4 flex items-center gap-3">
+                                    <Users className="text-blue-400" /> Our Story
+                                </h2>
+                                <p className="text-gray-300 leading-relaxed">
+                                    Founded in 2024, GetMoreClients emerged from a simple observation: agencies were great at serving clients but struggled to scale themselves. We set out to build the "OS for Agency Growth"—combining predictive AI, automated workflows, and battle-tested strategies to make growth inevitable, not accidental.
+                                </p>
+                            </GradientBorderCard>
                         </motion.div>
 
                         {/* Mission Card */}
@@ -142,14 +145,16 @@ const AboutPage = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6 }}
-                            className="bg-white/5 backdrop-blur-lg border border-white/10 p-8 rounded-3xl"
+                            className="h-full"
                         >
-                            <h2 className="text-3xl font-bold text-white mb-4 flex items-center gap-3">
-                                <Target className="text-purple-400" /> Our Mission
-                            </h2>
-                            <p className="text-gray-300 leading-relaxed">
-                                To empower 10,000 agencies to double their revenue by 2026. We believe that when agencies thrive, innovation flourishes. We are building the infrastructure that powers the next generation of digital service businesses, removing the friction from client acquisition.
-                            </p>
+                            <GradientBorderCard className="p-8 h-full bg-[#0a0118]/80">
+                                <h2 className="text-3xl font-bold text-white mb-4 flex items-center gap-3">
+                                    <Target className="text-purple-400" /> Our Mission
+                                </h2>
+                                <p className="text-gray-300 leading-relaxed">
+                                    To empower 10,000 agencies to double their revenue by 2026. We believe that when agencies thrive, innovation flourishes. We are building the infrastructure that powers the next generation of digital service businesses, removing the friction from client acquisition.
+                                </p>
+                            </GradientBorderCard>
                         </motion.div>
                     </div>
                 </section>
@@ -186,13 +191,15 @@ const AboutPage = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: idx * 0.1, duration: 0.5 }}
-                                    className="p-8 rounded-2xl bg-[#0f0720] border border-white/5 hover:border-purple-500/30 transition-colors group"
+                                    className="h-full group"
                                 >
-                                    <div className="mb-4 bg-white/5 w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                                        {value.icon}
-                                    </div>
-                                    <h3 className="text-xl font-bold text-white mb-2">{value.title}</h3>
-                                    <p className="text-gray-400">{value.desc}</p>
+                                    <GradientBorderCard className="p-8 h-full bg-[#0a0118]/80">
+                                        <div className="mb-4 bg-white/5 w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                                            {value.icon}
+                                        </div>
+                                        <h3 className="text-xl font-bold text-white mb-2">{value.title}</h3>
+                                        <p className="text-gray-400">{value.desc}</p>
+                                    </GradientBorderCard>
                                 </motion.div>
                             ))}
                         </div>
@@ -225,42 +232,44 @@ const AboutPage = () => {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -20 }}
                                     transition={{ duration: 0.3 }}
-                                    className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 md:p-12 w-full max-w-4xl flex flex-col md:flex-row items-center gap-8 md:gap-12"
+                                    className="w-full max-w-4xl"
                                 >
-                                    {/* Large Image of Selected Member */}
-                                    <div className="relative w-40 h-40 md:w-56 md:h-56 shrink-0 rounded-full overflow-hidden border-4 border-purple-500/30 shadow-[0_0_30px_rgba(168,85,247,0.3)]">
-                                        <img
-                                            src={selectedMember.image}
-                                            alt={selectedMember.name}
-                                            className="w-full h-full object-cover"
-                                        />
-                                    </div>
+                                    <GradientBorderCard className="p-8 md:p-12 w-full flex flex-col md:flex-row items-center gap-8 md:gap-12 bg-[#0a0118]/80">
+                                        {/* Large Image of Selected Member */}
+                                        <div className="relative w-40 h-40 md:w-56 md:h-56 shrink-0 rounded-full overflow-hidden border-4 border-purple-500/30 shadow-[0_0_30px_rgba(168,85,247,0.3)]">
+                                            <img
+                                                src={selectedMember.image}
+                                                alt={selectedMember.name}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </div>
 
-                                    {/* Text Content */}
-                                    <div className="flex-1 text-center md:text-left space-y-4">
-                                        <div>
-                                            <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">{selectedMember.name}</h3>
-                                            <p className="text-lg text-purple-400 font-medium tracking-wide border-b border-purple-500/30 inline-block pb-1">
-                                                {selectedMember.role}
+                                        {/* Text Content */}
+                                        <div className="flex-1 text-center md:text-left space-y-4">
+                                            <div>
+                                                <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">{selectedMember.name}</h3>
+                                                <p className="text-lg text-purple-400 font-medium tracking-wide border-b border-purple-500/30 inline-block pb-1">
+                                                    {selectedMember.role}
+                                                </p>
+                                            </div>
+                                            <p className="text-gray-300 text-lg leading-relaxed max-w-2xl">
+                                                {selectedMember.bio}
                                             </p>
-                                        </div>
-                                        <p className="text-gray-300 text-lg leading-relaxed max-w-2xl">
-                                            {selectedMember.bio}
-                                        </p>
 
-                                        {/* Social Links */}
-                                        <div className="flex items-center justify-center md:justify-start gap-4 pt-4">
-                                            <button className="p-2 rounded-full bg-white/5 hover:bg-white/20 transition-colors text-white">
-                                                <Linkedin className="w-5 h-5" />
-                                            </button>
-                                            <button className="p-2 rounded-full bg-white/5 hover:bg-white/20 transition-colors text-white">
-                                                <Twitter className="w-5 h-5" />
-                                            </button>
-                                            <button className="p-2 rounded-full bg-white/5 hover:bg-white/20 transition-colors text-white">
-                                                <Github className="w-5 h-5" />
-                                            </button>
+                                            {/* Social Links */}
+                                            <div className="flex items-center justify-center md:justify-start gap-4 pt-4">
+                                                <button className="p-2 rounded-full bg-white/5 hover:bg-white/20 transition-colors text-white">
+                                                    <Linkedin className="w-5 h-5" />
+                                                </button>
+                                                <button className="p-2 rounded-full bg-white/5 hover:bg-white/20 transition-colors text-white">
+                                                    <Twitter className="w-5 h-5" />
+                                                </button>
+                                                <button className="p-2 rounded-full bg-white/5 hover:bg-white/20 transition-colors text-white">
+                                                    <Github className="w-5 h-5" />
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </GradientBorderCard>
                                 </motion.div>
                             </AnimatePresence>
                         </div>
