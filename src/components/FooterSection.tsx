@@ -92,7 +92,7 @@ export default function Footer() {
 
             {/* Bottom Footer Links Area */}
             <div className="relative z-20 border-t border-white/5 bg-black/20 backdrop-blur-md">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-0">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
                         <div className="col-span-2 md:col-span-1 space-y-4">
                             <div className="flex items-center gap-2 text-white">
@@ -142,18 +142,19 @@ export default function Footer() {
                     </div>
 
                     <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8" />
+                </div>
 
-                    {/* Constellation Text Section */}
-                    {/* Height needs to be sufficient for text */}
-                    <div className="relative w-full h-[200px] md:h-[250px] flex justify-center items-center overflow-hidden">
-                        <FlickeringGrid
-                            text="Get More Client"
-                            className="w-full h-full"
-                        />
-                        {/* Extra ambient glow behind the text */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-xl h-24 bg-purple-500/10 blur-[60px] rounded-full pointer-events-none" />
-                    </div>
+                {/* Constellation Text Section - Full Width */}
+                <div className="relative w-full h-[200px] md:h-[250px] flex justify-center items-center overflow-hidden">
+                    <FlickeringGrid
+                        text="Get More Clients"
+                        className="w-full h-full"
+                    />
+                    {/* Extra ambient glow behind the text */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-xl h-24 bg-purple-500/10 blur-[60px] rounded-full pointer-events-none" />
+                </div>
 
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
                         <p>© {new Date().getFullYear()} GetMoreClients Inc. All rights reserved.</p>
                         <div className="flex gap-6">

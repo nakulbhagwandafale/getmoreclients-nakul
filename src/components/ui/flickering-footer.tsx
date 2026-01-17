@@ -41,8 +41,10 @@ export const Component = ({
         let height = 0;
 
         const initDots = (w: number, h: number) => {
-            width = w;
-            height = h;
+            width = Math.floor(w);
+            height = Math.floor(h);
+
+            if (width <= 0 || height <= 0) return;
 
             // 1. Offscreen Sampling
             const offCanvas = document.createElement("canvas");
