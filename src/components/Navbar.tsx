@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const navigation = [
     { name: 'Home', href: '/', isRoute: true },
@@ -11,6 +11,7 @@ const navigation = [
 ];
 
 const Navbar = () => {
+    const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
 
@@ -53,7 +54,13 @@ const Navbar = () => {
                         </div>
 
                         {/* Book Meeting Button - Right */}
-                        <button className="btn-primary text-sm">
+                        <button
+                            onClick={() => {
+                                navigate('/contact');
+                                window.scrollTo(0, 0);
+                            }}
+                            className="btn-primary text-sm"
+                        >
                             Book Meeting
                         </button>
                     </div>
@@ -112,7 +119,14 @@ const Navbar = () => {
                                         </a>
                                     )
                                 ))}
-                                <button className="btn-primary text-sm w-fit">
+                                <button
+                                    onClick={() => {
+                                        setIsMenuOpen(false);
+                                        navigate('/contact');
+                                        window.scrollTo(0, 0);
+                                    }}
+                                    className="btn-primary text-sm w-fit"
+                                >
                                     Book Meeting
                                 </button>
                             </div>

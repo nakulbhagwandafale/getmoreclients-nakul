@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/FooterSection';
+
 import BlogCard from '@/components/BlogCard';
 import { blogPosts } from '@/data/blogPosts';
 

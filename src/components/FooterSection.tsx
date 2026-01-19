@@ -1,5 +1,6 @@
 import { useRef, type ReactNode } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { Twitter, Linkedin, Instagram, ArrowRight, Flame, Github } from 'lucide-react';
 import Globe from './ui/Globe';
 import CosmicFooterBackground from './ui/cosmic-footer-background';
@@ -7,6 +8,7 @@ import CosmicFooterBackground from './ui/cosmic-footer-background';
 import FlickeringGrid from './ui/flickering-footer';
 
 export default function Footer() {
+    const navigate = useNavigate();
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -47,15 +49,27 @@ export default function Footer() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-                        <button className="group relative px-8 py-4 bg-white text-black font-bold rounded-full text-lg w-full sm:w-auto overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]">
+                        <button
+                            onClick={() => {
+                                navigate('/contact');
+                                window.scrollTo(0, 0);
+                            }}
+                            className="group relative px-8 py-4 bg-white text-black font-bold rounded-full text-lg w-full sm:w-auto overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]"
+                        >
                             <span className="relative z-10 flex items-center justify-center gap-2 group-hover:gap-3 transition-all duration-300">
-                                Book a Demo <ArrowRight className="w-5 h-5" />
+                                Book Meeting<ArrowRight className="w-5 h-5" />
                             </span>
                             <div className="absolute inset-0 bg-gradient-to-r from-purple-200 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </button>
 
-                        <button className="px-8 py-4 bg-white/5 text-white font-medium rounded-full text-lg w-full sm:w-auto hover:bg-white/10 transition-colors border border-white/10 backdrop-blur-sm">
-                            View Pricing
+                        <button
+                            onClick={() => {
+                                navigate('/work');
+                                window.scrollTo(0, 0);
+                            }}
+                            className="px-8 py-4 bg-white/5 text-white font-medium rounded-full text-lg w-full sm:w-auto hover:bg-white/10 transition-colors border border-white/10 backdrop-blur-sm"
+                        >
+                            View Our Work
                         </button>
                     </div>
 

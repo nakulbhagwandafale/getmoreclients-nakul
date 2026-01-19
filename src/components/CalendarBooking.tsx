@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -273,6 +274,7 @@ const BookingModal = ({ onClose }: { onClose: () => void }) => {
 };
 
 const CalendarBooking: React.FC = () => {
+    const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Placeholder data for the preview calendar
@@ -303,10 +305,13 @@ const CalendarBooking: React.FC = () => {
                             </p>
 
                             <button
-                                onClick={() => setIsModalOpen(true)}
+                                onClick={() => {
+                                    navigate('/contact');
+                                    window.scrollTo(0, 0);
+                                }}
                                 className="btn-primary inline-flex items-center space-x-2 group text-lg px-8 py-4 cursor-pointer"
                             >
-                                <span>Book Consultation</span>
+                                <span>Book Meeting</span>
                                 <svg
                                     className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
                                     fill="none"

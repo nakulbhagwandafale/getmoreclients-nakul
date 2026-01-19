@@ -1,4 +1,5 @@
 import { SplineScene } from './SplineScene';
+import { useNavigate } from 'react-router-dom';
 import { Spotlight } from './ui/Spotlight';
 import ShaderBackground from './ui/shader-background';
 
@@ -6,6 +7,7 @@ import ShaderBackground from './ui/shader-background';
 const ROBOT_SCENE_URL = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode";
 
 const Hero: React.FC = () => {
+    const navigate = useNavigate();
     return (
         <section className="relative min-h-screen overflow-hidden">
             <div className="absolute inset-0 z-0">
@@ -41,8 +43,14 @@ const Hero: React.FC = () => {
                     </p>
 
                     <div className="mt-8 flex flex-wrap gap-4">
-                        <button className="btn-primary text-sm md:text-base px-6 py-3 inline-flex items-center space-x-2 group">
-                            <span>Book a Free Consultation</span>
+                        <button
+                            onClick={() => {
+                                navigate('/contact');
+                                window.scrollTo(0, 0);
+                            }}
+                            className="btn-primary text-sm md:text-base px-6 py-3 inline-flex items-center space-x-2 group"
+                        >
+                            <span>Book Meeting</span>
                             <svg
                                 className="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
                                 fill="none"
@@ -52,7 +60,10 @@ const Hero: React.FC = () => {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
                         </button>
-                        <button className="px-6 py-3 text-sm md:text-base text-white border border-purple-500/50 rounded-full hover:bg-purple-500/10 transition-all duration-300">
+                        <button
+                            onClick={() => navigate('/work')}
+                            className="px-6 py-3 text-sm md:text-base text-white border border-purple-500/50 rounded-full hover:bg-purple-500/10 transition-all duration-300"
+                        >
                             View Our Work
                         </button>
                     </div>

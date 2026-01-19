@@ -15,7 +15,7 @@ function CardFront({ service }: CardProps) {
         <GradientBorderCard className="p-8 flex flex-col h-full bg-[#0a0118]/90">
             {/* Header */}
             <div className="flex justify-between items-start mb-6">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 flex items-center justify-center text-purple-400 group-hover:text-white group-hover:bg-purple-600 group-hover:shadow-[0_0_20px_rgba(168,85,247,0.5)] transition-all duration-500">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 flex items-center justify-center text-purple-400 group-hover:text-white group-hover:bg-purple-600 transition-all duration-500">
                     <Icon className="w-6 h-6" />
                 </div>
                 <div className="text-right opacity-0 group-hover:opacity-100 transition-opacity">

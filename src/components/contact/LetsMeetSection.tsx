@@ -1,34 +1,34 @@
 import { motion } from 'framer-motion';
 import { Phone, MapPin, Mail, MessageCircle } from 'lucide-react';
-import React from 'react';
+
 
 const LetsMeetSection = () => {
     const cards = [
         {
             icon: <MessageCircle className="w-8 h-8 text-green-400" />,
             title: "Whatsapp Us",
-            detail: "+91 87790 31795",
+            detail: "+91 9370425738",
             href: "https://wa.me/918779031795", // Assuming direct link
             delay: 0
         },
         {
             icon: <Phone className="w-8 h-8 text-blue-400" />,
             title: "Call Us",
-            detail: "+91 98920 10672",
+            detail: "+91 9370425738",
             href: "tel:+919892010672",
             delay: 0.1
         },
         {
             icon: <MapPin className="w-8 h-8 text-purple-400" />,
             title: "We're On The Map",
-            detail: "Mumbai | London",
+            detail: "Mumbai | chembur",
             href: "#", // Link to actual map if available
             delay: 0.2
         },
         {
             icon: <Mail className="w-8 h-8 text-pink-400" />,
             title: "Send Us A Message",
-            detail: "teammofa@mofadigital.in",
+            detail: "nakuldafale7@gmail.com",
             href: "mailto:teammofa@mofadigital.in",
             delay: 0.3
         }

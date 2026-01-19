@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { Search, Map, Rocket, TrendingUp, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -116,6 +117,7 @@ const MovingBorderCard = ({ step, index }: { step: any, index: number }) => {
 }
 
 const HowItWorks = () => {
+    const navigate = useNavigate();
     return (
         <section className="relative py-32 bg-transparent overflow-hidden">
             {/* StarField removed for performance - relying on global or clean background */}
@@ -181,8 +183,14 @@ const HowItWorks = () => {
                     transition={{ duration: 0.6, delay: 0.8 }}
                     className="mt-20 text-center"
                 >
-                    <button className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-purple-950 rounded-full font-bold text-lg hover:bg-purple-50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:-translate-y-1">
-                        Start Your Journey
+                    <button
+                        onClick={() => {
+                            navigate('/contact');
+                            window.scrollTo(0, 0);
+                        }}
+                        className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-purple-950 rounded-full font-bold text-lg hover:bg-purple-50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:-translate-y-1"
+                    >
+                        Book Meeting
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </button>
                     <p className="mt-4 text-sm text-gray-500">No commitment required. Book a free discovery call.</p>

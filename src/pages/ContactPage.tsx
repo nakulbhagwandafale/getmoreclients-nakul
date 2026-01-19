@@ -94,13 +94,13 @@ const ContactPage = () => {
                                     <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-purple-500/20 transition-colors">
                                         <Mail className="w-5 h-5" />
                                     </div>
-                                    <span>hello@getmoreclients.in</span>
+                                    <span>nakuldafale7@gmail.com</span>
                                 </a>
                                 <div className="flex items-center gap-3 text-gray-300">
                                     <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
                                         <MapPin className="w-5 h-5" />
                                     </div>
-                                    <span>San Francisco &middot; New York &middot; London</span>
+                                    <span>India &middot; mumbai &middot; chembur</span>
                                 </div>
                             </div>
                         </div>
