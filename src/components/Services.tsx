@@ -15,7 +15,7 @@ function CardFront({ service }: CardProps) {
         <GradientBorderCard className="p-8 flex flex-col h-full bg-[#0a0118]/90">
             {/* Header */}
             <div className="flex justify-between items-start mb-6">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 flex items-center justify-center text-purple-400 group-hover:text-white group-hover:bg-purple-600 transition-all duration-500">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-600/10 flex items-center justify-center text-purple-400 group-hover:text-white group-hover:bg-purple-600 group-hover:shadow-[0_0_20px_rgba(168,85,247,0.5)] transition-all duration-500">
                     <Icon className="w-6 h-6" />
                 </div>
                 <div className="text-right opacity-0 group-hover:opacity-100 transition-opacity">
@@ -62,9 +62,13 @@ function CardBack({ service }: CardProps) {
 
             <Link
                 to={`/services/${service.id}`}
-                className="px-8 py-3 bg-white text-purple-900 text-sm font-bold rounded-full hover:bg-purple-50 transition-colors shadow-lg shadow-white/5 inline-flex items-center gap-2"
+                className="group/btn relative px-8 py-3 bg-white text-purple-900 text-sm font-bold rounded-full overflow-hidden transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_25px_rgba(168,85,247,0.5)] inline-flex items-center gap-2"
             >
-                Explore Solution <ArrowRight className="w-4 h-4" />
+                <span className="relative z-10 flex items-center gap-2">
+                    Explore Solution
+                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1 text-purple-600" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-50 to-white opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
             </Link>
         </GradientBorderCard>
     );

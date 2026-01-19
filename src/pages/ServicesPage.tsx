@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Sparkles, Zap, BarChart3, Globe, Cpu } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Zap, BarChart3, Globe, Cpu } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/FooterSection';
@@ -70,10 +70,18 @@ const ServicesPage = () => {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5, delay: 0.1 }}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md shadow-lg shadow-purple-900/20"
+                            className="mb-8 flex justify-center"
                         >
-                            <Sparkles className="w-4 h-4 text-purple-400" />
-                            <span className="text-sm font-semibold text-purple-100 uppercase tracking-widest text-[10px]">Future of Marketing</span>
+                            <Link
+                                to="/services/ai-solutions" // Assuming a generic service ID for this button
+                                className="group/btn relative inline-flex items-center gap-2 px-6 py-3 bg-white text-purple-900 text-sm font-bold rounded-full overflow-hidden transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_25px_rgba(168,85,247,0.5)]"
+                            >
+                                <span className="relative z-10 flex items-center gap-2">
+                                    Explore Solution
+                                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1 text-purple-600" />
+                                </span>
+                                <div className="absolute inset-0 bg-gradient-to-r from-purple-50 to-white opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300" />
+                            </Link>
                         </motion.div>
 
                         <motion.h1

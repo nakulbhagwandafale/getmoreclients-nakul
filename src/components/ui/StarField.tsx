@@ -31,11 +31,11 @@ const StarField: React.FC<{ className?: string }> = ({ className = "fixed inset-
         const initStars = () => {
             // Lower density -> fewer stars. (Area / Density) = count.
             // Increased density value to decrease star count.
-            const density = 5000;
+            const density = 2000; // Increased density for more stars
             const starCount = Math.floor((canvas.width * canvas.height) / density);
 
             // Limit max stars to avoid overload on massive screens
-            const maxStars = 300;
+            const maxStars = 600; // Increased max count
             const finalCount = Math.min(starCount, maxStars);
 
             stars = [];
@@ -43,9 +43,9 @@ const StarField: React.FC<{ className?: string }> = ({ className = "fixed inset-
                 stars.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    size: Math.random() * 1.5 + 0.5,
-                    opacity: Math.random(),
-                    speed: Math.random() * 0.2 + 0.05,
+                    size: Math.random() * 2 + 0.5, // Slightly larger stars
+                    opacity: Math.random() * 0.8 + 0.2, // Higher minimum opacity
+                    speed: Math.random() * 0.15 + 0.02, // Slower, more majestic movement
                 });
             }
         };
@@ -55,6 +55,8 @@ const StarField: React.FC<{ className?: string }> = ({ className = "fixed inset-
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             ctx.fillStyle = "white";
+            ctx.shadowBlur = 4; // Add glow
+            ctx.shadowColor = "white";
 
             // Batch draws if possible, but opacity varies. 
             // We'll iterate but prevent expensive shadowBlur
