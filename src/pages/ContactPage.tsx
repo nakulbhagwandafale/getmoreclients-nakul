@@ -5,6 +5,7 @@ import { GradientBorderCard } from '@/components/ui/gradient-border-card';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/FooterSection';
 import LetsMeetSection from '@/components/contact/LetsMeetSection';
+import { supabase } from '@/lib/supabaseClient';
 
 // ... (existing imports, but typically I can't easily auto-insert imports at top with replace_file_content unless I target top lines. I will add import at top first, then component body)
 
@@ -15,11 +16,36 @@ const ContactPage = () => {
     const [focusedField, setFocusedField] = useState<string | null>(null);
     const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setFormState('submitting');
-        // Simulate network request
-        setTimeout(() => setFormState('success'), 1500);
+
+        const formData = new FormData(e.target as HTMLFormElement);
+        const data = {
+            name: formData.get('name') as string,
+            email: formData.get('email') as string,
+            website: formData.get('website') as string,
+            message: formData.get('message') as string,
+        };
+
+        try {
+            if (!supabase) {
+                throw new Error('Supabase client is not initialized. Check your environment variables.');
+            }
+
+            const { error } = await supabase
+                .from('contact_submissions')
+                .insert([data]);
+
+            if (error) throw error;
+
+            setFormState('success');
+        } catch (error: any) {
+            console.error('Error submitting form:', error);
+            // Show the actual error message to help debugging
+            alert(`Error: ${error.message || 'Something went wrong. Please check your connection and try again.'}`);
+            setFormState('idle');
+        }
     };
 
     return (
@@ -144,6 +170,7 @@ const ContactPage = () => {
                                             <input
                                                 type="text"
                                                 id="name"
+                                                name="name"
                                                 required
                                                 className={`w-full bg-[#1a0b2e] border rounded-xl px-5 pt-6 pb-2 text-white outline-none transition-all duration-300 ${focusedField === 'name' ? 'border-purple-500 shadow-[0_0_20px_rgba(168,85,247,0.15)]' : 'border-white/10'}`}
                                                 onFocus={() => setFocusedField('name')}
@@ -162,6 +189,7 @@ const ContactPage = () => {
                                             <input
                                                 type="email"
                                                 id="email"
+                                                name="email"
                                                 required
                                                 className={`w-full bg-[#1a0b2e] border rounded-xl px-5 pt-6 pb-2 text-white outline-none transition-all duration-300 ${focusedField === 'email' ? 'border-purple-500 shadow-[0_0_20px_rgba(168,85,247,0.15)]' : 'border-white/10'}`}
                                                 onFocus={() => setFocusedField('email')}
@@ -180,6 +208,7 @@ const ContactPage = () => {
                                             <input
                                                 type="url"
                                                 id="website"
+                                                name="website"
                                                 className={`w-full bg-[#1a0b2e] border rounded-xl px-5 pt-6 pb-2 text-white outline-none transition-all duration-300 ${focusedField === 'website' ? 'border-purple-500 shadow-[0_0_20px_rgba(168,85,247,0.15)]' : 'border-white/10'}`}
                                                 onFocus={() => setFocusedField('website')}
                                                 onBlur={(e) => !e.target.value && setFocusedField(null)}
@@ -196,6 +225,7 @@ const ContactPage = () => {
                                         <div className="relative">
                                             <textarea
                                                 id="message"
+                                                name="message"
                                                 required
                                                 rows={4}
                                                 className={`w-full bg-[#1a0b2e] border rounded-xl px-5 pt-6 pb-2 text-white outline-none transition-all duration-300 resize-none ${focusedField === 'message' ? 'border-purple-500 shadow-[0_0_20px_rgba(168,85,247,0.15)]' : 'border-white/10'}`}
@@ -221,7 +251,7 @@ const ContactPage = () => {
                                             <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                                         ) : (
                                             <>
-                                                Start the Conversation
+                                                submit
                                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                             </>
                                         )}
