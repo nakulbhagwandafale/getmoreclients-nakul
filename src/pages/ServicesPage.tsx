@@ -134,34 +134,7 @@ const ServicesPage = () => {
             {/* Services Component */}
             <Services />
 
-            <section className="relative py-32 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-[#0a0118] to-[#150528]" />
-                <div className="max-w-5xl mx-auto px-4 relative z-10 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">
-                            Ready to scale simpler, <br />
-                            <span className="text-purple-400">faster, and smarter?</span>
-                        </h2>
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                            <button className="btn-primary px-10 py-5 text-lg rounded-2xl inline-flex items-center gap-3 group">
-                                Book Your Strategy Call
-                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                            </button>
-                            <Link
-                                to="/contact"
-                                className="px-10 py-5 text-lg text-gray-300 hover:text-white border border-white/10 hover:bg-white/5 rounded-2xl transition-all duration-300"
-                            >
-                                Contact Support
-                            </Link>
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
+
 
             <Footer />
         </div>

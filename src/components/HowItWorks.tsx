@@ -23,60 +23,93 @@ const steps = [
         title: "Execution",
         description: "We deploy autonomous marketing agents and expert teams to execute campaigns with precision and speed.",
         icon: Rocket,
-        gradient: "from-purple-400 via-pink-500 to-rose-600"
+        gradient: "from-emerald-400 via-cyan-500 to-blue-600"
     },
     {
         id: 4,
         title: "Growth",
         description: "Real-time analytics optimize performance 24/7, ensuring continuous scaling and maximizing ROI.",
         icon: TrendingUp,
-        gradient: "from-pink-400 via-rose-500 to-orange-600"
+        gradient: "from-green-400 via-emerald-500 to-teal-600"
     }
 ];
 
 // Moving Border Card V2 (More robust implementation)
+// Enhanced Moving Border Card with smoother physics and better gradients
 const MovingBorderCard = ({ step, index }: { step: any, index: number }) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: index * 0.15 }}
-            className="relative h-full"
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="relative group h-full"
         >
-            <div className="relative h-full group isolate rounded-3xl bg-transparent">
-                {/* The Moving Gradient Border */}
-                <div
-                    className="absolute inset-0 -z-10 rounded-3xl overflow-hidden"
-                >
-                    {/* The spinning gradient layer - Uses the step's specific gradient */}
-                    <div className={cn("absolute inset-[-100%] animate-[spin_3s_linear_infinite] opacity-30 group-hover:opacity-100 transition-opacity duration-500 blur-md", `bg-gradient-to-r ${step.gradient}`)} />
-                </div>
+            {/* Outer Glow Effect - Visible on Hover */}
+            <div
+                className={cn("absolute -inset-0.5 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl -z-10", step.gradient)}
+            />
 
-                {/* Mask to create the border width */}
-                <div className="absolute inset-[1px] -z-10 rounded-[23px] bg-[#0a0118]" />
+            {/* Main Card Container */}
+            <div className="relative h-full overflow-hidden rounded-3xl bg-[#0a0118] border border-white/10 transition-colors duration-300">
 
-                {/* Inner Content */}
-                <div className="h-full p-8 rounded-3xl bg-white/[0.02] backdrop-blur-sm border border-white/5 group-hover:bg-white/[0.05] transition-colors duration-500">
-                    {/* Icon */}
-                    <div className="mb-6 relative">
-                        <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br transition-transform duration-500 group-hover:scale-110 shadow-lg", step.gradient)}>
-                            <step.icon className="w-7 h-7 text-white stroke-[1.5]" />
+                {/* The Rotating Neon Border Beam */}
+                <div className="absolute inset-0 z-0 overflow-hidden">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        {/* Spinning Conic Gradient */}
+                        <div
+                            className="absolute inset-0 animate-[spin_4s_linear_infinite]"
+                            style={{
+                                background: `conic-gradient(from 0deg, transparent 0 270deg, white 360deg)`
+                            }}
+                        >
+                            {/* Color Overlay to tin the white beam */}
+                            <div className={cn("absolute inset-0 mix-blend-multiply opacity-100", `bg-gradient-to-tr ${step.gradient}`)} />
                         </div>
-                        {/* Glow behind icon */}
-                        <div className={cn("absolute -inset-4 opacity-0 group-hover:opacity-40 blur-xl transition-opacity duration-500 rounded-full bg-gradient-to-br", step.gradient)} />
-
-                        {/* Number */}
-                        <span className="absolute -top-2 -right-2 text-4xl font-bold text-white/5 select-none">{`0${step.id}`}</span>
                     </div>
 
-                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400 transition-all duration-300">
+                    {/* Idle State Border (Softer, always moving) */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] opacity-40 group-hover:opacity-0 transition-opacity duration-500">
+                        <div
+                            className="absolute inset-0 animate-[spin_8s_linear_infinite]"
+                            style={{
+                                background: `conic-gradient(from 0deg, transparent 0 180deg, white 360deg)`
+                            }}
+                        />
+                    </div>
+                </div>
+
+                {/* Inner Mask - Creating the border thickness (2px) */}
+                <div className="absolute inset-[2px] rounded-[22px] bg-[#0a0118] z-0" />
+
+                {/* Content */}
+                <div className="relative z-10 p-8 h-full flex flex-col backdrop-blur-sm bg-white/[0.02]">
+                    {/* Icon */}
+                    <div className="mb-6 relative">
+                        <div className={cn("w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br border border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-500", step.gradient)}>
+                            <step.icon className="w-7 h-7 text-white" />
+                        </div>
+                        {/* Step Number */}
+                        <span className="absolute -top-2 -right-2 text-6xl font-black text-white/5 select-none transition-colors duration-500 group-hover:text-white/10">
+                            {`0${step.id}`}
+                        </span>
+                    </div>
+
+                    <h3 className="text-2xl font-bold text-white mb-3">
                         {step.title}
                     </h3>
 
-                    <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
+                    <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
                         {step.description}
                     </p>
+
+                    {/* Bottom Edge Light Reflection - Adds "Premium" feel */}
+                    <div className={cn("absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-current to-transparent opacity-0 group-hover:opacity-50 transition-opacity duration-700", {
+                        "text-cyan-500": step.id === 1,
+                        "text-indigo-500": step.id === 2,
+                        "text-emerald-500": step.id === 3,
+                        "text-green-500": step.id === 4
+                    })} />
                 </div>
             </div>
         </motion.div>

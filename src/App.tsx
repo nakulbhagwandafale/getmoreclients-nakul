@@ -9,6 +9,7 @@ import BlogPage from '@/pages/BlogPage';
 import BlogPostPage from '@/pages/BlogPostPage';
 import ContactPage from '@/pages/ContactPage';
 import WorkPage from '@/pages/WorkPage';
+import ServiceDetailPage from '@/pages/ServiceDetailPage';
 import PageTransition from './components/PageTransition';
 import './index.css';
 import StarField from './components/ui/StarField';
@@ -24,6 +25,7 @@ function AnimatedRoutes() {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageTransition><HomePage /></PageTransition>} />
         <Route path="/services" element={<PageTransition><ServicesPage /></PageTransition>} />
+        <Route path="/services/:id" element={<PageTransition><ServiceDetailPage /></PageTransition>} />
         <Route path="/work" element={<PageTransition><WorkPage /></PageTransition>} />
         <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
         <Route path="/blog" element={<PageTransition><BlogPage /></PageTransition>} />

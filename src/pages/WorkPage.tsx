@@ -167,20 +167,7 @@ const WorkPage = () => {
                 </div>
             </section>
 
-            {/* CTA */}
-            <section className="py-24 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent pointer-events-none" />
-                <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-8">Ready to start your project?</h2>
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="btn-primary px-10 py-5 text-lg rounded-2xl inline-flex items-center gap-2"
-                    >
-                        Get a Proposal <ArrowRight className="w-5 h-5" />
-                    </motion.button>
-                </div>
-            </section>
+
 
             <Footer />
         </div>
