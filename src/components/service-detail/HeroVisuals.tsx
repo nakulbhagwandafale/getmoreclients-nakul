@@ -76,11 +76,7 @@ export default function HeroVisuals({ service }: HeroVisualsProps) {
                     <img
                         src={service.heroImage}
                         alt={`${service.title} Visualization`}
-                        className="w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-110"
-                        onError={(e) => {
-                            // Fallback to abstract gradient if image missing
-                            e.currentTarget.style.display = 'none';
-                        }}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                 </div>
 

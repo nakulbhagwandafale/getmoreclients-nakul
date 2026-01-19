@@ -1,9 +1,15 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MessageSquare, ShieldCheck, ArrowRight, CheckCircle, MapPin } from 'lucide-react';
+import { GradientBorderCard } from '@/components/ui/gradient-border-card';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/FooterSection';
-import { GradientBorderCard } from '@/components/ui/gradient-border-card';
+import LetsMeetSection from '@/components/contact/LetsMeetSection';
+
+// ... (existing imports, but typically I can't easily auto-insert imports at top with replace_file_content unless I target top lines. I will add import at top first, then component body)
+
+// Actually, I will use a larger block replacement to handle both if possible, or two replacements.
+// Let's stick to two replacements for safety. First, adding the import.
 
 const ContactPage = () => {
     const [focusedField, setFocusedField] = useState<string | null>(null);
@@ -232,8 +238,10 @@ const ContactPage = () => {
                 </div>
             </div>
 
+            <LetsMeetSection />
+
             <Footer />
-        </div>
+        </div >
     );
 };
 

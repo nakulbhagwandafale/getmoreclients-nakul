@@ -14,6 +14,7 @@ import PageTransition from './components/PageTransition';
 import './index.css';
 import StarField from './components/ui/StarField';
 import SmoothScroll from './components/SmoothScroll';
+import FloatingContactButton from './components/ui/floating-contact-button';
 
 
 
@@ -42,6 +43,7 @@ function App() {
     <Router>
 
       <StarField />
+      <FloatingContactButton />
       <SmoothScroll>
         <AnimatedRoutes />
       </SmoothScroll>

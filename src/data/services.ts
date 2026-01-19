@@ -38,6 +38,17 @@ interface HeroMetric {
     icon: React.ElementType;
 }
 
+export interface ProcessStep {
+    title: string;
+    description: string;
+}
+
+export interface ProcessContent {
+    description: string;
+    steps: ProcessStep[];
+    visual: string;
+}
+
 export interface ServiceDetail {
     id: string;
     title: string;
@@ -72,6 +83,9 @@ export interface ServiceDetail {
 
     // Section 6: Showcase
     showcaseImage: string;
+
+    // Section New: Process & Execution
+    process: ProcessContent;
 }
 
 export const servicesData: ServiceDetail[] = [
@@ -108,6 +122,15 @@ export const servicesData: ServiceDetail[] = [
         trustMetric: '300%',
         trustLabel: 'Increase in Engagement',
         showcaseImage: '/assets/social-showcase.png',
+        process: {
+            description: "Our AI-driven social media strategy moves beyond vanity metrics to deliver predictable, high-impact growth. We analyze millions of data points to identify the exact content types, posting times, and emotional triggers that resonate with your specific audience, ensuring every post serves a strategic purpose.",
+            visual: '/assets/social-process.png',
+            steps: [
+                { title: "Audience DNA Mapping", description: "We use AI to deconstruct your target audience's online behavior, identifying their core interests, pain points, and engagement triggers." },
+                { title: "Predictive Content Modelling", description: "Before a single post is created, our algorithms predict its performance potential, allowing us to focus only on high-probability concepts." },
+                { title: "Automated Deployment & Optimization", description: "Content is scheduled for optimal windows, and real-time performance data feeds back into the system to refine future posts instantly." }
+            ]
+        }
     },
     {
         id: 'seo',
@@ -142,6 +165,15 @@ export const servicesData: ServiceDetail[] = [
         trustMetric: '4x',
         trustLabel: 'Faster Ranking Improvements',
         showcaseImage: '/assets/seo-showcase.png',
+        process: {
+            description: "We don't guess at SEO; we engineer it. By leveraging advanced natural language processing (NLP) and predictive SERP analysis, we identify the exact semantic gaps in your content and the technical bottlenecks in your infrastructure, creating a roadmap to dominance that is mathematically validated.",
+            visual: '/assets/seo-process.png',
+            steps: [
+                { title: "Semantic Opportunity Analysis", description: "Our AI scans the entire search landscape to find high-value, low-competition keyword clusters that your competitors have missed." },
+                { title: "Technical Health Optimization", description: "We deploy automated crawlers to fix structural issues, improve site speed, and ensure perfect indexability for search engines." },
+                { title: "Content Authority Building", description: "We generate mathematically optimized content briefs that satisfy user intent better than any existing result on the first page." }
+            ]
+        }
     },
     {
         id: 'ppc',
@@ -176,6 +208,15 @@ export const servicesData: ServiceDetail[] = [
         trustMetric: '-40%',
         trustLabel: 'Reduction in CPA',
         showcaseImage: '/assets/ppc-showcase.png',
+        process: {
+            description: "Traditional PPC creates waste; our AI-driven approach creates wealth. We utilize real-time algorithmic bidding and multivariate testing to ensure every dollar of ad spend is directed towards the users with the highest statistical probability of conversion, maximizing your ROI instantly.",
+            visual: '/assets/ppc-process.png',
+            steps: [
+                { title: "Behavioral Intent Targeting", description: "We identify users not just by demographics, but by their real-time purchase intent signals across the web." },
+                { title: "Algorithmic Bid Management", description: "Our systems adjust bids thousands of times per day, capitalizing on market inefficiencies that manual management simply cannot catch." },
+                { title: "Dynamic Creative Optimization", description: "Ad visuals and copy are automatically assembled and tested in real-time to find the winning combination for each specific user segment." }
+            ]
+        }
     },
     {
         id: 'content-strategy',
@@ -210,6 +251,15 @@ export const servicesData: ServiceDetail[] = [
         trustMetric: '2.5x',
         trustLabel: 'More Organic Reach',
         showcaseImage: '/assets/content-showcase.png',
+        process: {
+            description: "Content marketing fails without direction. Our approach combines data science with creative storytelling to produce content strategies that are not just readable, but commercially effective. We monitor global trends in real-time to ensure your brand is always part of the most important conversations.",
+            visual: '/assets/content-process.png',
+            steps: [
+                { title: "Trend Velocity Analysis", description: "We identify rising topics before they peak, allowing your brand to own the conversation while competitors are still reacting." },
+                { title: "Format-Fit Production", description: "Our insights determine the optimal format—video, article, or infographic—for each topic to maximize engagement and shareability." },
+                { title: "Distribution Intelligence", description: "We map the exact channels and influencers that will give your content the initial velocity it needs to go viral." }
+            ]
+        }
     },
     {
         id: 'app-web-development',
@@ -244,6 +294,15 @@ export const servicesData: ServiceDetail[] = [
         trustMetric: '40%',
         trustLabel: 'Reduction in Dev Costs',
         showcaseImage: '/assets/design-showcase.png', // Keeping path for now
+        process: {
+            description: "Modern applications demand modern architecture. We bypass the slow, error-prone manual coding of the past by utilizing AI-assisted development workflows. This allows us to build robust, scalable, and secure applications at a fraction of the time and cost of traditional development houses.",
+            visual: '/assets/design-process.png',
+            steps: [
+                { title: "AI-Architected Schema", description: "We use AI to design efficient, scalable database structures and API endpoints that prevent technical debt before it starts." },
+                { title: "Component-Driven Development", description: "Our libraries of pre-optimized, accessible components allow us to assemble complex interfaces rapidly without sacrificing quality." },
+                { title: "Automated Resiliency Testing", description: "Every line of code is subjected to rigorous automated stress testing to ensure zero-downtime performance under load." }
+            ]
+        }
     },
     // Adding defaults for others to avoid type errors, though less customized for brevity
     {
@@ -275,6 +334,15 @@ export const servicesData: ServiceDetail[] = [
         trustMetric: '3x',
         trustLabel: 'Social Shares',
         showcaseImage: '/assets/infographic-showcase.png',
+        process: {
+            description: "In the attention economy, clarity is king. We transform your dense, complex datasets into compelling visual narratives. By combining data science principles with premium design aesthetics, we create infographics that are not just beautiful, but are cognitively optimized for instant understanding.",
+            visual: '/assets/infographic-process.png',
+            steps: [
+                { title: "Data Distillation", description: "We ingest your raw data and use AI to identify the most significant trends, outliers, and key takeaways." },
+                { title: "Narrative Structuring", description: "We organize the data into a logical visual flow that guides the viewer from introduction to insight." },
+                { title: "Cognitive Styling", description: "Colors, typography, and layout are chosen based on cognitive load principles to ensure maximum retention and shareability." }
+            ]
+        }
     },
     {
         id: 'ecommerce-assets',
@@ -305,6 +373,15 @@ export const servicesData: ServiceDetail[] = [
         trustMetric: '45%',
         trustLabel: 'Cart Additions',
         showcaseImage: '/assets/ecom-showcase.png',
+        process: {
+            description: "Your product assets are your 24/7 sales team. We use generative AI to create photorealistic product scenes and persuasive copy at scale. This allows us to test hundreds of variations to find the exact visual triggers that convert browsers into buyers on your specific platform.",
+            visual: '/assets/ecom-process.png',
+            steps: [
+                { title: "Digital Twin Creation", description: "We create high-fidelity 3D models of your products, enabling infinite visual possibilities without physical photoshoots." },
+                { title: "Contextual Scene Generation", description: "AI places your products in hyper-realistic lifestyle environments tailored to different customer personas." },
+                { title: "Conversion-Oriented Copy", description: "Product descriptions and titles are crafted to hit both SEO keywords and psychological buying triggers." }
+            ]
+        }
     },
     {
         id: 'animations',
@@ -335,6 +412,15 @@ export const servicesData: ServiceDetail[] = [
         trustMetric: '80%',
         trustLabel: 'Completion Rate',
         showcaseImage: '/assets/animation-showcase.png',
+        process: {
+            description: "Motion captures attention where static images fade. We leverage AI-enhanced animation tools to automate the tedious parts of keyframing and physics simulation. This frees our designers to focus on fluid storytelling and emotional impact, delivering broadcast-quality motion graphics in record time.",
+            visual: '/assets/animation-process.png',
+            steps: [
+                { title: "AI-Scripted Storyboarding", description: "We generate dynamic storyboards that visualize the narrative flow and pacing before production begins." },
+                { title: "Procedural Animation", description: "Physics-based movement and particle effects are generated procedurally, creating natural, fluid motion." },
+                { title: "Style Transfer Rendering", description: "We can instantly apply unique artistic styles to 3D animations, ensuring your brand stands out visually." }
+            ]
+        }
     },
     {
         id: 'brand-assets',
@@ -365,6 +451,15 @@ export const servicesData: ServiceDetail[] = [
         trustMetric: '2x',
         trustLabel: 'Brand Recall',
         showcaseImage: '/assets/brand-showcase.png',
+        process: {
+            description: "A brand is more than a logo; it's a cohesive system. We use generative design algorithms to expand your core identity into a comprehensive visual language. This ensures that every touchpoint, from likely business cards to billboards, remains perfectly consistent and instantly recognizable.",
+            visual: '/assets/brand-process.png',
+            steps: [
+                { title: "Identity Core Extraction", description: "We analyze your brand values and mission to define the foundational visual elements: color, type, and form." },
+                { title: "Algorithmic Expansion", description: "Our systems generate thousands of potential asset variations based on your core identity, ensuring versatility." },
+                { title: "Systemization & Guidelines", description: "We compile the winning assets into a strict, easy-to-use design system that guarantees future consistency." }
+            ]
+        }
     },
 ];
 

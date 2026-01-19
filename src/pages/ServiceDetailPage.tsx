@@ -5,6 +5,7 @@ import Footer from '@/components/FooterSection';
 import HeroSection from '@/components/service-detail/HeroSection';
 import PerformanceSection from '@/components/service-detail/PerformanceSection';
 import WorkflowSection from '@/components/service-detail/WorkflowSection';
+import ProcessExecutionSection from '@/components/service-detail/ProcessExecutionSection';
 import ComparisonSection from '@/components/service-detail/ComparisonSection';
 import TrustSection from '@/components/service-detail/TrustSection';
 import ShowcaseSection from '@/components/service-detail/ShowcaseSection';
@@ -39,6 +40,7 @@ const ServiceDetailPage = () => {
             <HeroSection service={service} />
             <PerformanceSection service={service} />
             <WorkflowSection service={service} />
+            <ProcessExecutionSection service={service} />
             <ComparisonSection service={service} />
             <TrustSection service={service} />
             <ShowcaseSection service={service} />
