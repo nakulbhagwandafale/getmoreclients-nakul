@@ -28,7 +28,7 @@ const projects: Project[] = [
         description: "Redesigned the checkout flow using behavioral psychology, resulting in a 35% uplift in conversion.",
         client: "LuxeWear",
         image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=2070",
-        tags: ["CRO", "UX Design", "Data Analytics"]
+        tags: ["CRO", "App / Web Dev", "Data Analytics"]
     },
     {
         id: 3,
@@ -121,7 +121,7 @@ const WorkPage = () => {
                         </span>
                     </h1>
                     <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                        Explore how we've helped ambitious brands scale through AI-driven marketing and world-class design.
+                        Explore how we've helped ambitious brands scale through AI-driven marketing and world-class development.
                     </p>
                 </motion.div>
             </section>

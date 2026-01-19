@@ -73,7 +73,7 @@ export const blogPosts: BlogPost[] = [
             <h3>Tokenizing Your Brand</h3>
             <p>We started by defining our design tokens: colors, typography, spacing, and shadows. These immutable values became the foundation of our system, ensuring consistency across every touchpoint.</p>
         `,
-        category: "Design",
+        category: "Development",
         date: "Sep 29, 2024",
         readTime: "4 min read",
         image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop",

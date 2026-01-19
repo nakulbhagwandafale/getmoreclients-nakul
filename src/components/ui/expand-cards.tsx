@@ -23,7 +23,7 @@ const cards: CardProps[] = [
     },
     {
         id: 3,
-        title: "Premium Design",
+        title: "Premium Development",
         description: "First impressions matter. We craft stunning, high-end visuals that instantly position your brand as a market leader.",
         image: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=800&auto=format&fit=crop",
     },

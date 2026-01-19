@@ -13,7 +13,10 @@ import {
     TrendingUp,
     ShieldCheck,
     Cpu,
-    Target
+    Target,
+    Database,
+    BrainCircuit,
+    Image as ImageIcon
 } from 'lucide-react';
 import React from 'react';
 
@@ -209,38 +212,38 @@ export const servicesData: ServiceDetail[] = [
         showcaseImage: '/assets/content-showcase.png',
     },
     {
-        id: 'app-web-design',
-        title: 'Design',
-        impactWord: 'Alchemy',
-        subtitle: 'AI-Assisted UX',
-        description: 'Combine creativity with AI-assisted user behavior analysis for impressive, converting websites.',
-        shortDescription: 'Generative UI & predictive UX modeling.',
-        icon: Smartphone,
+        id: 'app-web-development',
+        title: 'App / Web Dev',
+        impactWord: 'Architecture',
+        subtitle: 'Scalable Systems',
+        description: 'Build robust, high-performance web and mobile applications with AI-optimized codebases and modern frameworks.',
+        shortDescription: 'Full-stack engineering & auto-scaling.',
+        icon: Globe,
         heroVisualType: 'dashboard',
         gradientMap: { from: '#ec4899', via: '#a855f7', to: '#6366f1' }, // Pink -> Purple -> Indigo
         heroMetrics: [
-            { label: 'Conversion', value: '+60%', icon: TrendingUp },
-            { label: 'Speed', value: 'Days', icon: Zap },
-            { label: 'Testing', value: 'Auto', icon: Cpu },
+            { label: 'Performance', value: '99/100', icon: Zap },
+            { label: 'Uptime', value: '99.99%', icon: ShieldCheck },
+            { label: 'Scale', value: 'Auto', icon: Cpu },
         ],
-        heroImage: '/assets/design-hero.png',
-        accuracy: 96,
-        performanceMetric: '96%',
-        performanceLabel: 'UX Issue Detection',
+        heroImage: '/assets/design-hero.png', // Keeping path for now
+        accuracy: 98,
+        performanceMetric: '98%',
+        performanceLabel: 'Code Health Score',
         workflowSteps: [
-            { title: 'Heatmap Analysis', description: 'Predict user gaze and click patterns.', icon: Search },
-            { title: 'Wireframe Gen', description: 'Rapidly prototype layout options.', icon: Palette },
-            { title: 'Style Transfer', description: 'Apply brand guidelines instantly.', icon: Palette },
-            { title: 'A/B Sim', description: 'Simulate user journeys before code.', icon: Play },
+            { title: 'Architecture Plan', description: 'AI designs scalable database & system structures.', icon: BrainCircuit },
+            { title: 'AI-Assisted Code', description: 'Generative coding for rapid boilerplate & logic.', icon: Cpu },
+            { title: 'Automated QA', description: 'Self-healing tests detect bugs before deploy.', icon: ShieldCheck },
+            { title: 'CI/CD Pipeline', description: 'Instant, automated global deployment.', icon: Globe },
         ],
         comparison: [
-            { metric: 'Design Cycle', traditional: 'Weeks/Months', aiDriven: 'Days' },
-            { metric: 'Usability Testing', traditional: 'Post-launch', aiDriven: 'Pre-launch predictive' },
-            { metric: 'Personalization', traditional: 'Static', aiDriven: 'Dynamic blocks' },
+            { metric: 'Development Time', traditional: 'Months', aiDriven: 'Weeks' },
+            { metric: 'Code Security', traditional: 'Reactive patching', aiDriven: 'Proactive AI scanning' },
+            { metric: 'Scalability', traditional: 'Manual provisioning', aiDriven: 'Serverless auto-scale' },
         ],
-        trustMetric: '60%',
-        trustLabel: 'Higher Conversion Rates',
-        showcaseImage: '/assets/design-showcase.png',
+        trustMetric: '40%',
+        trustLabel: 'Reduction in Dev Costs',
+        showcaseImage: '/assets/design-showcase.png', // Keeping path for now
     },
     // Adding defaults for others to avoid type errors, though less customized for brevity
     {
@@ -258,7 +261,12 @@ export const servicesData: ServiceDetail[] = [
         accuracy: 94,
         performanceMetric: '94%',
         performanceLabel: 'Retention',
-        workflowSteps: [],
+        workflowSteps: [
+            { title: 'Data Ingestion', description: 'AI parses raw CSVs/Excels to structured formats.', icon: Database },
+            { title: 'Logic Mapping', description: 'Auto-select the best chart type for your data.', icon: BrainCircuit },
+            { title: 'Visual Styling', description: 'Apply brand colors and fonts instantly.', icon: Palette },
+            { title: 'Multi-Format Export', description: 'Generate Blog, Social, and PDF versions.', icon: Share2 },
+        ],
         comparison: [
             { metric: 'Production Time', traditional: 'Days or Weeks', aiDriven: 'Minutes' },
             { metric: 'Data Accuracy', traditional: 'Manual entry errors', aiDriven: 'Automated live-sync' },
@@ -283,7 +291,12 @@ export const servicesData: ServiceDetail[] = [
         accuracy: 97,
         performanceMetric: '97%',
         performanceLabel: 'Purchase Intent',
-        workflowSteps: [],
+        workflowSteps: [
+            { title: '3D Product Scan', description: 'Turn simple photos into 3D models.', icon: Smartphone },
+            { title: 'Scene Generation', description: 'Place products in lifestyle contexts via AI.', icon: ImageIcon },
+            { title: 'Listing Optimization', description: 'Write SEO-perfect titles and bullets.', icon: FileText },
+            { title: 'A/B Deployment', description: 'Auto-test creative variants on live pages.', icon: Target },
+        ],
         comparison: [
             { metric: 'Product Photography', traditional: 'Expensive studio shoots', aiDriven: 'Photorealistic AI generation' },
             { metric: 'Description Copy', traditional: 'Generic text', aiDriven: 'SEO & conversion-optimized' },
@@ -308,7 +321,12 @@ export const servicesData: ServiceDetail[] = [
         accuracy: 93,
         performanceMetric: '93%',
         performanceLabel: 'Viewer Retention',
-        workflowSteps: [],
+        workflowSteps: [
+            { title: 'Story Generation', description: 'AI scripts the narrative flow.', icon: FileText },
+            { title: 'Asset Prep', description: 'Auto-rigging characters and objects.', icon: Cpu },
+            { title: 'Motion Synthesis', description: 'Physics-based tweening and movement.', icon: Play },
+            { title: 'High-Res Render', description: 'Cloud-accelerated final output.', icon: Zap },
+        ],
         comparison: [
             { metric: 'Rendering Speed', traditional: 'Hours per frame', aiDriven: 'Real-time neural rendering' },
             { metric: 'Fluidity', traditional: 'Keyframe gaps', aiDriven: 'Physics-based interpolation' },
@@ -333,7 +351,12 @@ export const servicesData: ServiceDetail[] = [
         accuracy: 99,
         performanceMetric: '99%',
         performanceLabel: 'Consistency',
-        workflowSteps: [],
+        workflowSteps: [
+            { title: 'Brand Audit', description: 'Scan current assets for inconsistencies.', icon: Search },
+            { title: 'DNA Digitization', description: 'Create a "Living Brand Book".', icon: ShieldCheck },
+            { title: 'Asset Scaling', description: 'Generate variations for Web, Social, Print.', icon: Globe },
+            { title: 'Auto-Distribution', description: 'Update assets across channels instantly.', icon: Share2 },
+        ],
         comparison: [
             { metric: 'Consistency Check', traditional: 'Manual visual review', aiDriven: 'Automated style enforcement' },
             { metric: 'Asset Adaptation', traditional: 'Manual resizing/tweaking', aiDriven: 'One-click multi-format gen' },
