@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/FooterSection';
 import Services from '@/components/Services';
-import StarField from '@/components/ui/StarField';
 
 const FloatingCard = ({ icon: Icon, label, className, delay }: { icon: any, label: string, className?: string, delay: number }) => (
     <motion.div
@@ -31,8 +30,8 @@ const FloatingCard = ({ icon: Icon, label, className, delay }: { icon: any, labe
 
 const ServicesPage = () => {
     return (
-        <div className="min-h-screen bg-[#0a0118] relative font-sans text-white">
-            <StarField />
+        <div className="min-h-screen bg-transparent relative font-sans text-white">
+            {/* <StarField /> - utilizing global starfield */}
             <Navbar />
 
             {/* Hero Section */}

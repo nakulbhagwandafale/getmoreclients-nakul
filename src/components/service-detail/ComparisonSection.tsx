@@ -8,7 +8,7 @@ interface ComparisonSectionProps {
 
 export default function ComparisonSection({ service }: ComparisonSectionProps) {
     return (
-        <section className="py-24 bg-[#0a0118] relative">
+        <section className="py-24 bg-transparent relative">
             {/* Background Split */}
             <div className="absolute inset-0 flex">
                 <div className="w-full md:w-1/2 bg-red-900/5" />

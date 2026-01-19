@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Mail, MessageSquare, ShieldCheck, ArrowRight, CheckCircle, MapPin } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/FooterSection';
-import StarField from '@/components/ui/StarField';
 import { GradientBorderCard } from '@/components/ui/gradient-border-card';
 
 const ContactPage = () => {
@@ -18,8 +17,8 @@ const ContactPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#0a0118] relative font-sans text-gray-200 overflow-hidden">
-            <StarField />
+        <div className="min-h-screen bg-transparent relative font-sans text-gray-200 overflow-hidden">
+            {/* StarField handled globally */}
             <Navbar />
 
             <div className="relative z-10 pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col items-center">

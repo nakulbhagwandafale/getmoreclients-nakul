@@ -2,14 +2,13 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/FooterSection';
-import StarField from '@/components/ui/StarField';
 import BlogCard from '@/components/BlogCard';
 import { blogPosts } from '@/data/blogPosts';
 
 const BlogPage = () => {
     return (
-        <div className="min-h-screen bg-[#0a0118] relative">
-            <StarField />
+        <div className="min-h-screen bg-transparent relative">
+            {/* StarField handled globally */}
             <Navbar />
 
             <main className="pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">

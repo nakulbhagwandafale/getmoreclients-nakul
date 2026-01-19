@@ -13,6 +13,7 @@ import ServiceDetailPage from '@/pages/ServiceDetailPage';
 import PageTransition from './components/PageTransition';
 import './index.css';
 import StarField from './components/ui/StarField';
+import SmoothScroll from './components/SmoothScroll';
 
 
 
@@ -41,7 +42,9 @@ function App() {
     <Router>
 
       <StarField />
-      <AnimatedRoutes />
+      <SmoothScroll>
+        <AnimatedRoutes />
+      </SmoothScroll>
     </Router>
   );
 }

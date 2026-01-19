@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Clock, Calendar } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/FooterSection';
-import StarField from '@/components/ui/StarField';
 import { blogPosts } from '@/data/blogPosts';
 import { useEffect } from 'react';
 
@@ -17,7 +16,7 @@ const BlogPostPage = () => {
 
     if (!post) {
         return (
-            <div className="min-h-screen bg-[#0a0118] text-white flex items-center justify-center">
+            <div className="min-h-screen bg-transparent text-white flex items-center justify-center">
                 <div className="text-center">
                     <h2 className="text-3xl font-bold mb-4">Post not found</h2>
                     <Link to="/blog" className="text-purple-400 hover:text-purple-300 flex items-center justify-center gap-2">
@@ -29,8 +28,8 @@ const BlogPostPage = () => {
     }
 
     return (
-        <div className="min-h-screen bg-[#0a0118] relative font-sans text-gray-200">
-            <StarField />
+        <div className="min-h-screen bg-transparent relative font-sans text-gray-200">
+            {/* StarField handled globally */}
             <Navbar />
 
             <article className="relative z-10 pt-32 pb-24">

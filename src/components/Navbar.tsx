@@ -17,7 +17,7 @@ const Navbar = () => {
     return (
         <>
             {/* Desktop Navigation */}
-            <nav className="fixed top-0 left-0 right-0 z-50 hidden md:block bg-gradient-to-r from-[#0a0118]/95 via-[#1a0a2e]/90 to-[#0a0118]/95 backdrop-blur-xl border-b border-purple-500/20 shadow-lg shadow-purple-900/20">
+            <nav className="fixed top-0 left-0 right-0 z-50 hidden md:block bg-gradient-to-r from-[#0a0118]/80 via-[#1a0a2e]/75 to-[#0a0118]/80 backdrop-blur-xl border-b border-purple-500/20 shadow-lg shadow-purple-900/20">
                 <div className="w-full px-8 md:px-12 py-4">
                     <div className="flex items-center justify-between">
                         {/* Logo - Left */}

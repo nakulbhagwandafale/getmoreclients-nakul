@@ -8,7 +8,7 @@ interface ShowcaseSectionProps {
 
 export default function ShowcaseSection({ service }: ShowcaseSectionProps) {
     return (
-        <section className="py-24 md:py-32 bg-[#0a0118] relative overflow-hidden">
+        <section className="py-24 md:py-32 bg-transparent relative overflow-hidden">
             {/* Ambient Background */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
                 <div

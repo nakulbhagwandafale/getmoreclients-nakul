@@ -4,7 +4,6 @@ import { Target, Users, Zap, Heart, Linkedin, Twitter, Github } from 'lucide-rea
 import Navbar from '../components/Navbar';
 import { GradientBorderCard } from '../components/ui/gradient-border-card';
 import Footer from '../components/FooterSection';
-import StarField from '../components/ui/StarField';
 
 // --- Mock Data ---
 const teamMembers = [
@@ -95,8 +94,8 @@ const AboutPage = () => {
     const selectedMember = teamMembers.find(m => m.id === selectedId) || teamMembers[0];
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-[#0a0118] via-[#1a0b2e] to-[#11052C] relative">
-            <StarField />
+        <div className="min-h-screen bg-transparent relative">
+            {/* StarField handled globally */}
             <Navbar />
 
             <main className="pt-24 pb-0">

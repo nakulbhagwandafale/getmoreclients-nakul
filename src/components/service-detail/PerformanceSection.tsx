@@ -68,7 +68,7 @@ const CircularProgress = ({ value, label }: { value: number, label: string }) =>
 
 export default function PerformanceSection({ service }: PerformanceSectionProps) {
     return (
-        <section className="py-24 bg-[#05010d]">
+        <section className="py-24 bg-transparent">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-12">
 

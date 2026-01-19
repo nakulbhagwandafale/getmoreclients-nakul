@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/FooterSection';
-import StarField from '@/components/ui/StarField';
 
 interface Project {
     id: number;
@@ -100,8 +99,8 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
 
 const WorkPage = () => {
     return (
-        <div className="min-h-screen bg-[#0a0118] relative font-sans text-white overflow-hidden">
-            <StarField />
+        <div className="min-h-screen bg-transparent relative font-sans text-white overflow-hidden">
+            {/* StarField handled globally */}
             <Navbar />
 
             {/* Hero Section */}

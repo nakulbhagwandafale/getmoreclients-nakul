@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Search, Map, Rocket, TrendingUp, ArrowRight } from 'lucide-react';
-import StarField from './ui/StarField';
 import { cn } from '@/lib/utils';
 
 const steps = [
@@ -58,7 +57,7 @@ const MovingBorderCard = ({ step, index }: { step: any, index: number }) => {
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         {/* Spinning Conic Gradient */}
                         <div
-                            className="absolute inset-0 animate-[spin_4s_linear_infinite]"
+                            className="absolute inset-0 animate-[spin_4s_linear_infinite] will-change-transform"
                             style={{
                                 background: `conic-gradient(from 0deg, transparent 0 270deg, white 360deg)`
                             }}
@@ -118,8 +117,9 @@ const MovingBorderCard = ({ step, index }: { step: any, index: number }) => {
 
 const HowItWorks = () => {
     return (
-        <section className="relative py-32 bg-[#0a0118] overflow-hidden">
-            <StarField className="absolute inset-0" />
+        <section className="relative py-32 bg-transparent overflow-hidden">
+            {/* StarField removed for performance - relying on global or clean background */}
+            {/* <StarField className="absolute inset-0" /> */}
 
             {/* Ambient Lighting */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">

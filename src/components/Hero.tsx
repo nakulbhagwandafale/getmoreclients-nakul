@@ -8,10 +8,10 @@ const ROBOT_SCENE_URL = "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splin
 const Hero: React.FC = () => {
     return (
         <section className="relative min-h-screen overflow-hidden">
-            {/* Background */}
             <div className="absolute inset-0 z-0">
                 <ShaderBackground />
             </div>
+            {/* <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#0a0118] to-[#1a0a2e]" /> - transparent for global starfield */}
 
             {/* Spotlight Effect - Overlaid on top of background but behind content */}
             <div className="absolute inset-0 z-0 pointer-events-none mix-blend-overlay">

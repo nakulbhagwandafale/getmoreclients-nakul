@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/FooterSection';
-import StarField from '@/components/ui/StarField';
 import HeroSection from '@/components/service-detail/HeroSection';
 import PerformanceSection from '@/components/service-detail/PerformanceSection';
 import WorkflowSection from '@/components/service-detail/WorkflowSection';
@@ -33,8 +32,8 @@ const ServiceDetailPage = () => {
     if (!service) return null; // Or a loading spinner
 
     return (
-        <div className="min-h-screen bg-[#0a0118] relative font-sans text-white">
-            <StarField />
+        <div className="min-h-screen bg-transparent relative font-sans text-white">
+            {/* StarField handled globally */}
             <Navbar />
 
             <HeroSection service={service} />

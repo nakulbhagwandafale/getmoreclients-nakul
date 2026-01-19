@@ -7,7 +7,7 @@ interface TrustSectionProps {
 
 export default function TrustSection({ service }: TrustSectionProps) {
     return (
-        <section className="py-20 bg-[#05010d] border-y border-white/5">
+        <section className="py-20 bg-transparent border-y border-white/5">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
 
