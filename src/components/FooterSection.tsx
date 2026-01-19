@@ -122,25 +122,68 @@ export default function Footer() {
                             </div>
                         </div>
 
-                        {/* Navigation Links - Centered/Right balanced */}
-                        <div className="flex flex-wrap justify-center md:justify-end gap-x-8 gap-y-4">
-                            {[
-                                { name: 'Home', href: '/' },
-                                { name: 'Work', href: '/work' },
-                                { name: 'Services', href: '/services' },
-                                { name: 'About Us', href: '/about' },
-                                { name: 'Blog', href: '/blog' },
-                                { name: 'Contact', href: '/contact' },
-                            ].map((link) => (
-                                <a
-                                    key={link.name}
-                                    href={link.href}
-                                    className="px-4 py-2 rounded-full text-sm font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300 relative group overflow-hidden"
-                                >
-                                    <span className="relative z-10">{link.name}</span>
-                                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[1.5px] bg-gradient-to-r from-purple-400 to-blue-400 group-hover:w-2/3 transition-all duration-300 shadow-[0_0_8px_rgba(168,85,247,0.8)]"></span>
-                                </a>
-                            ))}
+                        {/* Navigation Links - Three Column Layout */}
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
+                            {/* Pages Column */}
+                            <div className="flex flex-col gap-3">
+                                <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-2">Pages</h4>
+                                {[
+                                    { name: 'Home', href: '/' },
+                                    { name: 'Work', href: '/work' },
+                                    { name: 'Services', href: '/services' },
+                                    { name: 'About Us', href: '/about' },
+                                    { name: 'Blog', href: '/blog' },
+                                ].map((link) => (
+                                    <a
+                                        key={link.name}
+                                        href={link.href}
+                                        className="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300 relative group w-fit"
+                                    >
+                                        <span className="relative z-10">{link.name}</span>
+                                        <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gradient-to-r from-purple-400 to-blue-400 group-hover:w-full transition-all duration-300"></span>
+                                    </a>
+                                ))}
+                            </div>
+
+                            {/* Explore Column */}
+                            <div className="flex flex-col gap-3">
+                                <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-2">Explore</h4>
+                                {[
+                                    { name: 'How It Works', href: '/#how-it-works' },
+                                    { name: 'Testimonials', href: '/#testimonials' },
+                                    { name: 'Why Choose Us', href: '/#why-choose-us' },
+                                    { name: 'Book a Call', href: '/#calendar' },
+                                    { name: 'Contact', href: '/contact' },
+                                ].map((link) => (
+                                    <a
+                                        key={link.name}
+                                        href={link.href}
+                                        className="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300 relative group w-fit"
+                                    >
+                                        <span className="relative z-10">{link.name}</span>
+                                        <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gradient-to-r from-purple-400 to-blue-400 group-hover:w-full transition-all duration-300"></span>
+                                    </a>
+                                ))}
+                            </div>
+
+                            {/* Legal Column */}
+                            <div className="flex flex-col gap-3">
+                                <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-2">Legal</h4>
+                                {[
+                                    { name: 'Privacy Policy', href: '/privacy' },
+                                    { name: 'Terms of Service', href: '/terms' },
+                                    { name: 'Cookie Policy', href: '/cookies' },
+                                ].map((link) => (
+                                    <a
+                                        key={link.name}
+                                        href={link.href}
+                                        className="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300 relative group w-fit"
+                                    >
+                                        <span className="relative z-10">{link.name}</span>
+                                        <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gradient-to-r from-purple-400 to-blue-400 group-hover:w-full transition-all duration-300"></span>
+                                    </a>
+                                ))}
+                            </div>
                         </div>
                     </div>
 
@@ -158,16 +201,7 @@ export default function Footer() {
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-xl h-24 bg-purple-500/20 blur-[80px] rounded-full pointer-events-none mix-blend-screen" />
                 </div>
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-                        <p>© {new Date().getFullYear()} GetMoreClients Inc. All rights reserved.</p>
-                        <div className="flex gap-6">
-                            <a href="#" className="hover:text-purple-300 transition-colors">Privacy Policy</a>
-                            <a href="#" className="hover:text-purple-300 transition-colors">Terms of Service</a>
-                            <a href="#" className="hover:text-purple-300 transition-colors">Cookie Policy</a>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </footer>
     );

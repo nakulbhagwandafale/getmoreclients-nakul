@@ -17,11 +17,19 @@ const HomePage = () => {
             <main>
                 <Hero />
                 <Services />
-                <HowItWorks />
-                <Testimonials />
-                <WhyChooseUs />
+                <div id="how-it-works">
+                    <HowItWorks />
+                </div>
+                <div id="testimonials">
+                    <Testimonials />
+                </div>
+                <div id="why-choose-us">
+                    <WhyChooseUs />
+                </div>
                 <AboutUs />
-                <CalendarBooking />
+                <div id="calendar">
+                    <CalendarBooking />
+                </div>
             </main>
             <Footer />
         </div>
