@@ -1,7 +1,7 @@
 import { useRef, type ReactNode } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Twitter, Linkedin, Instagram, ArrowRight, Flame, Github } from 'lucide-react';
+import { Twitter, Linkedin, Instagram, ArrowRight, Flame, Github, MapPin } from 'lucide-react';
 import Globe from './ui/Globe';
 import CosmicFooterBackground from './ui/cosmic-footer-background';
 
@@ -49,18 +49,17 @@ export default function Footer() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-                        <button
-                            onClick={() => {
-                                navigate('/contact');
-                                window.scrollTo(0, 0);
-                            }}
-                            className="group relative px-8 py-4 bg-white text-black font-bold rounded-full text-lg w-full sm:w-auto overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]"
+                        <a
+                            href="https://cal.com/getmoreclients/strategy-call"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group relative px-8 py-4 bg-white text-black font-bold rounded-full text-lg w-full sm:w-auto overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] flex items-center justify-center"
                         >
                             <span className="relative z-10 flex items-center justify-center gap-2 group-hover:gap-3 transition-all duration-300">
                                 Book Meeting<ArrowRight className="w-5 h-5" />
                             </span>
                             <div className="absolute inset-0 bg-gradient-to-r from-purple-200 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        </button>
+                        </a>
 
                         <button
                             onClick={() => {
@@ -119,6 +118,7 @@ export default function Footer() {
                                 <SocialLink icon={<Linkedin className="w-4 h-4" />} href="https://www.linkedin.com/in/nakul-dafale-34081b372/" />
                                 <SocialLink icon={<Github className="w-4 h-4" />} href="https://github.com/nakulbhagwandafale" />
                                 <SocialLink icon={<Instagram className="w-4 h-4" />} href="https://www.instagram.com/nakuldafale7/" />
+                                <SocialLink icon={<MapPin className="w-4 h-4" />} href="https://www.google.com/maps/place/Stellar+Tower/@19.0514463,72.9009089,206m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3be7c721399dc71d:0x662f94190dad3a!8m2!3d19.0514463!4d72.9015526!16s%2Fg%2F11trbygwxy?authuser=0&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D" />
                             </div>
                         </div>
 
@@ -152,7 +152,7 @@ export default function Footer() {
                                     { name: 'How It Works', href: '/#how-it-works' },
                                     { name: 'Testimonials', href: '/#testimonials' },
                                     { name: 'Why Choose Us', href: '/#why-choose-us' },
-                                    { name: 'Book a Call', href: 'https://cal.com/getmoreclients', external: true },
+                                    { name: 'Book a Call', href: 'https://cal.com/getmoreclients/strategy-call', external: true },
                                     { name: 'Contact', href: '/contact' },
                                 ].map((link) => (
                                     <a

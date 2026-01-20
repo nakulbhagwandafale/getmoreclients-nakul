@@ -23,46 +23,68 @@ const Navbar = () => {
                     <div className="flex items-center justify-between">
                         {/* Logo - Left */}
                         <Link to="/" className="flex items-center space-x-2">
-                            <img src="/logo.png" alt="getmoreclients.in" className="h-20 w-auto" />
+                            <img src="/logo_circular.png" alt="getmoreclients.in" className="h-20 w-auto" />
                         </Link>
 
 
                         {/* Standard Navigation - Center */}
-                        <div className="hidden md:flex items-center space-x-8">
+                        <div className="hidden md:flex items-center space-x-2 lg:space-x-4">
                             {navigation.map((link) => (
                                 link.isRoute ? (
                                     <Link
                                         key={link.name}
                                         to={link.href}
-                                        className={`text-sm font-medium transition-colors duration-200 ${location.pathname === link.href
-                                            ? 'text-purple-400'
-                                            : 'text-gray-300 hover:text-white'
+                                        className={`relative px-5 py-2.5 text-base lg:text-lg font-semibold transition-all duration-300 group ${location.pathname === link.href
+                                                ? 'text-white'
+                                                : 'text-gray-300 hover:text-white'
                                             }`}
                                     >
-                                        {link.name}
+                                        {/* Text with glow effect on hover */}
+                                        <span className="relative z-10 group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.8)] transition-all duration-300">
+                                            {link.name}
+                                        </span>
+
+                                        {/* Animated underline */}
+                                        <span
+                                            className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 transition-all duration-300 ${location.pathname === link.href
+                                                    ? 'w-full'
+                                                    : 'w-0 group-hover:w-full'
+                                                }`}
+                                        />
+
+                                        {/* Hover glow background */}
+                                        <span className="absolute inset-0 rounded-lg bg-purple-500/0 group-hover:bg-purple-500/10 transition-all duration-300 -z-10" />
+
+                                        {/* Active indicator dot */}
+                                        {location.pathname === link.href && (
+                                            <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse" />
+                                        )}
                                     </Link>
                                 ) : (
                                     <a
                                         key={link.name}
                                         href={link.href}
-                                        className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
+                                        className="relative px-5 py-2.5 text-base lg:text-lg font-semibold text-gray-300 hover:text-white transition-all duration-300 group"
                                     >
-                                        {link.name}
+                                        <span className="relative z-10 group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.8)] transition-all duration-300">
+                                            {link.name}
+                                        </span>
+                                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 group-hover:w-full transition-all duration-300" />
+                                        <span className="absolute inset-0 rounded-lg bg-purple-500/0 group-hover:bg-purple-500/10 transition-all duration-300 -z-10" />
                                     </a>
                                 )
                             ))}
                         </div>
 
                         {/* Book Meeting Button - Right */}
-                        <button
-                            onClick={() => {
-                                navigate('/contact');
-                                window.scrollTo(0, 0);
-                            }}
+                        <a
+                            href="https://cal.com/getmoreclients/strategy-call"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="btn-primary text-sm"
                         >
                             Book Meeting
-                        </button>
+                        </a>
                     </div>
                 </div>
             </nav>
@@ -73,7 +95,7 @@ const Navbar = () => {
                     <div className="flex items-center justify-between h-16">
                         {/* Logo */}
                         <Link to="/" className="flex items-center">
-                            <img src="/logo.png" alt="getmoreclients.in" className="h-8 w-auto" />
+                            <img src="/logo_circular.png" alt="getmoreclients.in" className="h-8 w-auto" />
                         </Link>
 
                         {/* Mobile Menu Button */}
@@ -119,16 +141,15 @@ const Navbar = () => {
                                         </a>
                                     )
                                 ))}
-                                <button
-                                    onClick={() => {
-                                        setIsMenuOpen(false);
-                                        navigate('/contact');
-                                        window.scrollTo(0, 0);
-                                    }}
-                                    className="btn-primary text-sm w-fit"
+                                <a
+                                    href="https://cal.com/getmoreclients/strategy-call"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="btn-primary text-sm w-fit inline-block text-center"
                                 >
                                     Book Meeting
-                                </button>
+                                </a>
                             </div>
                         </div>
                     )}

@@ -122,12 +122,17 @@ const ContactPage = () => {
                                     </div>
                                     <span>nakuldafale7@gmail.com</span>
                                 </a>
-                                <div className="flex items-center gap-3 text-gray-300">
-                                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
+                                <a
+                                    href="https://www.google.com/maps/place/Stellar+Tower/@19.0514463,72.9015526,206m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3be7c721399dc71d:0x662f94190dad3a!8m2!3d19.0514463!4d72.9015526!16s%2Fg%2F11trbygwxy?authuser=0&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors group"
+                                >
+                                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-purple-500/20 transition-colors">
                                         <MapPin className="w-5 h-5" />
                                     </div>
-                                    <span>India &middot; mumbai &middot; chembur</span>
-                                </div>
+                                    <span>701,stellar tower,Sion - Trombay Rd,near Diamond Garden,opp K-star mall,Chembur, Mumbai, Maharashtra 400071</span>
+                                </a>
                             </div>
                         </div>
 

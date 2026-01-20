@@ -303,7 +303,7 @@ const CalendarBooking: React.FC = () => {
                             </p>
 
                             <a
-                                href="https://cal.com/getmoreclients"
+                                href="https://cal.com/getmoreclients/strategy-call"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="btn-primary inline-flex items-center space-x-2 group text-lg px-8 py-4 cursor-pointer"
@@ -321,7 +321,7 @@ const CalendarBooking: React.FC = () => {
                         </div>
 
                         {/* Right Side - Calendar Preview (Clickable) */}
-                        <a href="https://cal.com/getmoreclients" target="_blank" rel="noopener noreferrer" className="relative group cursor-pointer block">
+                        <a href="https://cal.com/getmoreclients/strategy-call" target="_blank" rel="noopener noreferrer" className="relative group cursor-pointer block">
                             {/* Glow effect */}
                             <div className="absolute inset-0 bg-purple-600/20 blur-3xl rounded-full transform scale-90 group-hover:bg-purple-600/30 transition-all duration-500"></div>
 

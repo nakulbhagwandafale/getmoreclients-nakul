@@ -43,11 +43,10 @@ const Hero: React.FC = () => {
                     </p>
 
                     <div className="mt-8 flex flex-wrap gap-4">
-                        <button
-                            onClick={() => {
-                                navigate('/contact');
-                                window.scrollTo(0, 0);
-                            }}
+                        <a
+                            href="https://cal.com/getmoreclients/strategy-call"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="btn-primary text-sm md:text-base px-6 py-3 inline-flex items-center space-x-2 group"
                         >
                             <span>Book Meeting</span>
@@ -59,7 +58,7 @@ const Hero: React.FC = () => {
                             >
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
-                        </button>
+                        </a>
                         <button
                             onClick={() => navigate('/work')}
                             className="px-6 py-3 text-sm md:text-base text-white border border-purple-500/50 rounded-full hover:bg-purple-500/10 transition-all duration-300"

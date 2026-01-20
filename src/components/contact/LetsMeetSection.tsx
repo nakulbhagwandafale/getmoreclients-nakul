@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion';
-import { Phone, MapPin, Mail, MessageCircle } from 'lucide-react';
+import { Phone, MapPin, Mail } from 'lucide-react';
+import { IconBrandWhatsapp } from '@tabler/icons-react';
 
 
 const LetsMeetSection = () => {
     const cards = [
         {
-            icon: <MessageCircle className="w-8 h-8 text-green-400" />,
+            icon: <IconBrandWhatsapp className="w-8 h-8 text-green-400" />,
             title: "Whatsapp Us",
             detail: "+91 9370425738",
             href: "https://wa.me/918779031795", // Assuming direct link
@@ -21,15 +22,15 @@ const LetsMeetSection = () => {
         {
             icon: <MapPin className="w-8 h-8 text-purple-400" />,
             title: "We're On The Map",
-            detail: "Mumbai | chembur",
-            href: "#", // Link to actual map if available
+            detail: "701,stellar tower,Sion - Trombay Rd,near Diamond Garden,opp K-star mall,Chembur, Mumbai, Maharashtra 400071",
+            href: "https://www.google.com/maps/place/Stellar+Tower/@19.0514463,72.9015526,206m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3be7c721399dc71d:0x662f94190dad3a!8m2!3d19.0514463!4d72.9015526!16s%2Fg%2F11trbygwxy?authuser=0&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D", // Link to actual map if available
             delay: 0.2
         },
         {
             icon: <Mail className="w-8 h-8 text-pink-400" />,
             title: "Send Us A Message",
             detail: "nakuldafale7@gmail.com",
-            href: "mailto:teammofa@mofadigital.in",
+            href: "mailto:nakuldafale7@gmail.com",
             delay: 0.3
         }
     ];
@@ -56,6 +57,8 @@ const LetsMeetSection = () => {
                     <motion.a
                         key={idx}
                         href={card.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
