@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const navigation = [
     { name: 'Home', href: '/', isRoute: true },
@@ -11,7 +11,6 @@ const navigation = [
 ];
 
 const Navbar = () => {
-    const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
 
@@ -35,8 +34,8 @@ const Navbar = () => {
                                         key={link.name}
                                         to={link.href}
                                         className={`relative px-5 py-2.5 text-base lg:text-lg font-semibold transition-all duration-300 group ${location.pathname === link.href
-                                                ? 'text-white'
-                                                : 'text-gray-300 hover:text-white'
+                                            ? 'text-white'
+                                            : 'text-gray-300 hover:text-white'
                                             }`}
                                     >
                                         {/* Text with glow effect on hover */}
@@ -47,8 +46,8 @@ const Navbar = () => {
                                         {/* Animated underline */}
                                         <span
                                             className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 transition-all duration-300 ${location.pathname === link.href
-                                                    ? 'w-full'
-                                                    : 'w-0 group-hover:w-full'
+                                                ? 'w-full'
+                                                : 'w-0 group-hover:w-full'
                                                 }`}
                                         />
 
