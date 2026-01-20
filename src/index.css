@@ -35,8 +35,10 @@
     box-sizing: border-box;
   }
 
+
   html {
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: auto; /* Let Lenis handle smoothscroll */
   }
 
   body {
@@ -48,16 +50,40 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* GPU Acceleration for smooth animations */
-  .gpu-accelerated {
-    transform: translateZ(0);
-    will-change: transform;
-    backface-visibility: hidden;
+  /* Performance Optimizations */
+  * {
+    /* Use CSS containment for better performance */
+    contain: layout style paint;
   }
 
-  /* Optimize 3D elements for performance */
+  /* GPU Acceleration for animations */
+  [class*="motion"] {
+    transform: translate3d(0, 0, 0);
+    will-change: transform, opacity;
+  }
+
+  /* Optimize images */
+  img {
+    content-visibility: auto;
+    will-change: auto;
+  }
+
+  /* Optimize 3D elements */
   canvas {
     will-change: auto;
+    transform: translateZ(0);
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 

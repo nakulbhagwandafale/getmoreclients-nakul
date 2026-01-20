@@ -6,12 +6,15 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     useEffect(() => {
         const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            duration: 0.8,  // Reduced from 1.2 for snappier response
+            easing: (t) => 1 - Math.pow(1 - t, 3), // Smoother cubic easing
             orientation: 'vertical',
             gestureOrientation: 'vertical',
             smoothWheel: true,
-            touchMultiplier: 2,
+            wheelMultiplier: 1,  // More responsive wheel scrolling
+            touchMultiplier: 1.5,  // Reduced from 2 for better touch control
+            infinite: false,
+            syncTouch: true,  // Better mobile performance
         });
 
         lenisRef.current = lenis;
