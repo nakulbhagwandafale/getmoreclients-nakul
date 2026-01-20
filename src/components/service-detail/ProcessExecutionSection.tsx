@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { CheckCircle2, ArrowRight } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import type { ServiceDetail } from '../../data/services';
 
 interface ProcessExecutionSectionProps {
