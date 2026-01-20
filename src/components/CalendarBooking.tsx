@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -274,7 +273,6 @@ const BookingModal = ({ onClose }: { onClose: () => void }) => {
 };
 
 const CalendarBooking: React.FC = () => {
-    const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Placeholder data for the preview calendar
@@ -304,11 +302,10 @@ const CalendarBooking: React.FC = () => {
                                 Ready to transform your business? Pick a time that works for you, and let's discuss how we can help you achieve your goals.
                             </p>
 
-                            <button
-                                onClick={() => {
-                                    navigate('/contact');
-                                    window.scrollTo(0, 0);
-                                }}
+                            <a
+                                href="https://cal.com/getmoreclients"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="btn-primary inline-flex items-center space-x-2 group text-lg px-8 py-4 cursor-pointer"
                             >
                                 <span>Book Meeting</span>
@@ -320,11 +317,11 @@ const CalendarBooking: React.FC = () => {
                                 >
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                 </svg>
-                            </button>
+                            </a>
                         </div>
 
                         {/* Right Side - Calendar Preview (Clickable) */}
-                        <div className="relative group cursor-pointer" onClick={() => setIsModalOpen(true)}>
+                        <a href="https://cal.com/getmoreclients" target="_blank" rel="noopener noreferrer" className="relative group cursor-pointer block">
                             {/* Glow effect */}
                             <div className="absolute inset-0 bg-purple-600/20 blur-3xl rounded-full transform scale-90 group-hover:bg-purple-600/30 transition-all duration-500"></div>
 
@@ -376,7 +373,7 @@ const CalendarBooking: React.FC = () => {
                                     </span>
                                 </div>
                             </GradientBorderCard>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </section>

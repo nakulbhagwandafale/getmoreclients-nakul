@@ -152,12 +152,13 @@ export default function Footer() {
                                     { name: 'How It Works', href: '/#how-it-works' },
                                     { name: 'Testimonials', href: '/#testimonials' },
                                     { name: 'Why Choose Us', href: '/#why-choose-us' },
-                                    { name: 'Book a Call', href: '/#calendar' },
+                                    { name: 'Book a Call', href: 'https://cal.com/getmoreclients', external: true },
                                     { name: 'Contact', href: '/contact' },
                                 ].map((link) => (
                                     <a
                                         key={link.name}
                                         href={link.href}
+                                        {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                                         className="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300 relative group w-fit"
                                     >
                                         <span className="relative z-10">{link.name}</span>
