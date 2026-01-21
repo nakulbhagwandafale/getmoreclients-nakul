@@ -1,52 +1,12 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MessageSquare, ShieldCheck, ArrowRight, CheckCircle, MapPin } from 'lucide-react';
+import { MessageSquare, ShieldCheck, ArrowRight, MapPin, CheckCircle } from 'lucide-react';
 import { GradientBorderCard } from '@/components/ui/gradient-border-card';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/FooterSection';
 import LetsMeetSection from '@/components/contact/LetsMeetSection';
-import { supabase } from '@/lib/supabaseClient';
-
-// ... (existing imports, but typically I can't easily auto-insert imports at top with replace_file_content unless I target top lines. I will add import at top first, then component body)
-
-// Actually, I will use a larger block replacement to handle both if possible, or two replacements.
-// Let's stick to two replacements for safety. First, adding the import.
 
 const ContactPage = () => {
-    const [focusedField, setFocusedField] = useState<string | null>(null);
-    const [formState, setFormState] = useState<'idle' | 'submitting' | 'success'>('idle');
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setFormState('submitting');
-
-        const formData = new FormData(e.target as HTMLFormElement);
-        const data = {
-            name: formData.get('name') as string,
-            email: formData.get('email') as string,
-            website: formData.get('website') as string,
-            message: formData.get('message') as string,
-        };
-
-        try {
-            if (!supabase) {
-                throw new Error('Supabase client is not initialized. Check your environment variables.');
-            }
-
-            const { error } = await supabase
-                .from('contact_submissions')
-                .insert([data]);
-
-            if (error) throw error;
-
-            setFormState('success');
-        } catch (error: any) {
-            console.error('Error submitting form:', error);
-            // Show the actual error message to help debugging
-            alert(`Error: ${error.message || 'Something went wrong. Please check your connection and try again.'}`);
-            setFormState('idle');
-        }
-    };
 
     return (
         <div className="min-h-screen bg-transparent relative font-sans text-gray-200 overflow-hidden">
@@ -102,7 +62,7 @@ const ContactPage = () => {
                                     desc: "Just a transparent conversation about your goals and how we can fit."
                                 }
                             ].map((item, idx) => (
-                                <div key={idx} className="flex gap-5 items-start p-6 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                                <div key={idx} className="flex gap-5 items-start p-6 rounded-2xl bg-[#130b29] border border-white/5 hover:bg-[#1a0f35] transition-colors">
                                     <div className="shrink-0 pt-1">{item.icon}</div>
                                     <div>
                                         <h3 className="text-lg font-semibold text-white mb-1">{item.title}</h3>
@@ -113,29 +73,6 @@ const ContactPage = () => {
                         </div>
 
                         {/* Direct Contact Info */}
-                        <div className="bg-gradient-to-br from-purple-900/20 to-blue-900/10 p-8 rounded-3xl border border-white/10 backdrop-blur-sm">
-                            <h3 className="text-white font-bold text-xl mb-6">Other ways to connect</h3>
-                            <div className="space-y-4">
-                                <a href="mailto:hello@getmoreclients.in" className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors group">
-                                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-purple-500/20 transition-colors">
-                                        <Mail className="w-5 h-5" />
-                                    </div>
-                                    <span>nakuldafale7@gmail.com</span>
-                                </a>
-                                <a
-                                    href="https://www.google.com/maps/place/Stellar+Tower/@19.0514463,72.9015526,206m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3be7c721399dc71d:0x662f94190dad3a!8m2!3d19.0514463!4d72.9015526!16s%2Fg%2F11trbygwxy?authuser=0&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors group"
-                                >
-                                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-purple-500/20 transition-colors">
-                                        <MapPin className="w-5 h-5" />
-                                    </div>
-                                    <span>701,stellar tower,Sion - Trombay Rd,near Diamond Garden,opp K-star mall,Chembur, Mumbai, Maharashtra 400071</span>
-                                </a>
-                            </div>
-                        </div>
-
                     </motion.div>
 
                     {/* Right Column: Premium Form */}
@@ -144,132 +81,66 @@ const ContactPage = () => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.4, duration: 0.8 }}
                     >
-                        <GradientBorderCard className="p-8 md:p-10 bg-[#0f0720]/80 backdrop-blur-xl">
-                            {formState === 'success' ? (
-                                <div className="h-full flex flex-col items-center justify-center text-center py-20">
-                                    <motion.div
-                                        initial={{ scale: 0 }}
-                                        animate={{ scale: 1 }}
-                                        className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mb-6"
-                                    >
-                                        <CheckCircle className="w-10 h-10 text-green-400" />
-                                    </motion.div>
-                                    <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-                                    <p className="text-gray-400 max-w-xs mx-auto">
-                                        Thanks for reaching out. We'll be in touch shortly to schedule your strategy session.
-                                    </p>
-                                    <button
-                                        onClick={() => setFormState('idle')}
-                                        className="mt-8 text-purple-400 hover:text-purple-300 text-sm font-medium"
-                                    >
-                                        Send another message
-                                    </button>
-                                </div>
-                            ) : (
-                                <form onSubmit={handleSubmit} className="space-y-6">
-                                    <div className="space-y-4">
-                                        <h2 className="text-2xl font-bold text-white mb-6">Tell us about your agency</h2>
+                        <GradientBorderCard className="relative h-full p-8 md:p-10 overflow-hidden border-none flex flex-col justify-center">
 
-                                        {/* Name Field */}
-                                        <div className="relative">
-                                            <input
-                                                type="text"
-                                                id="name"
-                                                name="name"
-                                                required
-                                                className={`w-full bg-[#1a0b2e] border rounded-xl px-5 pt-6 pb-2 text-white outline-none transition-all duration-300 ${focusedField === 'name' ? 'border-purple-500 shadow-[0_0_20px_rgba(168,85,247,0.15)]' : 'border-white/10'}`}
-                                                onFocus={() => setFocusedField('name')}
-                                                onBlur={(e) => !e.target.value && setFocusedField(null)}
-                                            />
-                                            <label
-                                                htmlFor="name"
-                                                className={`absolute left-5 transition-all duration-300 pointer-events-none text-gray-500 ${focusedField === 'name' || (document.getElementById('name') as HTMLInputElement)?.value ? 'top-2 text-xs text-purple-400' : 'top-4 text-base'}`}
-                                            >
-                                                Full Name
-                                            </label>
-                                        </div>
+                            {/* Background Image ONLY */}
+                            <div
+                                className="absolute inset-0 bg-cover bg-center"
+                                style={{ backgroundImage: 'url("/assets/Screenshot 2026-01-21 144131.png")' }}
+                            />
 
-                                        {/* Email Field */}
-                                        <div className="relative">
-                                            <input
-                                                type="email"
-                                                id="email"
-                                                name="email"
-                                                required
-                                                className={`w-full bg-[#1a0b2e] border rounded-xl px-5 pt-6 pb-2 text-white outline-none transition-all duration-300 ${focusedField === 'email' ? 'border-purple-500 shadow-[0_0_20px_rgba(168,85,247,0.15)]' : 'border-white/10'}`}
-                                                onFocus={() => setFocusedField('email')}
-                                                onBlur={(e) => !e.target.value && setFocusedField(null)}
-                                            />
-                                            <label
-                                                htmlFor="email"
-                                                className={`absolute left-5 transition-all duration-300 pointer-events-none text-gray-500 ${focusedField === 'email' || (document.getElementById('email') as HTMLInputElement)?.value ? 'top-2 text-xs text-purple-400' : 'top-4 text-base'}`}
-                                            >
-                                                Work Email
-                                            </label>
-                                        </div>
+                            {/* Content */}
+                            <div className="relative z-10 flex flex-col items-center text-center space-y-8">
 
-                                        {/* Website Field */}
-                                        <div className="relative">
-                                            <input
-                                                type="url"
-                                                id="website"
-                                                name="website"
-                                                className={`w-full bg-[#1a0b2e] border rounded-xl px-5 pt-6 pb-2 text-white outline-none transition-all duration-300 ${focusedField === 'website' ? 'border-purple-500 shadow-[0_0_20px_rgba(168,85,247,0.15)]' : 'border-white/10'}`}
-                                                onFocus={() => setFocusedField('website')}
-                                                onBlur={(e) => !e.target.value && setFocusedField(null)}
-                                            />
-                                            <label
-                                                htmlFor="website"
-                                                className={`absolute left-5 transition-all duration-300 pointer-events-none text-gray-500 ${focusedField === 'website' || (document.getElementById('website') as HTMLInputElement)?.value ? 'top-2 text-xs text-purple-400' : 'top-4 text-base'}`}
-                                            >
-                                                Company URL (Optional)
-                                            </label>
-                                        </div>
-
-                                        {/* Message Field */}
-                                        <div className="relative">
-                                            <textarea
-                                                id="message"
-                                                name="message"
-                                                required
-                                                rows={4}
-                                                className={`w-full bg-[#1a0b2e] border rounded-xl px-5 pt-6 pb-2 text-white outline-none transition-all duration-300 resize-none ${focusedField === 'message' ? 'border-purple-500 shadow-[0_0_20px_rgba(168,85,247,0.15)]' : 'border-white/10'}`}
-                                                onFocus={() => setFocusedField('message')}
-                                                onBlur={(e) => !e.target.value && setFocusedField(null)}
-                                            />
-                                            <label
-                                                htmlFor="message"
-                                                className={`absolute left-5 transition-all duration-300 pointer-events-none text-gray-500 ${focusedField === 'message' || (document.getElementById('message') as HTMLTextAreaElement)?.value ? 'top-2 text-xs text-purple-400' : 'top-4 text-base'}`}
-                                            >
-                                                How can we help you?
-                                            </label>
-                                        </div>
+                                {/* Icon */}
+                                <div className="relative">
+                                    <div className="absolute inset-0 bg-purple-500/20 rounded-full" />
+                                    <div className="relative w-24 h-24 rounded-full bg-black/40 border border-black/10 flex items-center justify-center shadow-2xl">
+                                        <MapPin className="w-10 h-10 text-purple-400" />
                                     </div>
+                                </div>
 
-                                    {/* Submit Button */}
+                                {/* Address */}
+                                <div className="space-y-4 max-w-sm">
+                                    <h2 className="text-3xl font-bold text-white drop-shadow-lg">
+                                        Visit Our HQ
+                                    </h2>
+                                    <p className="text-gray-200 text-lg leading-relaxed bg-black/40 backdrop-blur-md rounded-xl p-4">
+                                        701, Stellar Tower, Sion - Trombay Rd,<br />
+                                        near Diamond Garden, opp K-star mall,<br />
+                                        Chembur, Mumbai, 400071
+                                    </p>
+                                </div>
+
+                                {/* CTA */}
+                                <div className="w-full pt-4 space-y-4">
                                     <button
-                                        type="submit"
-                                        disabled={formState === 'submitting'}
-                                        className="w-full btn-primary py-4 text-lg rounded-xl flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
+                                        onClick={() =>
+                                            window.open(
+                                                "https://cal.com/getmoreclients/strategy-call",
+                                                "_blank"
+                                            )
+                                        }
+                                        className="w-full btn-primary py-4 text-lg rounded-xl flex items-center justify-center gap-3 hover:scale-[1.02] transition-transform duration-300 shadow-xl shadow-purple-900/30"
                                     >
-                                        {formState === 'submitting' ? (
-                                            <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                        ) : (
-                                            <>
-                                                submit
-                                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                            </>
-                                        )}
+                                        Let's Meet
+                                        <ArrowRight className="w-5 h-5" />
                                     </button>
 
-                                    <p className="text-center text-xs text-gray-500 mt-4">
-                                        By submitting this form, you agree to our privacy policy. <br />
-                                        We respect your inbox and never share your data.
+                                    <p className="text-sm text-gray-300 bg-black/40 backdrop-blur-md py-1 px-4 rounded-full border border-white/10">
+                                        Prefer a call?{" "}
+                                        <a
+                                            href="tel:+919370425738"
+                                            className="text-white-400 hover:text-purple-300 font-medium"
+                                        >
+                                            Dial +91 9370425738
+                                        </a>
                                     </p>
-                                </form>
-                            )}
+                                </div>
+                            </div>
                         </GradientBorderCard>
                     </motion.div>
+
                 </div>
             </div>
 

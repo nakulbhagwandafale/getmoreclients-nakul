@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Phone, MapPin, Mail } from 'lucide-react';
+import { Phone, Mail } from 'lucide-react';
 import { IconBrandWhatsapp } from '@tabler/icons-react';
 
 
@@ -20,18 +20,11 @@ const LetsMeetSection = () => {
             delay: 0.1
         },
         {
-            icon: <MapPin className="w-8 h-8 text-purple-400" />,
-            title: "We're On The Map",
-            detail: "701,stellar tower,Sion - Trombay Rd,near Diamond Garden,opp K-star mall,Chembur, Mumbai, Maharashtra 400071",
-            href: "https://www.google.com/maps/place/Stellar+Tower/@19.0514463,72.9015526,206m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3be7c721399dc71d:0x662f94190dad3a!8m2!3d19.0514463!4d72.9015526!16s%2Fg%2F11trbygwxy?authuser=0&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D", // Link to actual map if available
-            delay: 0.2
-        },
-        {
             icon: <Mail className="w-8 h-8 text-pink-400" />,
             title: "Send Us A Message",
             detail: "nakuldafale7@gmail.com",
             href: "mailto:nakuldafale7@gmail.com",
-            delay: 0.3
+            delay: 0.2
         }
     ];
 
@@ -45,14 +38,14 @@ const LetsMeetSection = () => {
                 className="mb-16 space-y-4"
             >
                 <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
-                    Let’s Meet
+                    Quick Connect
                 </h2>
                 <p className="text-purple-300 font-medium text-lg tracking-wide">
                     Chai/Coffee And Samosa Is On Us
                 </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
                 {cards.map((card, idx) => (
                     <motion.a
                         key={idx}
@@ -63,7 +56,7 @@ const LetsMeetSection = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: card.delay, duration: 0.6, ease: "easeOut" }}
-                        className="group relative p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 hover:-translate-y-2 flex flex-col items-center justify-center space-y-6 overflow-hidden"
+                        className="group relative p-8 rounded-3xl bg-[#0f0720] border border-white/10 backdrop-blur-sm hover:bg-[#150a2b] transition-all duration-300 hover:-translate-y-2 flex flex-col items-center justify-center space-y-6 overflow-hidden"
                     >
                         {/* Hover Gradient Glow */}
                         <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 via-purple-500/0 to-purple-500/0 group-hover:from-purple-500/10 group-hover:to-blue-500/10 transition-all duration-500" />
