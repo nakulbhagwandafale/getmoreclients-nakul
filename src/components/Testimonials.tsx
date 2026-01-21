@@ -46,8 +46,8 @@ const testimonials: CardStackItem[] = [
 
 const Testimonials = () => {
     return (
-        <section className="relative py-32 bg-transparent overflow-hidden wave-bg">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative py-32 bg-transparent wave-bg">
+            <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col items-center justify-between gap-12">
                     {/* Text Content */}
                     <div className="w-full text-center max-w-4xl mx-auto">
@@ -77,7 +77,7 @@ const Testimonials = () => {
                     </div>
 
                     {/* Card Stack Animation */}
-                    <div className="w-full flex justify-center h-[500px] items-center relative z-10">
+                    <div className="w-full flex justify-center min-h-[550px] items-center relative z-10">
                         <CardStack
                             items={testimonials}
                             autoAdvance={true}

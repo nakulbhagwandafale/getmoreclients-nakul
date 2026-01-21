@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
 import { Search, Map, Rocket, TrendingUp, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -117,7 +116,6 @@ const MovingBorderCard = ({ step, index }: { step: any, index: number }) => {
 }
 
 const HowItWorks = () => {
-    const navigate = useNavigate();
     return (
         <section className="relative py-32 bg-transparent overflow-hidden">
             {/* StarField removed for performance - relying on global or clean background */}
@@ -184,10 +182,7 @@ const HowItWorks = () => {
                     className="mt-20 text-center"
                 >
                     <button
-                        onClick={() => {
-                            navigate('/contact');
-                            window.scrollTo(0, 0);
-                        }}
+                        onClick={() => window.open('https://cal.com/getmoreclients/strategy-call', '_blank')}
                         className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-purple-950 rounded-full font-bold text-lg hover:bg-purple-50 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] hover:-translate-y-1"
                     >
                         Book Meeting

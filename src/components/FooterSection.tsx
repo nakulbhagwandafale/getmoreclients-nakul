@@ -19,7 +19,7 @@ export default function Footer() {
     const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
 
     return (
-        <footer ref={containerRef} className="relative min-h-screen w-full overflow-hidden flex flex-col pt-20">
+        <footer ref={containerRef} className="relative min-h-screen w-full flex flex-col pt-20">
             {/* Immersive Cosmic Background */}
             <CosmicFooterBackground className="z-0" />
 
@@ -90,11 +90,11 @@ export default function Footer() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1 }}
-                    className="relative w-full h-[500px] lg:h-[800px] flex items-center justify-center pointer-events-none"
+                    className="relative w-full h-[500px] lg:h-[800px] flex items-center justify-center pointer-events-none overflow-visible"
                 >
                     <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-transparent rounded-full blur-[100px] scale-75 animate-pulse" />
                     {/* Globe Wrapper with tailored sizing */}
-                    <div className="w-[140%] h-[140%] lg:w-[120%] lg:h-[120%] flex items-center justify-center -mr-20 lg:-mr-40 opacity-90">
+                    <div className="w-[130%] h-[130%] lg:w-[110%] lg:h-[110%] flex items-center justify-center opacity-90">
                         <Globe className="w-full h-full" />
                     </div>
                 </motion.div>

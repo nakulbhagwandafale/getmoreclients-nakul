@@ -302,10 +302,8 @@ const CalendarBooking: React.FC = () => {
                                 Ready to transform your business? Pick a time that works for you, and let's discuss how we can help you achieve your goals.
                             </p>
 
-                            <a
-                                href="https://cal.com/getmoreclients/strategy-call"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                            <button
+                                onClick={() => window.open('https://cal.com/getmoreclients', '_blank')}
                                 className="btn-primary inline-flex items-center space-x-2 group text-lg px-8 py-4 cursor-pointer"
                             >
                                 <span>Book Meeting</span>
@@ -317,11 +315,11 @@ const CalendarBooking: React.FC = () => {
                                 >
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                 </svg>
-                            </a>
+                            </button>
                         </div>
 
                         {/* Right Side - Calendar Preview (Clickable) */}
-                        <a href="https://cal.com/getmoreclients/strategy-call" target="_blank" rel="noopener noreferrer" className="relative group cursor-pointer block">
+                        <div className="relative group cursor-pointer" onClick={() => window.open('https://cal.com/getmoreclients', '_blank')}>
                             {/* Glow effect */}
                             <div className="absolute inset-0 bg-purple-600/20 blur-3xl rounded-full transform scale-90 group-hover:bg-purple-600/30 transition-all duration-500"></div>
 
@@ -373,7 +371,7 @@ const CalendarBooking: React.FC = () => {
                                     </span>
                                 </div>
                             </GradientBorderCard>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </section>

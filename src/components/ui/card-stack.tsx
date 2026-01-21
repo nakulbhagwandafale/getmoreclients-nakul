@@ -98,7 +98,7 @@ export const CardStack = ({
 
     return (
         <div
-            className="relative h-[28rem] w-full max-w-5xl mx-auto perspective-1000 flex items-center justify-center -mt-12"
+            className="relative min-h-[32rem] w-full max-w-[1400px] mx-auto perspective-1000 flex items-center justify-center"
             onMouseEnter={() => pauseOnHover && setIsHovering(true)}
             onMouseLeave={() => pauseOnHover && setIsHovering(false)}
         >
@@ -120,32 +120,32 @@ export const CardStack = ({
                     opacity = 1;
                 } else if (index === 1) {
                     // Right 1
-                    x = 280;
+                    x = 260;
                     scale = 0.9;
-                    rotate = 10;
+                    rotate = 8;
                     zIndex = 20;
-                    opacity = 0.8;
+                    opacity = 0.85;
                 } else if (index === 2) {
                     // Right 2
-                    x = 480;
+                    x = 450;
                     scale = 0.75;
-                    rotate = 20;
+                    rotate = 15;
                     zIndex = 10;
-                    opacity = 0.6;
+                    opacity = 0.65;
                 } else if (index === len - 1) {
                     // Left 1
-                    x = -280;
+                    x = -260;
                     scale = 0.9;
-                    rotate = -10;
+                    rotate = -8;
                     zIndex = 20;
-                    opacity = 0.8;
+                    opacity = 0.85;
                 } else if (index === len - 2) {
                     // Left 2
-                    x = -480;
+                    x = -450;
                     scale = 0.75;
-                    rotate = -20;
+                    rotate = -15;
                     zIndex = 10;
-                    opacity = 0.6;
+                    opacity = 0.65;
                 } else {
                     // Hidden
                     scale = 0;
@@ -184,7 +184,7 @@ export const CardStack = ({
                         <GradientBorderCard className="relative h-full w-full overflow-hidden rounded-[23px] bg-transparent border-none">
                             {/* Full Background Image */}
                             <div
-                                className="absolute inset-0 bg-cover bg-center z-0"
+                                className="absolute inset-0 bg-cover bg-center z-0 rounded-[23px]"
                                 style={{ backgroundImage: `url(${card.imageSrc})` }}
                             />
 

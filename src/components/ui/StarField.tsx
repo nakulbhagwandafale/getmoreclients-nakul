@@ -15,8 +15,7 @@ const StarField: React.FC<{ className?: string }> = ({ className = "fixed inset-
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        const ctx = canvas.getContext('2d', { alpha: false }); // Optimization: alpha false if possible, but we need transparency? No, we need transparency.
-        // Actually, sticky to default context but optimize draws.
+        const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
         let animationFrameId: number;
@@ -91,9 +90,8 @@ const StarField: React.FC<{ className?: string }> = ({ className = "fixed inset-
     return (
         <canvas
             ref={canvasRef}
-            className={`${className} z-0 pointer-events-none`}
-            // Ensure canvas is transparent
-            style={{ mixBlendMode: 'screen', background: 'transparent' }}
+            className={`${className} z-[1] pointer-events-none`}
+            style={{ background: 'transparent' }}
         />
     );
 };

@@ -126,7 +126,7 @@ const CosmicFooterBackground: React.FC<{ className?: string }> = ({ className = 
     }, []);
 
     return (
-        <div ref={containerRef} className={`absolute inset-0 w-full h-full overflow-hidden bg-[#0a0118] ${className}`}>
+        <div ref={containerRef} className={`absolute inset-0 w-full h-full bg-[#0a0118] ${className}`}>
             {/* Deep Cosmic Gradients */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#0a0118] via-[#110524] to-black z-0 pointer-events-none" />
 
