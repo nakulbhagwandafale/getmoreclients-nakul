@@ -59,11 +59,14 @@ const CosmicFooterBackground: React.FC<{ className?: string }> = ({ className = 
             ctx.clearRect(0, 0, width, height);
 
             // subtle glow for stars
+            // Optimization: Batch draw calls to minimize state changes
+
+            // 1. Draw small stars (no shadow)
             ctx.shadowBlur = 0;
             ctx.fillStyle = "white";
 
             stars.forEach((star) => {
-                // Interaction: move slightly away from mouse
+                // Update physics first
                 const dx = mouseX - star.x;
                 const dy = mouseY - star.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
@@ -75,12 +78,9 @@ const CosmicFooterBackground: React.FC<{ className?: string }> = ({ className = 
                     star.y -= (dy / dist) * force * 2;
                 }
 
-                // Drift logic - slow upward drift for "space floating" feel
                 star.y -= star.speed;
-                // Side drift slightly
                 star.x += Math.sin(star.y * 0.01) * 0.1;
 
-                // Wrap around
                 if (star.y < 0) {
                     star.y = height;
                     star.x = Math.random() * width;
@@ -88,19 +88,26 @@ const CosmicFooterBackground: React.FC<{ className?: string }> = ({ className = 
                 if (star.x < 0) star.x = width;
                 if (star.x > width) star.x = 0;
 
-                // Draw
-                // Larger stars get a glow
-                if (star.size > 1.5) {
-                    ctx.shadowBlur = 4;
-                    ctx.shadowColor = "rgba(255, 255, 255, 0.5)";
-                } else {
-                    ctx.shadowBlur = 0;
+                // Draw only if small
+                if (star.size <= 1.5) {
+                    ctx.globalAlpha = star.opacity;
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                    ctx.fill();
                 }
+            });
 
-                ctx.globalAlpha = star.opacity;
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-                ctx.fill();
+            // 2. Draw large stars (with glow)
+            ctx.shadowBlur = 4;
+            ctx.shadowColor = "rgba(255, 255, 255, 0.5)";
+
+            stars.forEach((star) => {
+                if (star.size > 1.5) {
+                    ctx.globalAlpha = star.opacity;
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
             });
 
             animationFrameId = requestAnimationFrame(draw);

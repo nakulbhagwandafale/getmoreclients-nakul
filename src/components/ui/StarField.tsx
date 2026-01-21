@@ -57,20 +57,39 @@ const StarField: React.FC<{ className?: string }> = ({ className = "fixed inset-
             ctx.shadowBlur = 4; // Add glow
             ctx.shadowColor = "white";
 
-            // Batch draws if possible, but opacity varies. 
-            // We'll iterate but prevent expensive shadowBlur
-            stars.forEach((star) => {
-                ctx.globalAlpha = star.opacity;
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-                ctx.fill();
+            // Batch draws for performance
 
-                // Move
+            // 1. Draw small stars (no shadow)
+            ctx.shadowBlur = 0;
+            ctx.fillStyle = "white";
+
+            stars.forEach((star) => {
+                // Update position
                 star.y -= star.speed;
-                // Wrap
                 if (star.y < 0) {
                     star.y = canvas.height;
                     star.x = Math.random() * canvas.width;
+                }
+
+                // Draw if small
+                if (star.size <= 1.5) {
+                    ctx.globalAlpha = star.opacity;
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            });
+
+            // 2. Draw large stars (with glow)
+            ctx.shadowBlur = 4;
+            ctx.shadowColor = "white";
+
+            stars.forEach((star) => {
+                if (star.size > 1.5) {
+                    ctx.globalAlpha = star.opacity;
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                    ctx.fill();
                 }
             });
 

@@ -50,11 +50,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Performance Optimizations */
-  * {
-    /* Use CSS containment for better performance */
-    contain: layout style paint;
-  }
+
 
   /* GPU Acceleration for animations */
   [class*="motion"] {
