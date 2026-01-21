@@ -13,6 +13,7 @@ import ServiceDetailPage from '@/pages/ServiceDetailPage';
 import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage';
 import TermsOfServicePage from '@/pages/TermsOfServicePage';
 import CookiePolicyPage from '@/pages/CookiePolicyPage';
+import FeedbackPage from './pages/FeedbackPage';
 import PageTransition from './components/PageTransition';
 import './index.css';
 import StarField from './components/ui/StarField';
@@ -36,6 +37,7 @@ function AnimatedRoutes() {
         <Route path="/blog" element={<PageTransition><BlogPage /></PageTransition>} />
         <Route path="/blog/:id" element={<PageTransition><BlogPostPage /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><ContactPage /></PageTransition>} />
+        <Route path="/feedback" element={<PageTransition><FeedbackPage /></PageTransition>} /> {/* Added route */}
         <Route path="/privacy" element={<PageTransition><PrivacyPolicyPage /></PageTransition>} />
         <Route path="/terms" element={<PageTransition><TermsOfServicePage /></PageTransition>} />
         <Route path="/cookies" element={<PageTransition><CookiePolicyPage /></PageTransition>} />

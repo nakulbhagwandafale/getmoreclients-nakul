@@ -123,7 +123,7 @@ export default function Footer() {
                         </div>
 
                         {/* Navigation Links - Three Column Layout */}
-                        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
                             {/* Pages Column */}
                             <div className="flex flex-col gap-3">
                                 <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-2">Pages</h4>
@@ -152,13 +152,10 @@ export default function Footer() {
                                     { name: 'How It Works', href: '/#how-it-works' },
                                     { name: 'Testimonials', href: '/#testimonials' },
                                     { name: 'Why Choose Us', href: '/#why-choose-us' },
-                                    { name: 'Book a Call', href: 'https://cal.com/getmoreclients/strategy-call', external: true },
-                                    { name: 'Contact', href: '/contact' },
                                 ].map((link) => (
                                     <a
                                         key={link.name}
                                         href={link.href}
-                                        {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                                         className="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300 relative group w-fit"
                                     >
                                         <span className="relative z-10">{link.name}</span>
@@ -178,6 +175,26 @@ export default function Footer() {
                                     <a
                                         key={link.name}
                                         href={link.href}
+                                        className="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300 relative group w-fit"
+                                    >
+                                        <span className="relative z-10">{link.name}</span>
+                                        <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-gradient-to-r from-purple-400 to-blue-400 group-hover:w-full transition-all duration-300"></span>
+                                    </a>
+                                ))}
+                            </div>
+
+                            {/* Contact us */}
+                            <div className="flex flex-col gap-3">
+                                <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-2">Contact Us</h4>
+                                {[
+                                    { name: 'Contact', href: '/contact' },
+                                    { name: 'Feedback', href: '/feedback' },
+                                    { name: 'Book a Call', href: 'https://cal.com/getmoreclients/strategy-call', external: true },
+                                ].map((link) => (
+                                    <a
+                                        key={link.name}
+                                        href={link.href}
+                                        {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                                         className="text-sm text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300 relative group w-fit"
                                     >
                                         <span className="relative z-10">{link.name}</span>

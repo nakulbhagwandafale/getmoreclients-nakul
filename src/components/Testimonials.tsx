@@ -1,9 +1,11 @@
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabaseClient";
 import { CardStack } from "./ui/card-stack";
 import type { CardStackItem } from "./ui/card-stack";
 
-const testimonials: CardStackItem[] = [
+const staticTestimonials: CardStackItem[] = [
     {
-        id: 1,
+        id: 101,
         title: "Sarah Jenkins",
         designation: "CMO, TechFlow",
         description: "GetMoreClients transformed our lead gen pipeline. We went from 50 to 300+ qualified leads per month in just one quarter. The ROI has been incredible.",
@@ -11,7 +13,7 @@ const testimonials: CardStackItem[] = [
         href: "#",
     },
     {
-        id: 2,
+        id: 102,
         title: "Michael Chen",
         designation: "Founder, GrowthX",
         description: "Their AI-driven approach to SEO is unlike anything I've seen. We started ranking for competitive keywords within weeks, not months.",
@@ -19,7 +21,7 @@ const testimonials: CardStackItem[] = [
         href: "#",
     },
     {
-        id: 3,
+        id: 103,
         title: "Elena Rodriguez",
         designation: "Director, CreativeStudio",
         description: "The team understood our brand voice perfectly. The content strategy they built increased our social engagement by 400%. Highly recommended!",
@@ -27,7 +29,7 @@ const testimonials: CardStackItem[] = [
         href: "#",
     },
     {
-        id: 4,
+        id: 104,
         title: "David Park",
         designation: "CEO, InnovateNow",
         description: "Professional, data-driven, and transparent. They don't just promise results; they deliver them with detailed reporting every step of the way.",
@@ -35,7 +37,7 @@ const testimonials: CardStackItem[] = [
         href: "#",
     },
     {
-        id: 5,
+        id: 105,
         title: "James Wilson",
         designation: "Marketing Head, SoftSolutions",
         description: "The best agency partner we've worked with. Their improved ad targeting lowered our CAC by 35% while scaling spend.",
@@ -45,6 +47,50 @@ const testimonials: CardStackItem[] = [
 ];
 
 const Testimonials = () => {
+    const [items, setItems] = useState<CardStackItem[]>(staticTestimonials);
+
+    useEffect(() => {
+        const fetchTestimonials = async () => {
+            if (!supabase) return;
+
+            try {
+                console.log("Fetching testimonials from Supabase...");
+                const { data, error } = await supabase
+                    .from('testimonials')
+                    .select('*')
+                    .eq('approved', true) // Only show approved testimonials
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    console.error('Error fetching testimonials:', error);
+                    return;
+                }
+
+                console.log("Supabase testimonials data:", data);
+
+                if (data && data.length > 0) {
+                    const newItems: CardStackItem[] = data.map((item: any) => ({
+                        id: item.id, // Keeping DB ID (e.g. 1, 2, 3)
+                        title: item.name,
+                        designation: item.designation + (item.company ? `, ${item.company}` : ''),
+                        description: item.content,
+                        imageSrc: item.image_url || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=90&w=800&auto=format&fit=crop", // Default avatar
+                        href: "#",
+                    }));
+
+                    // Combine Supabase items with static items
+                    setItems([...newItems, ...staticTestimonials]);
+                } else {
+                    console.log("No approved testimonials found.");
+                }
+            } catch (err) {
+                console.error("Unexpected error fetching testimonials:", err);
+            }
+        };
+
+        fetchTestimonials();
+    }, []);
+
     return (
         <section className="relative py-32 bg-transparent wave-bg">
             <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,7 +125,7 @@ const Testimonials = () => {
                     {/* Card Stack Animation */}
                     <div className="w-full flex justify-center min-h-[550px] items-center relative z-10">
                         <CardStack
-                            items={testimonials}
+                            items={items}
                             autoAdvance={true}
                             intervalMs={4000}
                             pauseOnHover={true}
