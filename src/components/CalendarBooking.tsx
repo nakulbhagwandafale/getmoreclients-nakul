@@ -275,10 +275,26 @@ const BookingModal = ({ onClose }: { onClose: () => void }) => {
 const CalendarBooking: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Placeholder data for the preview calendar
-    const currentMonth = 'August 2024';
+    // Dynamic data for the preview calendar
+    const today = new Date();
+    const currentMonthStr = format(today, 'MMMM yyyy');
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const calendarDays = [null, null, null, null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
+
+    // Generate actual calendar days for current month
+    const startOfCurrentMonth = startOfMonth(today);
+    const endOfCurrentMonth = endOfMonth(today);
+    const startDay = startOfCurrentMonth.getDay(); // 0-6 (Sun-Sat)
+    const daysInMonth = endOfCurrentMonth.getDate();
+
+    const calendarDays = [
+        ...Array(startDay).fill(null), // Empty slots
+        ...Array.from({ length: daysInMonth }, (_, i) => i + 1) // Days 1-31
+    ];
+
+    // Ensure 6 rows (42 cells) to keep height consistent
+    while (calendarDays.length < 42) {
+        calendarDays.push(null);
+    }
 
     return (
         <>
@@ -329,7 +345,7 @@ const CalendarBooking: React.FC = () => {
                                     <button className="w-10 h-10 rounded-full flex items-center justify-center text-gray-400">
                                         <IconChevronLeft className="w-5 h-5" />
                                     </button>
-                                    <h3 className="text-white font-semibold text-xl tracking-wide">{currentMonth}</h3>
+                                    <h3 className="text-white font-semibold text-xl tracking-wide">{currentMonthStr}</h3>
                                     <button className="w-10 h-10 rounded-full flex items-center justify-center text-gray-400">
                                         <IconChevronRight className="w-5 h-5" />
                                     </button>
@@ -353,7 +369,7 @@ const CalendarBooking: React.FC = () => {
                                                 aspect-square flex items-center justify-center text-sm rounded-xl
                                                 ${day === null
                                                     ? 'invisible'
-                                                    : day === 15
+                                                    : day === today.getDate()
                                                         ? 'bg-purple-600 text-white font-bold shadow-lg shadow-purple-500/30 scale-105'
                                                         : 'text-gray-300 bg-white/5'
                                                 }
