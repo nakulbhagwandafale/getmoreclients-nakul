@@ -48,21 +48,30 @@ export default function FeedbackPage() {
             // 1. Upload Image if exists
             if (imageFile) {
                 const fileExt = imageFile.name.split('.').pop();
-                const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+                // Sanitize file name to avoid special char issues in URLs
+                const sanitizedFileName = imageFile.name.replace(/[^a-zA-Z0-9]/g, '_');
+                const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}-${sanitizedFileName}.${fileExt}`;
+
                 const { error: uploadError, data } = await supabase.storage
                     .from('testimonial-images')
-                    .upload(fileName, imageFile);
+                    .upload(fileName, imageFile, {
+                        cacheControl: '3600',
+                        upsert: false
+                    });
 
                 if (uploadError) {
-                    // Fallback: If bucket doesn't exist, we might skip image or just log it.
-                    // For now, we'll try to proceed without image if upload fails, or throw.
                     console.error('Image upload failed:', uploadError);
-                    // Optional: throw uploadError; 
+                    // Decide: Do we stop or continue without image? 
+                    // Let's continue without image but warn user via console
+                    // throw uploadError; // Uncomment if we want to block submission
                 } else if (data) {
                     const { data: publicUrlData } = supabase.storage
                         .from('testimonial-images')
                         .getPublicUrl(fileName);
-                    imageUrl = publicUrlData.publicUrl;
+
+                    if (publicUrlData) {
+                        imageUrl = publicUrlData.publicUrl;
+                    }
                 }
             }
 

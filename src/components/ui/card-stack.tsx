@@ -1,3 +1,4 @@
+import { SafeImage } from "./SafeImage";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { GradientBorderCard } from "./gradient-border-card";
@@ -183,9 +184,10 @@ export const CardStack = ({
                     >
                         <GradientBorderCard className="relative h-full w-full overflow-hidden rounded-[23px] bg-transparent border-none">
                             {/* Full Background Image */}
-                            <div
-                                className="absolute inset-0 bg-cover bg-center z-0 rounded-[23px]"
-                                style={{ backgroundImage: `url(${card.imageSrc})` }}
+                            <SafeImage
+                                src={card.imageSrc}
+                                alt={card.title}
+                                className="absolute inset-0 w-full h-full object-cover z-0 rounded-[23px]"
                             />
 
                             {/* Gradient Overlay */}

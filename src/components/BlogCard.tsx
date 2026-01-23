@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Clock, Calendar } from 'lucide-react';
 import { GradientBorderCard } from './ui/gradient-border-card';
 import { type BlogPost } from '@/data/blogPosts';
+import { SafeImage } from './ui/SafeImage';
 
 interface BlogCardProps {
     post: BlogPost;
@@ -21,12 +22,15 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
             <GradientBorderCard className="h-full bg-[#0a0118]/80 flex flex-col p-5">
                 {/* Image Container */}
                 <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden mb-6">
-                    <motion.img
+                    <SafeImage
                         src={post.image}
                         alt={post.title}
                         className="w-full h-full object-cover"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        asMotion={true}
+                        motionProps={{
+                            whileHover: { scale: 1.05 },
+                            transition: { duration: 0.6, ease: "easeOut" }
+                        }}
                     />
 
                     {/* Category Badge */}

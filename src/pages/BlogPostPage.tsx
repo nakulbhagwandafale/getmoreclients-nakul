@@ -4,11 +4,17 @@ import { ArrowLeft, Clock, Calendar, Link2, Check, Twitter, Linkedin, Facebook, 
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/FooterSection';
 import { blogPosts } from '@/data/blogPosts';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
+import DOMPurify from 'dompurify';
+import { Helmet } from 'react-helmet-async';
+import { toast } from 'sonner';
+import { getShareUrl } from '@/lib/share';
+import { SafeImage } from '@/components/ui/SafeImage';
 
 const BlogPostPage = () => {
     const { id } = useParams<{ id: string }>();
-    const post = blogPosts.find(p => p.id === Number(id));
+    const postId = parseInt(id || '', 10);
+    const post = isNaN(postId) ? undefined : blogPosts.find(p => p.id === postId);
     const [copied, setCopied] = useState(false);
 
     // Reading progress
@@ -16,9 +22,11 @@ const BlogPostPage = () => {
     const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
     // Get related posts (same category, excluding current)
-    const relatedPosts = blogPosts
-        .filter(p => p.category === post?.category && p.id !== post?.id)
-        .slice(0, 3);
+    const relatedPosts = useMemo(() => {
+        return blogPosts
+            .filter(p => p.category === post?.category && p.id !== post?.id)
+            .slice(0, 3);
+    }, [post]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -28,39 +36,47 @@ const BlogPostPage = () => {
         try {
             await navigator.clipboard.writeText(window.location.href);
             setCopied(true);
+            toast.success('Link copied to clipboard');
             setTimeout(() => setCopied(false), 2000);
         } catch (err) {
             console.error('Failed to copy link:', err);
+            toast.error('Failed to copy link');
         }
     };
 
-    const shareOnTwitter = () => {
-        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(post?.title || '')}&url=${encodeURIComponent(window.location.href)}`, '_blank');
-    };
-
-    const shareOnLinkedIn = () => {
-        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}`, '_blank');
-    };
-
-    const shareOnFacebook = () => {
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank');
-    };
+    const sanitizedContent = useMemo(() => {
+        return DOMPurify.sanitize(post?.content || `<p>${post?.excerpt}</p>`);
+    }, [post]);
 
     if (!post) {
         return (
-            <div className="min-h-screen bg-transparent text-white flex items-center justify-center">
-                <div className="text-center">
-                    <h2 className="text-3xl font-bold mb-4">Post not found</h2>
-                    <Link to="/blog" className="text-purple-400 hover:text-purple-300 flex items-center justify-center gap-2">
+            <div className="min-h-screen bg-transparent relative font-sans text-gray-200">
+                <Navbar />
+                <div className="pt-32 pb-24 min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
+                    <h2 className="text-3xl font-bold mb-4 text-white">Post not found</h2>
+                    <p className="text-gray-400 mb-8">The article you are looking for does not exist or has been moved.</p>
+                    <Link to="/blog" className="text-purple-400 hover:text-purple-300 flex items-center justify-center gap-2 font-medium">
                         <ArrowLeft className="w-4 h-4" /> Back to Blog
                     </Link>
                 </div>
+                <Footer />
             </div>
         );
     }
 
     return (
         <div className="min-h-screen bg-transparent relative font-sans text-gray-200">
+            <Helmet>
+                <title>{post.title} | GetMoreClients</title>
+                <meta name="description" content={post.excerpt} />
+                <meta property="og:title" content={post.title} />
+                <meta property="og:description" content={post.excerpt} />
+                <meta property="og:image" content={post.image} />
+                <meta property="og:type" content="article" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <link rel="canonical" href={window.location.href.split('?')[0]} />
+            </Helmet>
+
             {/* Reading Progress Bar */}
             <motion.div
                 className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 z-50 origin-left"
@@ -132,31 +148,40 @@ const BlogPostPage = () => {
                                     {/* Share Buttons */}
                                     <div className="flex items-center gap-2">
                                         <span className="text-sm text-gray-500 mr-2">Share:</span>
-                                        <button
-                                            onClick={shareOnTwitter}
+                                        <a
+                                            href={getShareUrl('twitter', window.location.href, post.title)}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#1DA1F2] hover:border-[#1DA1F2]/50 transition-all"
+                                            aria-label="Share on Twitter"
                                         >
                                             <Twitter className="w-4 h-4" />
-                                        </button>
-                                        <button
-                                            onClick={shareOnLinkedIn}
+                                        </a>
+                                        <a
+                                            href={getShareUrl('linkedin', window.location.href, post.title)}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#0A66C2] hover:border-[#0A66C2]/50 transition-all"
+                                            aria-label="Share on LinkedIn"
                                         >
                                             <Linkedin className="w-4 h-4" />
-                                        </button>
-                                        <button
-                                            onClick={shareOnFacebook}
+                                        </a>
+                                        <a
+                                            href={getShareUrl('facebook', window.location.href, post.title)}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#1877F2] hover:border-[#1877F2]/50 transition-all"
+                                            aria-label="Share on Facebook"
                                         >
                                             <Facebook className="w-4 h-4" />
-                                        </button>
+                                        </a>
                                         <motion.button
                                             onClick={handleCopyLink}
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
                                             className={`w-9 h-9 rounded-full flex items-center justify-center transition-all ${copied
-                                                    ? 'bg-green-500/20 text-green-400 border border-green-500/40'
-                                                    : 'bg-white/5 border border-white/10 text-gray-400 hover:text-purple-400 hover:border-purple-500/50'
+                                                ? 'bg-green-500/20 text-green-400 border border-green-500/40'
+                                                : 'bg-white/5 border border-white/10 text-gray-400 hover:text-purple-400 hover:border-purple-500/50'
                                                 }`}
                                         >
                                             {copied ? <Check className="w-4 h-4" /> : <Link2 className="w-4 h-4" />}
@@ -173,7 +198,7 @@ const BlogPostPage = () => {
                                 className="mb-12"
                             >
                                 <div className="relative overflow-hidden rounded-2xl">
-                                    <img
+                                    <SafeImage
                                         src={post.image}
                                         alt={post.title}
                                         className="w-full h-[400px] object-cover"
@@ -205,7 +230,9 @@ const BlogPostPage = () => {
                                     prose-figcaption:text-center prose-figcaption:text-gray-500 prose-figcaption:text-sm prose-figcaption:mt-3 prose-figcaption:italic
                                     prose-code:text-purple-300 prose-code:bg-purple-900/30 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
                                     prose-pre:bg-[#1a0a2e] prose-pre:border prose-pre:border-purple-500/20"
-                                    dangerouslySetInnerHTML={{ __html: post.content || `<p>${post.excerpt}</p>` }}
+                                    dangerouslySetInnerHTML={{
+                                        __html: sanitizedContent
+                                    }}
                                 />
                             </motion.div>
 
@@ -257,8 +284,8 @@ const BlogPostPage = () => {
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
                                         className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-300 ${copied
-                                                ? 'bg-green-500/20 text-green-400 border border-green-500/40'
-                                                : 'bg-purple-500/10 text-purple-300 border border-purple-500/30 hover:bg-purple-500/20 hover:border-purple-500/50'
+                                            ? 'bg-green-500/20 text-green-400 border border-green-500/40'
+                                            : 'bg-purple-500/10 text-purple-300 border border-purple-500/30 hover:bg-purple-500/20 hover:border-purple-500/50'
                                             }`}
                                     >
                                         {copied ? (
@@ -324,10 +351,11 @@ const BlogPostPage = () => {
                                                     className="group block"
                                                 >
                                                     <div className="flex gap-4">
-                                                        <img
+                                                        <SafeImage
                                                             src={relatedPost.image}
                                                             alt={relatedPost.title}
                                                             className="w-16 h-16 rounded-lg object-cover flex-shrink-0 border border-white/10 group-hover:border-purple-500/50 transition-colors"
+                                                            loading="lazy"
                                                         />
                                                         <div>
                                                             <h4 className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors line-clamp-2">
